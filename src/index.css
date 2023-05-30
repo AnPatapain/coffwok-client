@@ -1,0 +1,160 @@
+/*------------------- App -------------------*/
+html body {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+* {
+    font-family: 'Readex Pro', sans-serif;
+}
+
+.primary-title {
+    font-size: 50px;
+}
+
+h2 {
+    font-style: italic;
+}
+
+.primary-button {
+    color: black;
+    font-size: 20px;
+    text-transform: uppercase;
+    background-color: #9AFB4D;
+    padding: 12px 35px;
+    border: solid 3px;
+    border-radius: 10px;
+}
+
+.primary-button:hover {
+    background-color: #a5ff00;
+    cursor: pointer;
+}
+
+.secondary-button {
+    color: rgb(121, 119, 119);
+    background-color: rgb(255, 255, 255);
+    font-weight: 500;
+    font-size: 15px;
+    text-transform: uppercase;
+    padding: 12px 30px;
+    border-radius: 30px;
+    border: solid 2px rgb(121, 119, 119);
+    margin: 6px
+}
+
+.secondary-button:hover {
+    color: rgb(48, 48, 48);
+    border: solid 2px rgb(48, 48, 48);
+}
+
+/*------------------- Home -------------------*/
+.overlay {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+}
+
+.home {
+    margin-top: 15vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.home h1 {
+    margin-bottom: 0px;
+}
+
+.home h2 {
+    font-size: 30px;
+}
+
+.home h1 span {
+    color: #1655B2;
+}
+
+.home .home-buttons {
+    margin-top: 70px;
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.home .home-buttons button {
+    margin-bottom: 32px;
+}
+
+/*------------------- Nav -------------------*/
+nav {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+nav .logo-container {
+    display: flex;
+    align-items: baseline;
+}
+
+nav .logo-container .logo {
+    width: 32px;
+    height: 32px;
+}
+
+nav .logo-container h3 {
+    text-transform: uppercase;
+}
+
+/*------------------- Auth Modal -------------------*/
+
+.auth-modal {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 360px;
+    height: 600px;
+    background-color: #F6F6F6;
+    border: solid 3px black;
+    border-radius: 10px;
+    padding: 40px;
+}
+
+.auth-modal .close-icon {
+    float: right;
+}
+
+.auth-modal .close-icon:hover {
+    cursor: pointer;
+}
+
+.auth-modal form {
+    display: flex;
+    flex-direction: column;
+}
+
+.auth-modal input[type=password],
+.auth-modal input[type=email] {
+    padding: 8px;
+    margin: 8px;
+    font-size: 17px;
+    border: solid 2px;
+}
+
+.auth-modal .auth-match-password-error {
+    font-size: large;
+    color: red;
+}
+
+.auth-modal .auth-message-success {
+    font-size: large;
+    font-weight: bold;
+    color: #3b8a03;
+}
+
+
