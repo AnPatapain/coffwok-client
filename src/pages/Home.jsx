@@ -2,11 +2,6 @@ import Nav from "../components/Nav.jsx";
 import AuthModal from "../components/AuthModal.jsx";
 import {useState} from "react";
 
-/**
- *
- * TODO: Add linear background image
- */
-
 const Home = () => {
     const [showModal, setShowModal] = useState(false)
     const [isSignup, setIsSignup] = useState(true)
@@ -25,7 +20,7 @@ const Home = () => {
         <div className="overlay">
             <Nav/>
             <div className="home">
-                <h1 className="primary-title">Study together at <span>Glife</span></h1>
+                <h1 className="primary-title">Study together at Glife</h1>
                 <h2 className="secondary-title">The best place for Sapiosexuals</h2>
                 <div className="home-buttons">
                     <button className="primary-button" onClick={handleSignupClick}>create account</button>

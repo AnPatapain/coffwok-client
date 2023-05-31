@@ -1,5 +1,7 @@
 import {useEffect, useState} from "react";
 import AuthService from "../api/services/auth.service.js";
+import coffwokLogo from "../assets/coffwok-logo.png";
+import googleLogo from "../assets/google-logo.png"
 
 // eslint-disable-next-line react/prop-types
 const AuthModal = ({setShowModal, isSignup, setIsSignup}) => {
@@ -63,7 +65,21 @@ const AuthModal = ({setShowModal, isSignup, setIsSignup}) => {
             <div className="close-icon" onClick={handleClick}>
                 &#10006;
             </div>
+            <div className="logo-container">
+                <img className="logo" src={coffwokLogo}/>
+            </div>
             <h2>{isSignup ? 'CREATE ACCOUNT' : 'LOGIN'}</h2>
+            <div className="google-button">
+                <button className="google-button-style">
+                    Continue with Google
+                    <img src={googleLogo} alt="Google Logo" className="google-logo" />
+                </button>
+            </div>
+            <div className="divider">
+                <div className="line-1"></div>
+                <p>or</p>
+                <div className="line-2"></div>
+            </div>
             <form onSubmit={handleSubmit}>
                 <input
                     type="email"
