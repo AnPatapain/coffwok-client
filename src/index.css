@@ -11,6 +11,7 @@ html body {
 
 .primary-title {
     font-size: 50px;
+    color: white;
 }
 
 h2 {
@@ -19,12 +20,13 @@ h2 {
 
 .primary-button {
     color: black;
-    font-size: 20px;
+    font-size: 15px;
+    font-weight: bold;
     text-transform: uppercase;
     background-color: #9AFB4D;
     padding: 12px 35px;
     border: solid 3px;
-    border-radius: 10px;
+    border-radius: 30px;
 }
 
 .primary-button:hover {
@@ -54,6 +56,12 @@ h2 {
     position: fixed;
     width: 100vw;
     height: 100vh;
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0) 0%,
+        rgba(0, 0, 0, 0.6) 100%
+    ), url("assets/hero_image.jpg");
+    background-size: cover;
 }
 
 .home {
@@ -66,8 +74,8 @@ h2 {
     margin-bottom: 0px;
 }
 
-.home h2 {
-    font-size: 30px;
+.home .secondary-title {
+    color: white;
 }
 
 .home h1 span {
@@ -86,6 +94,32 @@ h2 {
 .home .home-buttons button {
     margin-bottom: 32px;
 }
+
+.home .home-buttons .transparent-button {
+    color: white;
+    background: transparent;
+}
+
+@media (max-width: 360px) {
+    .primary-title {
+        font-size: 30px;
+    }
+
+    .secondary-title {
+        font-size: 25px;
+    }
+
+    .primary-button {
+        font-size: 16px;
+    }
+    .home .home-buttons {
+        margin-top: 20vh;
+    }
+    .home .primary-title {
+        margin-top: 50px;
+    }
+}
+
 
 /*------------------- Nav -------------------*/
 nav {
@@ -106,6 +140,7 @@ nav .logo-container .logo {
 
 nav .logo-container h3 {
     text-transform: uppercase;
+    color: white;
 }
 
 /*------------------- Auth Modal -------------------*/
@@ -114,11 +149,11 @@ nav .logo-container h3 {
     position: absolute;
     left: 0;
     right: 0;
-    top: 50px;
+    top: 100px;
     margin-left: auto;
     margin-right: auto;
     max-width: 360px;
-    height: 600px;
+    height: 500px;
     background-color: #F6F6F6;
     border: solid 3px black;
     border-radius: 10px;
@@ -144,6 +179,7 @@ nav .logo-container h3 {
     margin: 8px;
     font-size: 17px;
     border: solid 2px;
+    border-radius: 30px;
 }
 
 .auth-modal .auth-match-password-error {
