@@ -2,9 +2,13 @@ import {useEffect, useState} from "react";
 import AuthService from "../api/services/auth.service.js";
 import coffwokLogo from "../assets/coffwok-logo.png";
 import googleLogo from "../assets/google-logo.png"
+import {GOOGLE_AUTH_URL} from "../api/constant/index.js";
+import {useNavigate} from "react-router-dom";
 
 // eslint-disable-next-line react/prop-types
 const AuthModal = ({setShowModal, isSignup, setIsSignup}) => {
+    const navigate = useNavigate()
+
     const [email, setEmail] = useState(null)
     const [password, setPassword] = useState(null)
     const [confirmPassword, setConfirmPassword] = useState(null)
@@ -15,7 +19,6 @@ const AuthModal = ({setShowModal, isSignup, setIsSignup}) => {
         password !== confirmPassword ? setError("Error: Password do not match") : setError("")
     }, [email, password, confirmPassword])
 
-    console.log(email, password, confirmPassword)
     const handleClick = () => {
         setShowModal(false)
     }
@@ -36,21 +39,16 @@ const AuthModal = ({setShowModal, isSignup, setIsSignup}) => {
                             error.response.data.message) ||
                         error.message ||
                         error.toString();
-                    console.log(resMessage)
+                    setError(resMessage)
                 }
             )
         }else {
             //If the modal show the login form
             AuthService.login(email, password).then(
                 (data) => {
-                    console.log("success")
-                    console.log(data)
-
-                    /**
-                     * TODO: redirect user the newfeed plan page if login success
-                     *       for now just close the modal.
-                     */
-                    setShowModal(false)
+                    navigate("/localAuth/redirect", {
+                        state: {data}
+                    })
                 },
                 (error) => {
                     console.log("error", error)
@@ -70,10 +68,12 @@ const AuthModal = ({setShowModal, isSignup, setIsSignup}) => {
             </div>
             <h2>{isSignup ? 'CREATE ACCOUNT' : 'LOGIN'}</h2>
             <div className="google-button">
-                <button className="google-button-style">
-                    Continue with Google
-                    <img src={googleLogo} alt="Google Logo" className="google-logo" />
-                </button>
+                <a href={GOOGLE_AUTH_URL}>
+                    <button className="google-button-style">
+                        Continue with Google
+                        <img src={googleLogo} alt="Google Logo" className="google-logo" />
+                    </button>
+                </a>
             </div>
             <div className="divider">
                 <div className="line-1"></div>

@@ -1,10 +1,19 @@
-import Nav from "../components/Nav.jsx";
+import HomeNav from "../components/HomeNav.jsx";
 import AuthModal from "../components/AuthModal.jsx";
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import {ACCESS_TOKEN} from "../api/constant/index.js";
+import {useNavigate} from "react-router-dom";
 
 const Home = () => {
+    const navigate = useNavigate()
     const [showModal, setShowModal] = useState(false)
     const [isSignup, setIsSignup] = useState(true)
+
+    useEffect(() => {
+        if(localStorage.getItem(ACCESS_TOKEN)) {
+            navigate("/plans")
+        }
+    })
 
     const handleSignupClick = () => {
         setShowModal(true)
@@ -18,9 +27,10 @@ const Home = () => {
 
     return (
         <div className="overlay">
-            <Nav/>
+            <HomeNav/>
             <div className="home">
-                <h1 className="primary-title">Study together at Glife</h1>
+                <h1 className="primary-title">Hey, you study alone ?</h1>
+                <h2 className="secondary-title">make a study plan, connect and study together at Glife</h2>
                 <h2 className="secondary-title">The best place for Sapiosexuals</h2>
                 <div className="home-buttons">
                     <button className="primary-button" onClick={handleSignupClick}>create account</button>
