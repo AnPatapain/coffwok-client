@@ -1,29 +1,13 @@
 import {useEffect, useState} from 'react'
-import {useLocation, useNavigate} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
 import axios from 'axios'
 import HomeNav from "../components/HomeNav.jsx";
+import ProfileService from "../api/services/profile.service.js";
+import LocalStorageService from "../api/services/localStorage.service.js";
 
 const ProfileCRUD = () => {
-    const [selectedFile, setSelectedFile] = useState()
-    const [preview, setPreview] = useState(null)
-
     const url = new URL(window.location.href);
-    let isEdit = url.searchParams.get("isEdit")
-
-    useEffect(() => {
-        if (!selectedFile) {
-            setPreview(undefined)
-            return
-        }
-
-        const objectUrl = URL.createObjectURL(selectedFile)
-
-        setPreview(objectUrl)
-
-        // free memory when ever this component is unmounted
-        return () => URL.revokeObjectURL(objectUrl)
-    }, [selectedFile])
-
+    let isEdit = url.searchParams.get("isEdit") === 'true'
 
     const [formData, setFormData] = useState({
         name: "",
@@ -34,31 +18,36 @@ const ProfileCRUD = () => {
         url: "",
         about: "",
         school: "",
-        strengths: []
+        strength_subjects: [],
+        weak_subjects: []
     })
 
     let navigate = useNavigate()
 
-    const onSelectFile = e => {
-        if (!e.target.files || e.target.files.length === 0) {
-            setSelectedFile(undefined)
-            return
-        }
-        setSelectedFile(e.target.files[0])
-    }
-
     const handleSubmit = async (e) => {
-        console.log('submitted')
         e.preventDefault()
         try {
-            const response = await axios.put('http://localhost:8000/user', {formData})
-            console.log(response)
-            const success = response.status === 200
-            if (success) navigate('/dashboard')
+            console.log(formData)
+            ProfileService.uploadProfileInfo(formData)
+                .then(
+                    response => {
+                        console.log(response)
+                        LocalStorageService.add("profileId", response.data.id)
+                        navigate("/profile-image-creation")
+                    },
+                    error => {
+                        const resMessage =
+                            (error.response &&
+                                error.response.data &&
+                                error.response.data.message) ||
+                            error.message ||
+                            error.toString();
+                        console.log(resMessage)
+                    }
+                )
         } catch (err) {
             console.log(err)
         }
-
     }
 
     const handleChange = (e) => {
@@ -80,22 +69,20 @@ const ProfileCRUD = () => {
         })
     }
 
-    const addStrength = (strength) => {
+    const addStrengthOrWeakness = (field, value) => {
         setFormData((prevState) => {
-            if(prevState.strengths.includes(strength)) {
+            if(prevState[field].includes(value)) {
                 return {
                     ...prevState,
-                    ['strengths']: prevState['strengths'].filter((str) => str !== strength)
+                    [field]: prevState[field].filter((str) => str !== value)
                 }
             }
             return {
                 ...prevState,
-                ['strengths']: [...prevState['strengths'], strength]
+                [field]: [...prevState[field], value]
             }
         })
     }
-
-    console.log(formData)
 
     return (
         <>
@@ -206,62 +193,109 @@ const ProfileCRUD = () => {
                         />
 
                         <label>Strengths</label>
-                        <ul className="strength-list">
-                            <li className={`${formData.strengths.includes("physics") ? "selected":""}`}
-                                onClick={() => {addStrength("physics")}}>
+                        <ul>
+                            <li className={`${formData.strength_subjects.includes("physics") ? "selected":""}`}
+                                onClick={() => {addStrengthOrWeakness("strength_subjects", "physics")}}>
                                 Physics
                             </li>
-                            <li className={`${formData.strengths.includes("coding") ? "selected":""}`}
-                                onClick={() => {addStrength("coding")}}>
+                            <li className={`${formData.strength_subjects.includes("coding") ? "selected":""}`}
+                                onClick={() => {addStrengthOrWeakness("strength_subjects", "coding")}}>
                                 Coding
                             </li>
-                            <li className={`${formData.strengths.includes("math") ? "selected":""}`}
-                                onClick={() => {addStrength("math")}}>
+                            <li className={`${formData.strength_subjects.includes("math") ? "selected":""}`}
+                                onClick={() => {addStrengthOrWeakness("strength_subjects", "math")}}>
                                 Math
                             </li>
 
-                            <li className={`${formData.strengths.includes("chemistry") ? "selected":""}`}
-                                onClick={() => {addStrength("chemistry")}}>
+                            <li className={`${formData.strength_subjects.includes("chemistry") ? "selected":""}`}
+                                onClick={() => {addStrengthOrWeakness("strength_subjects", "chemistry")}}>
                                 Chemistry
                             </li>
 
-                            <li className={`${formData.strengths.includes("biology") ? "selected":""}`}
-                                onClick={() => {addStrength("biology")}}>
+                            <li className={`${formData.strength_subjects.includes("biology") ? "selected":""}`}
+                                onClick={() => {addStrengthOrWeakness("strength_subjects", "biology")}}>
                                 Biology
                             </li>
 
-                            <li className={`${formData.strengths.includes("english") ? "selected":""}`}
-                                onClick={() => {addStrength("english")}}>
+                            <li className={`${formData.strength_subjects.includes("english") ? "selected":""}`}
+                                onClick={() => {addStrengthOrWeakness("strength_subjects", "english")}}>
                                 English
                             </li>
 
-                            <li className={`${formData.strengths.includes("literature") ? "selected":""}`}
-                                onClick={() => {addStrength("literature")}}>
+                            <li className={`${formData.strength_subjects.includes("literature") ? "selected":""}`}
+                                onClick={() => {addStrengthOrWeakness("strength_subjects", "literature")}}>
                                 Literature
                             </li>
 
-                            <li className={`${formData.strengths.includes("french") ? "selected":""}`}
-                                onClick={() => {addStrength("french")}}>
+                            <li className={`${formData.strength_subjects.includes("french") ? "selected":""}`}
+                                onClick={() => {addStrengthOrWeakness("strength_subjects", "french")}}>
                                 French
                             </li>
 
-                            <li className={`${formData.strengths.includes("marketing") ? "selected":""}`}
-                                onClick={() => {addStrength("marketing")}}>
+                            <li className={`${formData.strength_subjects.includes("marketing") ? "selected":""}`}
+                                onClick={() => {addStrengthOrWeakness("strength_subjects", "marketing")}}>
                                 Marketing
                             </li>
 
-                            <li className={`${formData.strengths.includes("finance") ? "selected":""}`}
-                                onClick={() => {addStrength("finance")}}>
+                            <li className={`${formData.strength_subjects.includes("finance") ? "selected":""}`}
+                                onClick={() => {addStrengthOrWeakness("strength_subjects", "finance")}}>
                                 Finance
                             </li>
 
                         </ul>
 
-                        <label htmlFor="url">Profile Photo</label>
-                        <input id="url" type='file' onChange={onSelectFile} />
-                        <div className="photo-container">
-                            {selectedFile &&  <img src={preview} /> }
-                        </div>
+                        <label>Weakness</label>
+                        <ul>
+                            <li className={`${formData.weak_subjects.includes("physics") ? "selected":""}`}
+                                onClick={() => {addStrengthOrWeakness("weak_subjects", "physics")}}>
+                                Physics
+                            </li>
+                            <li className={`${formData.weak_subjects.includes("coding") ? "selected":""}`}
+                                onClick={() => {addStrengthOrWeakness("weak_subjects", "coding")}}>
+                                Coding
+                            </li>
+                            <li className={`${formData.weak_subjects.includes("math") ? "selected":""}`}
+                                onClick={() => {addStrengthOrWeakness("weak_subjects", "math")}}>
+                                Math
+                            </li>
+
+                            <li className={`${formData.weak_subjects.includes("chemistry") ? "selected":""}`}
+                                onClick={() => {addStrengthOrWeakness("weak_subjects", "chemistry")}}>
+                                Chemistry
+                            </li>
+
+                            <li className={`${formData.weak_subjects.includes("biology") ? "selected":""}`}
+                                onClick={() => {addStrengthOrWeakness("weak_subjects", "biology")}}>
+                                Biology
+                            </li>
+
+                            <li className={`${formData.weak_subjects.includes("english") ? "selected":""}`}
+                                onClick={() => {addStrengthOrWeakness("weak_subjects", "english")}}>
+                                English
+                            </li>
+
+                            <li className={`${formData.weak_subjects.includes("literature") ? "selected":""}`}
+                                onClick={() => {addStrengthOrWeakness("weak_subjects", "literature")}}>
+                                Literature
+                            </li>
+
+                            <li className={`${formData.weak_subjects.includes("french") ? "selected":""}`}
+                                onClick={() => {addStrengthOrWeakness("weak_subjects", "french")}}>
+                                French
+                            </li>
+
+                            <li className={`${formData.weak_subjects.includes("marketing") ? "selected":""}`}
+                                onClick={() => {addStrengthOrWeakness("weak_subjects", "marketing")}}>
+                                Marketing
+                            </li>
+
+                            <li className={`${formData.weak_subjects.includes("finance") ? "selected":""}`}
+                                onClick={() => {addStrengthOrWeakness("weak_subjects", "finance")}}>
+                                Finance
+                            </li>
+
+                        </ul>
+
                     </section>
 
                 </form>

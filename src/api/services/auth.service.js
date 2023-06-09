@@ -11,7 +11,6 @@ const login = (email, password) => {
     return axios.post(API_BASE_URL + "/api/auth/login", {
         email, password
     }).then((response) => {
-        console.log(response)
         if (response.data.accessToken) {
             setAccessTokenInLocalStorage(response.data.accessToken);
         }

@@ -29,8 +29,8 @@ const Home = () => {
         <div className="overlay">
             <HomeNav/>
             <div className="home">
-                <h1 className="primary-title">Hey, you study alone ?</h1>
-                <h2 className="secondary-title">make a study plan, connect and study together at Glife</h2>
+                <h1 className="primary-title">Hey, you love working at coffee shop ambiance ?</h1>
+                <h2 className="secondary-title">make a coffee-work plan, connect and create professional connection</h2>
                 <h2 className="secondary-title">The best place for Sapiosexuals</h2>
                 <div className="home-buttons">
                     <button className="primary-button" onClick={handleSignupClick}>create account</button>

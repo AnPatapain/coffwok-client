@@ -4,7 +4,7 @@ const LocalAuthRedirect = () => {
     const location = useLocation()
     console.log(location)
     return (
-        <Navigate to={"/profile-creation?isEdit=false"} />
+        <Navigate to={"/profile-info-creation?isEdit=false"} />
     )
 }
 

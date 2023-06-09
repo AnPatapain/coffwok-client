@@ -102,7 +102,7 @@ h2 {
     }
 
     .secondary-title {
-        font-size: 25px;
+        display: none;
     }
 
     .primary-button {
@@ -162,8 +162,8 @@ nav .logo-container h3 {
 /*------------------- Vertical Nav -----------------*/
 .vertical-nav {
     width: 20%;
-    border: solid 2px;
-    /*border-radius: 30px;*/
+    /*border: solid 2px;*/
+    border-radius: 10px;
     background-color: white;
 }
 
@@ -387,8 +387,8 @@ nav .logo-container h3 {
 
 .profile-section-container .profile-section {
     margin-bottom: 30px;
-    border-radius: 30px;
-    border: solid 2px;
+    border-radius: 20px;
+    /*border: solid 2px;*/
     background-color: white;
     display: flex;
     justify-content: center;
@@ -429,7 +429,7 @@ nav .logo-container h3 {
 .profile-personal-info-section div .personal-info .name-button button {
     font-size: 10px;
     padding: 5px 20px;
-    border: solid 2px;
+    border: none;
 }
 
 .profile-personal-info-section div .personal-info .about{
@@ -697,5 +697,86 @@ nav .logo-container h3 {
     background-color: #5FB51C;
     color: white;
 }
+
+/*------------- Profile image Crud page -----------*/
+.upload-profile-image-container {
+    display: flex;
+    flex-direction: column;
+    border-top: solid 1px rgb(213, 213, 213);
+}
+
+.upload-profile-image-container h2 {
+    color: #5FB51C;
+}
+
+.upload-profile-image-container .image-options {
+    margin: 50px auto 200px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 70%;
+}
+
+.upload-profile-image-container button {
+    width: 70%;
+    margin: auto;
+}
+
+.upload-profile-image-container .image-options div {
+    height: 300px;
+    width: 200px;
+    border: solid 1px;
+    border-radius: 20px;
+}
+
+.upload-profile-image-container .image-options div:hover {
+    cursor: pointer;
+    border: solid 2px #5FB51C;
+}
+
+.upload-profile-image-container .image-options div img {
+    height: 100%;
+    width: 100%;
+    border-radius: 20px;
+}
+
+.upload-profile-image-container .image-options div:first-child {
+    text-align: center;
+}
+
+.upload-profile-image-container .image-options .user-option {
+    margin-top: 120px;
+    height: 40px;
+    width: 40px;
+}
+
+.upload-profile-image-container .image-options .inputfile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.upload-profile-image-container .image-options label {
+    cursor: pointer;
+}
+
+.upload-profile-image-container .image-options .user-image-container {
+    max-height: 400px;
+}
+
+.upload-profile-image-container .image-options .user-image-container button {
+    font-size: 10px;
+    padding: 5px 20px;
+    border: solid 2px;
+    cursor: pointer;
+}
+
+.upload-profile-image-container .image-options .selected {
+    border: solid 2px #5FB51C;
+}
+
 
 

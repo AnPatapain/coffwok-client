@@ -22,9 +22,9 @@ const Profile = () => {
                         <section className="personal-info">
                             <section className="name-button">
                                 <span className="username">NGUYEN An, 22</span>
-                                {isUser && (<button className="primary-button" onClick={() => {navigate(`/profile-creation?isEdit=true`)}}>Edit profile</button>)}
+                                {isUser && (<button className="primary-button" onClick={() => {navigate(`/profile-info-creation?isEdit=true`)}}>Edit profile</button>)}
                             </section>
-                            <p className="about">I love coding at coffee shop and networking with peopleeeeeeeee
+                            <p className="about">I love coding at coffee shop and networking with people
                             </p>
                             <section className="profile-sub-info">
                                 {isUser ? (<article><span>130 visited</span><span>10 love</span></article>) :
