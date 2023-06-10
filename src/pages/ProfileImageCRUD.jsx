@@ -5,6 +5,7 @@ import {BiImageAdd} from "react-icons/bi"
 import HomeNav from "../components/HomeNav.jsx";
 import ProfileService from "../api/services/profile.service.js";
 import {useNavigate} from "react-router-dom";
+import {getErrorMessage} from "../api/error/errorMessage.js";
 
 const ProfileImageCRUD = () => {
     const navigate = useNavigate()
@@ -45,17 +46,12 @@ const ProfileImageCRUD = () => {
         let profileId = localStorage.getItem("profileId")
         ProfileService.uploadProfileImage(profileId, selectedFile)
             .then(
-                res => {
-                    console.log(res)
+                response => {
+                    console.log(response)
                     navigate("/profile")
                 },
                 error => {
-                    const resMessage =
-                        (error.response &&
-                            error.response.data &&
-                            error.response.data.message) ||
-                        error.message ||
-                        error.toString();
+                    const resMessage = getErrorMessage(error)
                     console.log(resMessage)
                 }
             )

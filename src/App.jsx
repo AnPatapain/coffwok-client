@@ -1,9 +1,9 @@
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Home from "./pages/Home.jsx";
-import OAuth2Redirect from "./components/authentication/OAuth2Redirect.jsx";
+import OAuth2Redirect from "./pages/authHandler/OAuth2Redirect.jsx";
 import Profile from "./pages/Profile.jsx";
 import PlanNewfeeds from "./pages/PlanNewfeeds.jsx";
-import LocalAuthRedirect from "./components/authentication/LocalAuthRedirect.jsx";
+import LocalAuthRedirect from "./pages/authHandler/LocalAuthRedirect.jsx";
 import ProfileCRUD from "./pages/ProfileCRUD.jsx";
 import ProfileImageCRUD from "./pages/ProfileImageCRUD.jsx";
 

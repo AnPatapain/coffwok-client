@@ -4,6 +4,7 @@ import coffwokLogo from "../assets/coffwok-logo.png";
 import googleLogo from "../assets/google-logo.png"
 import {GOOGLE_AUTH_URL} from "../api/constant/index.js";
 import {useNavigate} from "react-router-dom";
+import {getErrorMessage} from "../api/error/errorMessage.js";
 
 // eslint-disable-next-line react/prop-types
 const AuthModal = ({setShowModal, isSignup, setIsSignup}) => {
@@ -33,12 +34,7 @@ const AuthModal = ({setShowModal, isSignup, setIsSignup}) => {
                     setMessage("Register successfully, please login")
                 },
                 error => {
-                    const resMessage =
-                        (error.response &&
-                            error.response.data &&
-                            error.response.data.message) ||
-                        error.message ||
-                        error.toString();
+                    const resMessage = getErrorMessage(error)
                     setError(resMessage)
                 }
             )

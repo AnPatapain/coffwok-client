@@ -1,9 +1,8 @@
-import {useEffect, useState} from 'react'
+import {useState} from 'react'
 import {useNavigate} from 'react-router-dom'
-import axios from 'axios'
 import HomeNav from "../components/HomeNav.jsx";
 import ProfileService from "../api/services/profile.service.js";
-import LocalStorageService from "../api/services/localStorage.service.js";
+import {getErrorMessage} from "../api/error/errorMessage.js"
 
 const ProfileCRUD = () => {
     const url = new URL(window.location.href);
@@ -31,17 +30,10 @@ const ProfileCRUD = () => {
             ProfileService.uploadProfileInfo(formData)
                 .then(
                     response => {
-                        console.log(response)
-                        LocalStorageService.add("profileId", response.data.id)
                         navigate("/profile-image-creation")
                     },
                     error => {
-                        const resMessage =
-                            (error.response &&
-                                error.response.data &&
-                                error.response.data.message) ||
-                            error.message ||
-                            error.toString();
+                        const resMessage = getErrorMessage(error)
                         console.log(resMessage)
                     }
                 )
