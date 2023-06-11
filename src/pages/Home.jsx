@@ -26,7 +26,7 @@ const Home = () => {
                 }
                 navigate("/")
             })
-    })
+    }, [])
 
     const handleSignupClick = () => {
         setShowModal(true)
@@ -42,8 +42,8 @@ const Home = () => {
         <div className="overlay">
             <HomeNav/>
             <div className="home">
-                <h1 className="primary-title">Hey, you love working at coffee shop ambiance ?</h1>
-                <h2 className="secondary-title">make a coffee-work plan, connect and create professional connection</h2>
+                <h1 className="primary-title">Hey, you love connecting and studying with other student at café ?</h1>
+                <h2 className="secondary-title">share a plan, connect and study together</h2>
                 <h2 className="secondary-title">The best place for Sapiosexuals</h2>
                 <div className="home-buttons">
                     <button className="primary-button" onClick={handleSignupClick}>create account</button>

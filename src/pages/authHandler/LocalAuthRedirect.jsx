@@ -21,7 +21,7 @@ const LocalAuthRedirect = () => {
                 }
                 navigate("/")
             })
-    })
+    }, [])
 }
 
 export default LocalAuthRedirect

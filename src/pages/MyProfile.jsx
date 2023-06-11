@@ -1,4 +1,3 @@
-import test_profile_img from "../assets/test/test-profile-img.jpg"
 import VerticalNav from "../components/VerticalNav.jsx";
 
 import {TbSchool} from "react-icons/tb"
@@ -7,25 +6,59 @@ import {AiOutlineDislike} from "react-icons/ai"
 import {AiOutlineMessage} from "react-icons/ai";
 import {AiOutlineHeart} from "react-icons/ai"
 import {useNavigate} from "react-router-dom";
+import {useEffect, useState} from "react";
+import ProfileService from "../api/services/profile.service.js";
 
 
-const Profile = () => {
+const MyProfile = () => {
     const navigate = useNavigate()
+    const [profile, setProfile] = useState({
+        name: "",
+        dob_day: "",
+        dob_month: "",
+        dob_year: "",
+        gender_identity: "",
+        about: "",
+        school: "",
+        strength_subjects: [],
+        weak_subjects: []
+    })
     const isUser = true
+
+    useEffect(() => {
+        ProfileService.getMyProfile()
+            .then(data => {
+                setProfile(data)
+            })
+    },[])
+
+    const calculateAge = (birthYear) => {
+        const currentYear = new Date().getFullYear();
+        const yearDifference = currentYear - parseInt(birthYear);
+
+        // Check if the user's birthday has passed in the current year
+        const birthdayHasPassed = new Date().getTime() > new Date(currentYear, new Date().getMonth(), new Date().getDate()).getTime();
+
+        // Adjust age based on whether the birthday has passed or not
+        const age = birthdayHasPassed ? yearDifference : yearDifference - 1;
+
+        return age;
+    }
+
+
     return (
         <div className="profile-container">
             <VerticalNav />
             <div className="profile-section-container">
                 <section className="profile-section profile-personal-info-section">
                     <div>
-                        <img src={test_profile_img}/>
+                        <img src={profile.imgUrl}/>
                         <section className="personal-info">
                             <section className="name-button">
-                                <span className="username">NGUYEN An, 22</span>
+                                <span className="username">{profile.name}, {calculateAge(profile.dob_year)}</span>
                                 {isUser && (<button className="primary-button" onClick={() => {navigate(`/profile-info-creation?isEdit=true`)}}>Edit profile</button>)}
                             </section>
-                            <p className="about">I love coding at coffee shop and networking with people
-                            </p>
+                            <p className="about">{profile.about}</p>
                             <section className="profile-sub-info">
                                 {isUser ? (<article><span>130 visited</span><span>10 love</span></article>) :
                                     (<article>
@@ -40,15 +73,15 @@ const Profile = () => {
                 <section className="profile-section profile-study-info-section">
                     <article>
                         <span className="category"><TbSchool className="study-info-icon"/> School</span>
-                        <span>Le Quy Don</span>
+                        <span>{profile.school}</span>
                     </article>
                     <article>
                         <span className="category"><AiOutlineLike className="study-info-icon"/> My strengths</span>
-                        <span>Physics, Coding, French, Math</span>
+                        <span>{profile.strength_subjects.join(", ")}</span>
                     </article>
                     <article>
                         <span className="category"><AiOutlineDislike className="study-info-icon"/> My weakness</span>
-                        <span>English, Chemistry, Biology</span>
+                        <span>{profile.weak_subjects.join(", ")}</span>
                     </article>
                 </section>
                 <section className="profile-section profile-coffee-study-plan-section">
@@ -59,4 +92,4 @@ const Profile = () => {
     )
 }
 
-export default Profile
+export default MyProfile

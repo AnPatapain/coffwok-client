@@ -25,7 +25,7 @@ const OAuth2Redirect = () => {
                 }
                 navigate("/")
             })
-    })
+    }, [])
 }
 
 export default OAuth2Redirect

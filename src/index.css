@@ -11,7 +11,7 @@ html body {
 }
 
 .primary-title {
-    font-size: 50px;
+    font-size: 35px;
     color: white;
 }
 
@@ -99,7 +99,7 @@ h2 {
 
 @media (max-width: 430px) {
     .primary-title {
-        font-size: 30px;
+        font-size: 20px;
     }
 
     .secondary-title {
@@ -107,7 +107,7 @@ h2 {
     }
 
     .primary-button {
-        font-size: 16px;
+        font-size: 10px;
     }
     .home .home-buttons {
         margin-top: 20vh;
@@ -119,18 +119,17 @@ h2 {
 
 @media (min-width: 430px) and (max-width: 537px) {
     .primary-title {
-        font-size: 40px;
+        font-size: 25px;
     }
 
     .secondary-title {
-        font-size: 30px;
+        font-size: 20px;
     }
-
     .primary-button {
-        font-size: 16px;
+        font-size: 15px;
     }
     .home .home-buttons {
-        margin-top: 20vh;
+        margin-top: 10vh;
     }
     .home .primary-title {
         margin-top: 50px;
@@ -382,23 +381,21 @@ nav .logo-container h3 {
 
 /* Profile Section  */
 .profile-container .profile-section-container {
-    width: 70%;
+    width: 60%;
     margin-left: 5%;
 }
 
 .profile-section-container .profile-section {
     margin-bottom: 30px;
     border-radius: 20px;
-    /*border: solid 2px;*/
     background-color: white;
     display: flex;
-    justify-content: center;
 }
 
 /* profile-personal-info-section */
 
 .profile-personal-info-section{
-    height: 200px;
+    height: 250px;
     padding-bottom: 40px ;
 }
 
@@ -407,6 +404,7 @@ nav .logo-container h3 {
     height: 100%;
     display: flex;
     margin-top: 10px;
+    margin-left: 20%;
 }
 
 .profile-personal-info-section div img {
@@ -434,7 +432,6 @@ nav .logo-container h3 {
 }
 
 .profile-personal-info-section div .personal-info .about{
-    width: 70%;
     overflow-wrap: break-word;
 }
 
@@ -590,7 +587,7 @@ nav .logo-container h3 {
     color: #5FB51C;
 }
 
-.onboarding form {
+.onboarding form div{
     display: flex;
     justify-content: center;
 }
@@ -623,6 +620,7 @@ nav .logo-container h3 {
 .onboarding form .multiple-input-container {
     display: flex;
     flex-direction: row;
+    justify-content: start;
 }
 
 .onboarding form input::-webkit-outer-spin-button,
@@ -666,6 +664,7 @@ nav .logo-container h3 {
 .onboarding form input[type=submit] {
     background-color: #6bff00;
     font-size: large;
+    width: 40%;
 }
 
 .onboarding form .photo-container img {
@@ -699,7 +698,19 @@ nav .logo-container h3 {
     color: white;
 }
 
-/*------------- Profile image Crud page -----------*/
+@media (max-width: 768px) {
+    .onboarding form div{
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+    .onboarding form section {
+        width: 50%;
+    }
+
+}
+
+/*------------- MyProfile image Crud page -----------*/
 .upload-profile-image-container {
     display: flex;
     flex-direction: column;
