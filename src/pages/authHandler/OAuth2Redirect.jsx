@@ -20,6 +20,7 @@ const OAuth2Redirect = () => {
                 }
             })
             .catch(error => {
+                console.log(error)
                 if(localStorage.getItem(ACCESS_TOKEN)) {
                     localStorage.removeItem(ACCESS_TOKEN)
                 }

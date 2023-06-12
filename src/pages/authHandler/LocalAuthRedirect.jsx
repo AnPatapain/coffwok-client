@@ -16,6 +16,7 @@ const LocalAuthRedirect = () => {
                 }
             })
             .catch(error => {
+                console.log(error)
                 if(localStorage.getItem(ACCESS_TOKEN)) {
                     localStorage.removeItem(ACCESS_TOKEN)
                 }

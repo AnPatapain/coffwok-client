@@ -10,6 +10,10 @@ const uploadProfileImage = (profileId, file) => {
     return RequestService.postRequestFile(API_BASE_URL + "/api/profiles/images/" + profileId, file)
 }
 
+const editProfileInfo = (profileId, updatedProfileData) => {
+    return RequestService.patchRequestJson(API_BASE_URL + `/api/profiles/${profileId}`, updatedProfileData)
+}
+
 const getMyProfile = () => {
     return new Promise((resolve, reject) => {
         RequestService.getRequest(API_BASE_URL + "/api/profiles/me")
@@ -26,6 +30,7 @@ const getMyProfile = () => {
 const ProfileService = {
     uploadProfileInfo,
     uploadProfileImage,
+    editProfileInfo,
     getMyProfile
 }
 

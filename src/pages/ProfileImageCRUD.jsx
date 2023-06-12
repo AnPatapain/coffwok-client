@@ -6,6 +6,8 @@ import HomeNav from "../components/HomeNav.jsx";
 import ProfileService from "../api/services/profile.service.js";
 import {useNavigate} from "react-router-dom";
 import {getErrorMessage} from "../api/error/errorMessage.js";
+import UserService from "../api/services/user.service.js";
+import {ACCESS_TOKEN} from "../api/constant/index.js";
 
 const ProfileImageCRUD = () => {
     const navigate = useNavigate()
@@ -42,19 +44,32 @@ const ProfileImageCRUD = () => {
     }
 
     const handleSubmit = () => {
-        console.log(selectedFile)
-        let profileId = localStorage.getItem("profileId")
-        ProfileService.uploadProfileImage(profileId, selectedFile)
-            .then(
-                response => {
-                    console.log(response)
-                    navigate("/profile")
-                },
-                error => {
-                    const resMessage = getErrorMessage(error)
-                    console.log(resMessage)
+        UserService.getCurrentUser()
+            .then(user => {
+                if(user.profileId === null) {
+                    navigate("/profile-info-creation?isEdit=false")
+                }else {
+                    ProfileService.uploadProfileImage(user.profileId, selectedFile)
+                        .then(
+                            response => {
+                                console.log(response)
+                                navigate("/profile")
+                            },
+                            error => {
+                                const resMessage = getErrorMessage(error)
+                                console.log(resMessage)
+                            }
+                        )
                 }
-            )
+            })
+            .catch(error => {
+                console.log(error)
+                if(localStorage.getItem(ACCESS_TOKEN)) {
+                    localStorage.removeItem(ACCESS_TOKEN)
+                }
+                navigate("/")
+            })
+
     }
 
     return (

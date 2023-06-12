@@ -25,6 +25,17 @@ const postRequestJson = (req, data) => {
     return axios.post(req, data, {headers: headers})
 }
 
+const patchRequestJson = (req, data) => {
+    const headers = {
+        'Content-Type': 'application/json'
+    }
+    if(localStorage.getItem(ACCESS_TOKEN)) {
+        headers['Authorization'] = 'Bearer ' + localStorage.getItem(ACCESS_TOKEN)
+    }
+
+    return axios.patch(req, data, {headers: headers})
+}
+
 const postRequestFile = (req, file) => {
     const headers = {
         'Content-Type': 'multipart/form-data'
@@ -43,6 +54,7 @@ const postRequestFile = (req, file) => {
 const RequestService = {
     getRequest,
     postRequestJson,
+    patchRequestJson,
     postRequestFile
 }
 export default RequestService

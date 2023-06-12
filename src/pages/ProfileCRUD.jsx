@@ -3,11 +3,27 @@ import {useNavigate} from 'react-router-dom'
 import HomeNav from "../components/HomeNav.jsx";
 import ProfileService from "../api/services/profile.service.js";
 import {getErrorMessage} from "../api/error/errorMessage.js"
-import LocalStorageService from "../api/services/localStorage.service.js";
+import UserService from "../api/services/user.service.js";
+import {ACCESS_TOKEN} from "../api/constant/index.js";
 
 const ProfileCRUD = () => {
     const url = new URL(window.location.href);
     let isEdit = url.searchParams.get("isEdit") === 'true'
+    const subjects = [
+        "physic",
+        "english",
+        "ielts",
+        "coding",
+        "literature",
+        "math",
+        "chemistry",
+        "biology",
+        "history",
+        "geography",
+        "french",
+        "marketing",
+        "finance"
+    ]
 
     const [formData, setFormData] = useState({
         name: "",
@@ -28,18 +44,43 @@ const ProfileCRUD = () => {
         e.preventDefault()
         try {
             console.log(formData)
-            ProfileService.uploadProfileInfo(formData)
-                .then(
-                    response => {
-                        console.log(response.data)
-                        LocalStorageService.add("profileId", response.data.id)
-                        navigate("/profile-image-creation")
-                    },
-                    error => {
-                        const resMessage = getErrorMessage(error)
-                        console.log(resMessage)
-                    }
-                )
+            if(isEdit) {
+                UserService.getCurrentUser()
+                    .then(user => {
+                        if(user.profileId === null) {
+                            navigate("/profile-info-creation?isEdit=false")
+                        }else {
+                            ProfileService.editProfileInfo(user.profileId, formData)
+                                .then(response => {
+                                    console.log(response.data)
+                                    navigate("/profile")
+                                })
+                                .catch(error => {
+                                    const errorMsg = getErrorMessage(error)
+                                    console.log(errorMsg)
+                                })
+                        }
+                    })
+                    .catch(error => {
+                        console.log(error)
+                        if(localStorage.getItem(ACCESS_TOKEN)) {
+                            localStorage.removeItem(ACCESS_TOKEN)
+                        }
+                        navigate("/")
+                    })
+            }else {
+                ProfileService.uploadProfileInfo(formData)
+                    .then(
+                        response => {
+                            console.log(response.data)
+                            navigate("/profile-image-creation")
+                        },
+                        error => {
+                            const resMessage = getErrorMessage(error)
+                            console.log(resMessage)
+                        }
+                    )
+            }
         } catch (err) {
             console.log(err)
         }
@@ -78,6 +119,8 @@ const ProfileCRUD = () => {
             }
         })
     }
+
+    console.log(formData)
 
     return (
         <>
@@ -160,7 +203,7 @@ const ProfileCRUD = () => {
                                     onChange={handleChange}
                                     checked={formData.gender_identity === "more"}
                                 />
-                                <label htmlFor="more-gender-identity">More</label>
+                                <label htmlFor="more-gender-identity">Other</label>
                             </div>
 
                             <label htmlFor="about">About me</label>
@@ -190,106 +233,22 @@ const ProfileCRUD = () => {
 
                             <label>Strengths</label>
                             <ul>
-                                <li className={`${formData.strength_subjects.includes("physics") ? "selected":""}`}
-                                    onClick={() => {addStrengthOrWeakness("strength_subjects", "physics")}}>
-                                    Physics
-                                </li>
-                                <li className={`${formData.strength_subjects.includes("coding") ? "selected":""}`}
-                                    onClick={() => {addStrengthOrWeakness("strength_subjects", "coding")}}>
-                                    Coding
-                                </li>
-                                <li className={`${formData.strength_subjects.includes("math") ? "selected":""}`}
-                                    onClick={() => {addStrengthOrWeakness("strength_subjects", "math")}}>
-                                    Math
-                                </li>
-
-                                <li className={`${formData.strength_subjects.includes("chemistry") ? "selected":""}`}
-                                    onClick={() => {addStrengthOrWeakness("strength_subjects", "chemistry")}}>
-                                    Chemistry
-                                </li>
-
-                                <li className={`${formData.strength_subjects.includes("biology") ? "selected":""}`}
-                                    onClick={() => {addStrengthOrWeakness("strength_subjects", "biology")}}>
-                                    Biology
-                                </li>
-
-                                <li className={`${formData.strength_subjects.includes("english") ? "selected":""}`}
-                                    onClick={() => {addStrengthOrWeakness("strength_subjects", "english")}}>
-                                    English
-                                </li>
-
-                                <li className={`${formData.strength_subjects.includes("literature") ? "selected":""}`}
-                                    onClick={() => {addStrengthOrWeakness("strength_subjects", "literature")}}>
-                                    Literature
-                                </li>
-
-                                <li className={`${formData.strength_subjects.includes("french") ? "selected":""}`}
-                                    onClick={() => {addStrengthOrWeakness("strength_subjects", "french")}}>
-                                    French
-                                </li>
-
-                                <li className={`${formData.strength_subjects.includes("marketing") ? "selected":""}`}
-                                    onClick={() => {addStrengthOrWeakness("strength_subjects", "marketing")}}>
-                                    Marketing
-                                </li>
-
-                                <li className={`${formData.strength_subjects.includes("finance") ? "selected":""}`}
-                                    onClick={() => {addStrengthOrWeakness("strength_subjects", "finance")}}>
-                                    Finance
-                                </li>
-
+                                {subjects.map((value, index) => {
+                                    return <li key={index} className={`${formData.strength_subjects.includes(value) ? "selected":""}`}
+                                               onClick={() => {addStrengthOrWeakness("strength_subjects", value)}}>
+                                        {value}
+                                    </li>
+                                })}
                             </ul>
 
                             <label>Weakness</label>
                             <ul>
-                                <li className={`${formData.weak_subjects.includes("physics") ? "selected":""}`}
-                                    onClick={() => {addStrengthOrWeakness("weak_subjects", "physics")}}>
-                                    Physics
-                                </li>
-                                <li className={`${formData.weak_subjects.includes("coding") ? "selected":""}`}
-                                    onClick={() => {addStrengthOrWeakness("weak_subjects", "coding")}}>
-                                    Coding
-                                </li>
-                                <li className={`${formData.weak_subjects.includes("math") ? "selected":""}`}
-                                    onClick={() => {addStrengthOrWeakness("weak_subjects", "math")}}>
-                                    Math
-                                </li>
-
-                                <li className={`${formData.weak_subjects.includes("chemistry") ? "selected":""}`}
-                                    onClick={() => {addStrengthOrWeakness("weak_subjects", "chemistry")}}>
-                                    Chemistry
-                                </li>
-
-                                <li className={`${formData.weak_subjects.includes("biology") ? "selected":""}`}
-                                    onClick={() => {addStrengthOrWeakness("weak_subjects", "biology")}}>
-                                    Biology
-                                </li>
-
-                                <li className={`${formData.weak_subjects.includes("english") ? "selected":""}`}
-                                    onClick={() => {addStrengthOrWeakness("weak_subjects", "english")}}>
-                                    English
-                                </li>
-
-                                <li className={`${formData.weak_subjects.includes("literature") ? "selected":""}`}
-                                    onClick={() => {addStrengthOrWeakness("weak_subjects", "literature")}}>
-                                    Literature
-                                </li>
-
-                                <li className={`${formData.weak_subjects.includes("french") ? "selected":""}`}
-                                    onClick={() => {addStrengthOrWeakness("weak_subjects", "french")}}>
-                                    French
-                                </li>
-
-                                <li className={`${formData.weak_subjects.includes("marketing") ? "selected":""}`}
-                                    onClick={() => {addStrengthOrWeakness("weak_subjects", "marketing")}}>
-                                    Marketing
-                                </li>
-
-                                <li className={`${formData.weak_subjects.includes("finance") ? "selected":""}`}
-                                    onClick={() => {addStrengthOrWeakness("weak_subjects", "finance")}}>
-                                    Finance
-                                </li>
-
+                                {subjects.map((value, index) => {
+                                    return <li key={index} className={`${formData.weak_subjects.includes(value) ? "selected":""}`}
+                                               onClick={() => {addStrengthOrWeakness("weak_subjects", value)}}>
+                                        {value}
+                                    </li>
+                                })}
                             </ul>
 
                         </section>

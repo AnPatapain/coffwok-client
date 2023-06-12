@@ -3,8 +3,6 @@ import VerticalNav from "../components/VerticalNav.jsx";
 import {TbSchool} from "react-icons/tb"
 import {AiOutlineLike} from "react-icons/ai"
 import {AiOutlineDislike} from "react-icons/ai"
-import {AiOutlineMessage} from "react-icons/ai";
-import {AiOutlineHeart} from "react-icons/ai"
 import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import ProfileService from "../api/services/profile.service.js";
@@ -23,7 +21,6 @@ const MyProfile = () => {
         strength_subjects: [],
         weak_subjects: []
     })
-    const isUser = true
 
     useEffect(() => {
         ProfileService.getMyProfile()
@@ -52,19 +49,22 @@ const MyProfile = () => {
             <div className="profile-section-container">
                 <section className="profile-section profile-personal-info-section">
                     <div>
-                        <img src={profile.imgUrl}/>
+                        <section className="image-container">
+                            <img src={profile.imgUrl}/>
+                            <button className="primary-button" onClick={() => {navigate(`/profile-image-creation`)}}>Change image</button>
+                        </section>
+
                         <section className="personal-info">
                             <section className="name-button">
-                                <span className="username">{profile.name}, {calculateAge(profile.dob_year)}</span>
-                                {isUser && (<button className="primary-button" onClick={() => {navigate(`/profile-info-creation?isEdit=true`)}}>Edit profile</button>)}
+                                <span className="username">{profile.name}</span>
+                                <button className="primary-button" onClick={() => {navigate(`/profile-info-creation?isEdit=true`)}}>Edit profile</button>
                             </section>
                             <p className="about">{profile.about}</p>
                             <section className="profile-sub-info">
-                                {isUser ? (<article><span>130 visited</span><span>10 love</span></article>) :
-                                    (<article>
-                                        <span><AiOutlineMessage className="icon"/> Invite to Glife</span>
-                                        <span><AiOutlineHeart className="icon"/> Like</span>
-                                    </article>)}
+                               <article>
+                                   <span>130 visitors</span>
+                                   <span>10 love</span>
+                               </article>
                             </section>
                         </section>
                     </div>
@@ -76,11 +76,11 @@ const MyProfile = () => {
                         <span>{profile.school}</span>
                     </article>
                     <article>
-                        <span className="category"><AiOutlineLike className="study-info-icon"/> My strengths</span>
+                        <span className="category"><AiOutlineLike className="study-info-icon"/> Good</span>
                         <span>{profile.strength_subjects.join(", ")}</span>
                     </article>
                     <article>
-                        <span className="category"><AiOutlineDislike className="study-info-icon"/> My weakness</span>
+                        <span className="category"><AiOutlineDislike className="study-info-icon"/> Bad</span>
                         <span>{profile.weak_subjects.join(", ")}</span>
                     </article>
                 </section>

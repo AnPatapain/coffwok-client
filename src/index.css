@@ -4,6 +4,7 @@ html body {
     padding: 0;
     text-align: center;
     background-color: #F6F6F6;
+    letter-spacing: 1px;
 }
 
 * {
@@ -11,7 +12,7 @@ html body {
 }
 
 .primary-title {
-    font-size: 35px;
+    font-size: 40px;
     color: white;
 }
 
@@ -26,7 +27,7 @@ h2 {
     text-transform: uppercase;
     background-color: #9AFB4D;
     padding: 12px 35px;
-    border: solid 3px;
+    border: solid 2px;
     border-radius: 30px;
 }
 
@@ -65,18 +66,26 @@ h2 {
     background-size: cover;
 }
 
+.overlay nav {
+    padding: 10px 10px;
+}
+
 .home {
     margin-top: 15vh;
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 .home h1 {
     margin-bottom: 0;
 }
-
-.home .secondary-title {
+.home article {
+    text-align: center;
+}
+.home article p{
     color: white;
+    letter-spacing: 1px;
 }
 
 .home .home-buttons {
@@ -89,7 +98,7 @@ h2 {
 }
 
 .home .home-buttons button {
-    margin-bottom: 32px;
+    margin-bottom: 25px;
 }
 
 .home .home-buttons .transparent-button {
@@ -99,31 +108,32 @@ h2 {
 
 @media (max-width: 430px) {
     .primary-title {
-        font-size: 20px;
-    }
-
-    .secondary-title {
-        display: none;
+        font-size: 30px;
     }
 
     .primary-button {
         font-size: 10px;
     }
+
+    .home article p{
+        font-size: 12px;
+    }
+
     .home .home-buttons {
-        margin-top: 20vh;
+        margin-top: 25vh;
     }
     .home .primary-title {
+        font-size: 20px;
         margin-top: 50px;
+    }
+    .home .home-buttons button {
+        margin-bottom: 10px;
     }
 }
 
 @media (min-width: 430px) and (max-width: 537px) {
     .primary-title {
         font-size: 25px;
-    }
-
-    .secondary-title {
-        font-size: 20px;
     }
     .primary-button {
         font-size: 15px;
@@ -142,6 +152,7 @@ nav {
     display: flex;
     width: 100%;
     justify-content: space-between;
+    padding: 5px 5px;
 }
 
 nav .logo-container {
@@ -165,6 +176,8 @@ nav .logo-container h3 {
     /*border: solid 2px;*/
     border-radius: 10px;
     background-color: white;
+    position: fixed;
+    height: 100%;
 }
 
 .vertical-nav .nav-text, .logo-container h3 {
@@ -231,6 +244,7 @@ nav .logo-container h3 {
         display: flex;
         position: fixed;
         bottom: 0;
+        max-height: 50px;
         width: 100%;
         align-items: baseline;
         justify-content: center;
@@ -248,7 +262,7 @@ nav .logo-container h3 {
 
     .vertical-nav ul li {
         height: 100%;
-        padding: 0px 0px;
+        padding: 0 0;
         margin: auto;
     }
 }
@@ -377,12 +391,13 @@ nav .logo-container h3 {
     display: flex;
     background-color: #F6F6F6;
     width: 100%;
+    font-weight: 400;
 }
 
 /* Profile Section  */
 .profile-container .profile-section-container {
-    width: 60%;
-    margin-left: 5%;
+    width: 50%;
+    margin-left: 25%;
 }
 
 .profile-section-container .profile-section {
@@ -395,8 +410,7 @@ nav .logo-container h3 {
 /* profile-personal-info-section */
 
 .profile-personal-info-section{
-    height: 250px;
-    padding-bottom: 40px ;
+    padding-bottom: 20px;
 }
 
 
@@ -404,19 +418,37 @@ nav .logo-container h3 {
     height: 100%;
     display: flex;
     margin-top: 10px;
-    margin-left: 20%;
+    margin-left: 5%;
+    width: 80%;
+}
+
+.profile-personal-info-section div .image-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-personal-info-section div .image-container button{
+    font-size: 10px;
+    padding: 3px 3px;
+    border: none;
+    margin-top: 5px;
+    border: solid 1px;
+    background: transparent;
 }
 
 .profile-personal-info-section div img {
-    height: 100%;
+    /*height: 100%;*/
+    max-height: 250px;
+    max-width: 200px;
     border-radius: 30px;
     border: solid 2px #5FB51C;
 }
 
 .profile-personal-info-section div .personal-info{
-    margin-left: 50px;
+    margin-left: 10%;
     margin-top: 20px;
     text-align: start;
+    width: 60%;
 }
 
 .profile-personal-info-section div .personal-info .name-button .username{
@@ -424,7 +456,9 @@ nav .logo-container h3 {
     margin-right: 20px;
     font-size: 1rem;
 }
-
+.profile-personal-info-section div .personal-info .name-button{
+    display: flex;
+}
 .profile-personal-info-section div .personal-info .name-button button {
     font-size: 10px;
     padding: 5px 20px;
@@ -435,9 +469,6 @@ nav .logo-container h3 {
     overflow-wrap: break-word;
 }
 
-.profile-personal-info-section div .personal-info .profile-sub-info {
-    margin-top: 50px;
-}
 
 .profile-personal-info-section div .personal-info .profile-sub-info article {
     display: flex;
@@ -480,7 +511,7 @@ nav .logo-container h3 {
 }
 
 .profile-study-info-section article {
-    margin-left: 20%;
+    margin-left: 5%;
     margin-bottom: 10px;
     display: flex;
     align-items: center;
@@ -506,6 +537,10 @@ nav .logo-container h3 {
 }
 
 @media (max-width: 950px) {
+    .profile-container .profile-section-container {
+        width: 70%;
+        margin-left: 10%;
+    }
     .profile-personal-info-section div {
         width: 100%;
         margin-left: 20px;
@@ -554,26 +589,65 @@ nav .logo-container h3 {
 }
 
 @media (max-width: 444px) {
+
     .profile-personal-info-section div .personal-info {
-        margin-left: auto;
-        width: 50%;
+        width: 40%;
+    }
+
+    .profile-personal-info-section div img {
+        /*height: 100%;*/
+        max-height: 150px;
+        max-width: 150px;
+    }
+
+
+    .profile-personal-info-section div .personal-info .name-button{
+        flex-direction: column;
+    }
+
+    .profile-personal-info-section div .personal-info .name-button button{
+        margin-top: 8px;
+    }
+
+    .profile-personal-info-section div .personal-info .profile-sub-info {
+        margin-top: 0;
     }
 
     .profile-personal-info-section div .personal-info .profile-sub-info article {
         display: flex;
-        flex-direction: column;
         align-items: start;
         /*justify-content: space-between;*/
     }
 
-    .profile-personal-info-section div .personal-info .profile-sub-info span {
+    .profile-personal-info-section div .personal-info .profile-sub-info article span {
         /*display: none;*/
         /*display: inline;*/
-        margin-right: 0;
+        margin-right: 20px;
     }
 
     .profile-personal-info-section div .about {
-        display: none;
+        /*display: none;*/
+        font-size: 14px;
+        font-weight: 400;
+        margin-top: 20px;
+    }
+
+    .profile-personal-info-section div .personal-info .name-button button {
+        font-size: 7px;
+        padding: 5px 20px;
+        border: none;
+    }
+
+    .profile-personal-info-section div .personal-info .profile-sub-info article span {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-bottom: 15px;
+        font-size: 10px;
+    }
+
+    .profile-personal-info-section div .personal-info{
+        margin-left: 10%;
     }
 }
 
@@ -706,6 +780,32 @@ nav .logo-container h3 {
     }
     .onboarding form section {
         width: 50%;
+    }
+
+    .onboarding form input {
+        padding: 10px 25px;
+    }
+
+    .onboarding form section {
+        width: 80%;
+    }
+
+    .onboarding form input[type=submit] {
+        width: 90%;
+        margin: 5px;
+    }
+
+    .onboarding form .multiple-input-container label {
+        padding: 5px;
+        font-size: 14px;
+    }
+
+    .onboarding form ul li {
+        font-size: 10px;
+    }
+
+    .onboarding h2{
+        font-size: 20px;
     }
 
 }
