@@ -6,6 +6,8 @@ import {AiOutlineDislike} from "react-icons/ai"
 import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import ProfileService from "../api/services/profile.service.js";
+import {getErrorMessage} from "../api/error/errorMessage.js";
+import {PROFILE_IMG} from "../api/constant/index.js";
 
 
 const MyProfile = () => {
@@ -25,20 +27,23 @@ const MyProfile = () => {
     useEffect(() => {
         ProfileService.getMyProfile()
             .then(data => {
+                console.log(data)
                 setProfile(data)
+            })
+            .catch(error => {
+                const errMsg = getErrorMessage(error)
+                console.log(errMsg)
+                navigate("/")
             })
     },[])
 
     const calculateAge = (birthYear) => {
         const currentYear = new Date().getFullYear();
         const yearDifference = currentYear - parseInt(birthYear);
-
         // Check if the user's birthday has passed in the current year
         const birthdayHasPassed = new Date().getTime() > new Date(currentYear, new Date().getMonth(), new Date().getDate()).getTime();
-
         // Adjust age based on whether the birthday has passed or not
         const age = birthdayHasPassed ? yearDifference : yearDifference - 1;
-
         return age;
     }
 
@@ -50,7 +55,7 @@ const MyProfile = () => {
                 <section className="profile-section profile-personal-info-section">
                     <div>
                         <section className="image-container">
-                            <img src={profile.imgUrl}/>
+                            {localStorage.getItem(PROFILE_IMG) ? <img src={localStorage.getItem(PROFILE_IMG)}/> : <img src={profile.imgUrl}/>}
                             <button className="primary-button" onClick={() => {navigate(`/profile-image-creation`)}}>Change image</button>
                         </section>
 

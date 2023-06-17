@@ -30,7 +30,7 @@ const ProfileCRUD = () => {
         dob_day: "",
         dob_month: "",
         dob_year: "",
-        gender_identity: "",
+        gender: "",
         url: "",
         about: "",
         school: "",
@@ -43,7 +43,7 @@ const ProfileCRUD = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            console.log(formData)
+            console.log("before sending ", formData)
             if(isEdit) {
                 UserService.getCurrentUser()
                     .then(user => {
@@ -52,12 +52,13 @@ const ProfileCRUD = () => {
                         }else {
                             ProfileService.editProfileInfo(user.profileId, formData)
                                 .then(response => {
-                                    console.log(response.data)
+                                    console.log("sent ", response.data)
                                     navigate("/profile")
                                 })
                                 .catch(error => {
                                     const errorMsg = getErrorMessage(error)
                                     console.log(errorMsg)
+                                    navigate("/profile")
                                 })
                         }
                     })
@@ -69,17 +70,33 @@ const ProfileCRUD = () => {
                         navigate("/")
                     })
             }else {
-                ProfileService.uploadProfileInfo(formData)
-                    .then(
-                        response => {
-                            console.log(response.data)
-                            navigate("/profile-image-creation")
-                        },
-                        error => {
-                            const resMessage = getErrorMessage(error)
-                            console.log(resMessage)
+                UserService.getCurrentUser()
+                    .then(user => {
+                        if(user.profileId) {
+                            console.log("user has already profile")
+                            navigate("/profile")
+                        }else {
+                            ProfileService.uploadProfileInfo(formData)
+                                .then(
+                                    response => {
+                                        console.log(response.data)
+                                        navigate("/profile-image-creation")
+                                    },
+                                    error => {
+                                        const resMessage = getErrorMessage(error)
+                                        console.log(resMessage)
+                                    }
+                                )
                         }
-                    )
+                    })
+                    .catch(error => {
+                        console.log(error)
+                        if(localStorage.getItem(ACCESS_TOKEN)) {
+                            localStorage.removeItem(ACCESS_TOKEN)
+                        }
+                        navigate("/")
+                    })
+
             }
         } catch (err) {
             console.log(err)
@@ -120,10 +137,8 @@ const ProfileCRUD = () => {
         })
     }
 
-    console.log(formData)
-
     return (
-        <>
+        <div className="onboarding-container">
             <HomeNav/>
             <div className="onboarding">
                 {isEdit ? (<h2>EDIT PROFILE</h2>) : <h2>CREATE PROFILE</h2>}
@@ -180,28 +195,28 @@ const ProfileCRUD = () => {
                                 <input
                                     id="man-gender-identity"
                                     type="radio"
-                                    name="gender_identity"
+                                    name="gender"
                                     value="man"
                                     onChange={handleChange}
-                                    checked={formData.gender_identity === "man"}
+                                    checked={formData.gender === "man"}
                                 />
                                 <label htmlFor="man-gender-identity">Man</label>
                                 <input
                                     id="woman-gender-identity"
                                     type="radio"
-                                    name="gender_identity"
+                                    name="gender"
                                     value="woman"
                                     onChange={handleChange}
-                                    checked={formData.gender_identity === "woman"}
+                                    checked={formData.gender === "woman"}
                                 />
                                 <label htmlFor="woman-gender-identity">Woman</label>
                                 <input
                                     id="more-gender-identity"
                                     type="radio"
-                                    name="gender_identity"
+                                    name="gender"
                                     value="more"
                                     onChange={handleChange}
-                                    checked={formData.gender_identity === "more"}
+                                    checked={formData.gender === "more"}
                                 />
                                 <label htmlFor="more-gender-identity">Other</label>
                             </div>
@@ -256,7 +271,7 @@ const ProfileCRUD = () => {
                     <input type="submit"/>
                 </form>
             </div>
-        </>
+        </div>
     )
 }
 export default ProfileCRUD

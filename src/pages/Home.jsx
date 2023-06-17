@@ -16,7 +16,7 @@ const Home = () => {
                 if(user.profileId === null) {
                     navigate("/profile-info-creation?isEdit=false")
                 }else {
-                    navigate("/plans")
+                    navigate("/dashboard")
                 }
             })
             .catch(error => {
