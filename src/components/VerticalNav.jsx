@@ -1,7 +1,7 @@
 import LogoContainer from "./LogoContainer.jsx";
 import {BiHomeAlt2, BiMessageSquareAdd} from "react-icons/bi";
 import {AiOutlineMessage} from "react-icons/ai";
-import {IoMdNotificationsOutline} from "react-icons/io";
+import {IoIosAddCircleOutline, IoMdNotificationsOutline} from "react-icons/io";
 import {CgProfile} from "react-icons/cg";
 import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
@@ -36,7 +36,7 @@ const VerticalNav = () => {
                     <IoMdNotificationsOutline className="ver-nav-icon"/>
                     <span className="nav-text">Notifications</span>
                 </li>
-                <li onClick={() => {navigate("/plan-creation?isEdit=false")}}>
+                <li onClick={() => {navigate("/plan-creation")}}>
                     <BiMessageSquareAdd className="ver-nav-icon"/>
                     <span className="nav-text">Create plan</span>
                 </li>

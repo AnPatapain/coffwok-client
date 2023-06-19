@@ -2,14 +2,12 @@ import {AiOutlineDislike, AiOutlineLike} from "react-icons/ai";
 import {TbSchool} from "react-icons/tb";
 import {GoLocation} from "react-icons/go";
 import {MdSchedule} from "react-icons/md";
+import {SlPencil} from "react-icons/sl"
+import {useState} from "react";
 
 // eslint-disable-next-line react/prop-types
-const PlanCreationEditCard = ({planInfo, planDTO, setPlanDTO}) => {
-    /**
-     * TODO: Fetch user -> if user has already plan -> show edit-delete format
-     *                     if not -> show create format
-     */
-
+const PlanCreationEditCard = ({planInfo, planDTO, setPlanDTO, oldPlan}) => {
+    const [isClick, setIsClick] = useState(false)
     const handleChange = (e) => {
         let value = e.target.value
         let name = e.target.name
@@ -41,15 +39,22 @@ const PlanCreationEditCard = ({planInfo, planDTO, setPlanDTO}) => {
                         <label htmlFor="cafe">Café</label>
                     </span>
                     <span>
-                        <input
-                            id="cafe"
-                            type="text"
-                            name="coffeeShop"
-                            required={true}
-                            value={planDTO.coffeeShop}
-                            placeholder="Glife"
-                            onChange={handleChange}
-                        />
+                        {
+                            oldPlan && !isClick ?
+                                <article>
+                                    <span className="text">
+                                        {oldPlan.coffeeShop}
+                                        <SlPencil className="edit-icon" onClick={() => {setIsClick(true)}}/>
+                                    </span>
+                                </article> :
+                                <input id="cafe"
+                                       type="text"
+                                       name="coffeeShop"
+                                       required={true}
+                                       value={planDTO.coffeeShop}
+                                       placeholder="Glife"
+                                       onChange={handleChange}/>
+                        }
                     </span>
                 </li>
                 <li className="plan-info-item">
@@ -58,15 +63,23 @@ const PlanCreationEditCard = ({planInfo, planDTO, setPlanDTO}) => {
                         <label htmlFor="schedule">Schedule</label>
                     </span>
                     <span>
-                        <input
-                            id="schedule"
-                            type="text"
-                            name="schedule"
-                            required={true}
-                            value={planDTO.schedule}
-                            placeholder="7h-9h tomorrow"
-                            onChange={handleChange}
-                        />
+                        {
+                            oldPlan && !isClick ?
+                                <article>
+                                    <span className="text">
+                                        {oldPlan.schedule}
+                                        <SlPencil className="edit-icon" onClick={() => {setIsClick(true)}}/>
+                                    </span>
+                                </article> :
+                                <input id="schedule"
+                                       type="text"
+                                       name="schedule"
+                                       required={true}
+                                       value={planDTO.schedule}
+                                       placeholder="7h-9h tomorrow"
+                                       onChange={handleChange}/>
+                        }
+
                     </span>
                 </li>
                 <li className="plan-info-item">

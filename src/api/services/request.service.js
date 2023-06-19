@@ -36,6 +36,16 @@ const patchRequestJson = (req, data) => {
     return axios.patch(req, data, {headers: headers})
 }
 
+const deleteRequest = (req) => {
+    const headers = {
+        'Content-Type': 'application/json'
+    }
+    if(localStorage.getItem(ACCESS_TOKEN)) {
+        headers['Authorization'] = 'Bearer ' + localStorage.getItem(ACCESS_TOKEN)
+    }
+    return axios.delete(req, {headers: headers})
+}
+
 const postRequestFile = (req, file) => {
     const headers = {
         'Content-Type': 'multipart/form-data'
@@ -55,6 +65,7 @@ const RequestService = {
     getRequest,
     postRequestJson,
     patchRequestJson,
+    deleteRequest,
     postRequestFile
 }
 export default RequestService

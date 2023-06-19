@@ -171,7 +171,7 @@ nav .logo-container .logo {
 
 nav .logo-container h3 {
     text-transform: uppercase;
-    color: white;
+    color: #5FB51C;
 }
 
 /*------------------- Vertical Nav -----------------*/
@@ -548,7 +548,48 @@ nav .logo-container h3 {
 }
 
 .profile-coffee-study-plan-section{
-    height: 500px;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 20px;
+}
+
+.profile-coffee-study-plan-section h2 {
+    color: #5FB51C;
+}
+
+.profile-coffee-study-plan-section .add-plan-icon {
+    margin: auto;
+    height: 60px;
+    width: 60px;
+    cursor: pointer;
+    border-radius: 20px;
+}
+
+.profile-coffee-study-plan-section .add-plan-icon:hover {
+    background-color: #F6F6F6;
+}
+
+
+.profile-coffee-study-plan-section .plan-card {
+    border: solid 2px #5FB51C;
+}
+
+.profile-coffee-study-plan-section .buttons {
+    margin-top: 10px;
+}
+
+.profile-coffee-study-plan-section .buttons .edit-button {
+    border: none;
+    padding: 5px 30px;
+    font-size: 16px;
+}
+
+.profile-coffee-study-plan-section .buttons .delete-button {
+    border: none;
+    padding: 5px 30px;
+    font-size: 16px;
+    background-color: transparent;
+    border: solid 1px;
 }
 
 @media (max-width: 950px) {
@@ -669,9 +710,6 @@ nav .logo-container h3 {
 /*-------- OnBoarding Page --------*/
 .onboarding-container .logo-container h3 {
     color: #5FB51C;
-}
-.onboarding {
-    border-top: solid 1px rgb(213, 213, 213);
 }
 
 .onboarding h2, .onboarding label {
@@ -998,6 +1036,12 @@ nav .logo-container h3 {
     margin-right: 5px;
 }
 
+.plan-card .plan-info-section li span article .edit-icon {
+    margin-left: 5px;
+    cursor: pointer;
+    color: #00bbf9;
+}
+
 /*--------------- plan crud page ---------------------*/
 .plan-crud-container .plan-card {
     margin-top: 30px;
@@ -1030,6 +1074,18 @@ nav .logo-container h3 {
 .plan-crud-container .plan-card input:focus {
     outline: none;
     border: solid 2px #5FB51C;
+}
+
+.plan-crud-container .button-group {
+    display: flex;
+    flex-direction: row;
+    max-width: 350px;
+    margin: auto;
+}
+
+.plan-crud-container .button-group button:nth-child(2) {
+    background-color: #000000;
+    color: white;
 }
 
 

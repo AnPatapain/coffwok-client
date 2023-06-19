@@ -29,12 +29,12 @@ const PlanCard = ({planInfo}) => {
                     <span className="text">{planInfo.schedule}</span>
                 </li>
                 <li className="plan-info-item">
-                    <span><AiOutlineLike className="icon"/>My Strengths</span>
-                    <span className="text">{planInfo.strength_subjects.join(", ")}</span>
+                    <span><AiOutlineLike className="icon"/>Strengths</span>
+                    <span className="text">{planInfo.strength_subjects.slice(0, 2).join(", ")}</span>
                 </li>
                 <li className="plan-info-item">
-                    <span><AiOutlineDislike className="icon"/>My Weakness</span>
-                    <span className="text">{planInfo.weak_subjects.join(", ")}</span>
+                    <span><AiOutlineDislike className="icon"/>Weakness</span>
+                    <span className="text">{planInfo.weak_subjects.slice(0, 2).join(", ")}</span>
                 </li>
             </ul>
         </div>

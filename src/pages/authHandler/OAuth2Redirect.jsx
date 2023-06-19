@@ -16,7 +16,7 @@ const OAuth2Redirect = () => {
                 if(user.profileId === null) {
                     navigate("/profile-info-creation?isEdit=false")
                 }else {
-                    navigate("/profile")
+                    navigate("/dashboard")
                 }
             })
             .catch(error => {

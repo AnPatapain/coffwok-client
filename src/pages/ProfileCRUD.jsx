@@ -1,14 +1,23 @@
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import {useNavigate} from 'react-router-dom'
 import HomeNav from "../components/HomeNav.jsx";
 import ProfileService from "../api/services/profile.service.js";
 import {getErrorMessage} from "../api/error/errorMessage.js"
 import UserService from "../api/services/user.service.js";
 import {ACCESS_TOKEN} from "../api/constant/index.js";
+import VerticalNav from "../components/VerticalNav.jsx";
 
 const ProfileCRUD = () => {
     const url = new URL(window.location.href);
     let isEdit = url.searchParams.get("isEdit") === 'true'
+    const [placeHolder, setPlaceHolder] = useState({
+        name: "Name",
+        dob_day: "DD",
+        dob_month: "MM",
+        dob_year: "YYYY",
+        about: "I love study at coffee shop",
+        school: "School"
+    })
     const subjects = [
         "physic",
         "english",
@@ -39,6 +48,18 @@ const ProfileCRUD = () => {
     })
 
     let navigate = useNavigate()
+
+    useEffect(() => {
+        if(isEdit) {
+            ProfileService.getMyProfile()
+                .then(data => {
+                    setPlaceHolder(data)
+                })
+                .catch(error => {
+                    console.log(getErrorMessage(error))
+                })
+        }
+    }, [])
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -151,7 +172,7 @@ const ProfileCRUD = () => {
                                 id="name"
                                 type='text'
                                 name="name"
-                                placeholder="Name"
+                                placeholder={placeHolder.name}
                                 required={true}
                                 value={formData.name}
                                 onChange={handleChange}
@@ -163,7 +184,7 @@ const ProfileCRUD = () => {
                                     id="dob_day"
                                     type="number"
                                     name="dob_day"
-                                    placeholder="DD"
+                                    placeholder={placeHolder.dob_day}
                                     required={true}
                                     value={formData.dob_day}
                                     onChange={handleChange}
@@ -173,7 +194,7 @@ const ProfileCRUD = () => {
                                     id="dob_month"
                                     type="number"
                                     name="dob_month"
-                                    placeholder="MM"
+                                    placeholder={placeHolder.dob_month}
                                     required={true}
                                     value={formData.dob_month}
                                     onChange={handleChange}
@@ -183,7 +204,7 @@ const ProfileCRUD = () => {
                                     id="dob_year"
                                     type="number"
                                     name="dob_year"
-                                    placeholder="YYYY"
+                                    placeholder={placeHolder.dob_year}
                                     required={true}
                                     value={formData.dob_year}
                                     onChange={handleChange}
@@ -227,7 +248,7 @@ const ProfileCRUD = () => {
                                 type="text"
                                 name="about"
                                 required={true}
-                                placeholder="I love study at coffee shop ..."
+                                placeholder={placeHolder.about}
                                 value={formData.about}
                                 onChange={handleChange}
                             />
@@ -241,7 +262,7 @@ const ProfileCRUD = () => {
                                 type="text"
                                 name="school"
                                 required={true}
-                                placeholder="school"
+                                placeholder={placeHolder.school}
                                 value={formData.school}
                                 onChange={handleChange}
                             />

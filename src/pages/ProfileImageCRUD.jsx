@@ -5,8 +5,9 @@ import ProfileService from "../api/services/profile.service.js";
 import {useNavigate} from "react-router-dom";
 import {getErrorMessage} from "../api/error/errorMessage.js";
 import UserService from "../api/services/user.service.js";
-import {ACCESS_TOKEN} from "../api/constant/index.js";
+import {ACCESS_TOKEN, PROFILE_IMG} from "../api/constant/index.js";
 import {RotatingSquare} from 'react-loader-spinner';
+import localStorageService from "../api/services/localStorage.service.js";
 
 const ProfileImageCRUD = () => {
     const navigate = useNavigate()
@@ -54,6 +55,7 @@ const ProfileImageCRUD = () => {
                         .then(
                             response => {
                                 console.log(response)
+                                localStorageService.add(PROFILE_IMG, response.data.imgUrl)
                                 navigate("/profile")
                             },
                             error => {
