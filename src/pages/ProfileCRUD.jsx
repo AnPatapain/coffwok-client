@@ -178,9 +178,21 @@ const ProfileCRUD = () => {
                                 onChange={handleChange}
                             />
 
+                            {/* TODO: change backend dto */}
+
                             <label>Birthday</label>
                             <div className="multiple-input-container">
                                 <input
+                                    id="dob_day"
+                                    type="date"
+                                    name="dob_day"
+                                    placeholder={placeHolder.dob_day}
+                                    required={true}
+                                    value={formData.dob_day}
+                                    onChange={handleChange}
+                                />
+                                
+                                {/* <input
                                     id="dob_day"
                                     type="number"
                                     name="dob_day"
@@ -208,7 +220,7 @@ const ProfileCRUD = () => {
                                     required={true}
                                     value={formData.dob_year}
                                     onChange={handleChange}
-                                />
+                                /> */}
                             </div>
 
                             <label>Gender</label>
