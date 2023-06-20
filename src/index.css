@@ -1123,4 +1123,21 @@ nav .logo-container h3 {
     }
 }
 
+/*-------------------------------- Dash Board ------------------------*/
+.dashboard-container .plans-container {
+    max-width: 450px;
+    margin: auto;
+}
+
+.dashboard-container .plans-container .plan-card .image-container img {
+    width: 100%;
+}
+
+.dashboard-container .plans-container .plan-card {
+    margin-bottom: 50px;
+}
+.dashboard-container .plans-container .plan-card:first-child {
+    margin-top: 10px;
+}
+
 

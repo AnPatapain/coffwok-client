@@ -14,12 +14,14 @@ const VerticalNav = () => {
 
     useEffect(() => {
         let imgUrl = localStorage.getItem(PROFILE_IMG)
-        if(imgUrl) {
+        console.log(imgUrl)
+        if(imgUrl !== null) {
+            console.log("nigger")
             imgUrl = ImageService.modifyImageURI(imgUrl, ["q_100", "w_40", "h_40", "c_fill", "g_face"])
             setProfileImg(imgUrl)
             console.log(imgUrl)
         }
-    }, [profileImg])
+    }, [])
     return (
         <div className="vertical-nav">
             <LogoContainer/>

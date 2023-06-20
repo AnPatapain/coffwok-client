@@ -16,9 +16,14 @@ const DashBoard = () => {
         async function myFunc() {
             await ProfileService.getMyProfile()
                 .then(data => {
-                    localStorageService.add(PROFILE_ID, data.id)
-                    localStorageService.add(USER_ID, data.userId)
-                    localStorageService.add(PROFILE_IMG, data.imgUrl)
+                    if(data.imgUrl === null) {
+                        navigate("/profile-image-creation")
+                    }else {
+                        console.log(data)
+                        localStorageService.add(PROFILE_ID, data.id)
+                        localStorageService.add(USER_ID, data.userId)
+                        localStorageService.add(PROFILE_IMG, data.imgUrl)
+                    }
                 })
                 .catch(error => {
                     const errMsg = getErrorMessage(error)

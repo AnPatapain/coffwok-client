@@ -4,6 +4,7 @@ import {useEffect, useState} from "react";
 import {ACCESS_TOKEN} from "../api/constant/index.js";
 import {useNavigate} from "react-router-dom";
 import UserService from "../api/services/user.service.js";
+import ProfileService from "../api/services/profile.service.js";
 
 const Home = () => {
     const navigate = useNavigate()
@@ -16,7 +17,14 @@ const Home = () => {
                 if(user.profileId === null) {
                     navigate("/profile-info-creation?isEdit=false")
                 }else {
-                    navigate("/dashboard")
+                    ProfileService.getMyProfile()
+                        .then(data => {
+                            if(data.imgUrl === null) {
+                                navigate("/profile-image-creation")
+                            }else {
+                                navigate("/dashboard")
+                            }
+                        })
                 }
             })
             .catch(error => {

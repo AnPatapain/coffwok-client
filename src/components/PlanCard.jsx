@@ -2,6 +2,7 @@ import {AiOutlineDislike, AiOutlineLike, AiOutlineMessage} from "react-icons/ai"
 import {TbSchool} from "react-icons/tb";
 import {GoLocation} from "react-icons/go";
 import {MdSchedule} from "react-icons/md";
+import ImageService from "../api/services/image.service.js";
 
 // eslint-disable-next-line react/prop-types
 const PlanCard = ({planInfo}) => {
@@ -9,7 +10,7 @@ const PlanCard = ({planInfo}) => {
         <div className="plan-card">
             <section className="image-container">
                 <img
-                    src={planInfo.imgUrl}/>
+                    src={ImageService.modifyImageURI(planInfo.imgUrl, ["w_350", "h_250", "c_fill", "g_face", "q_100"])}/>
             </section>
             <section className="name-button-section">
                 <p>{planInfo.name}</p>
