@@ -178,6 +178,8 @@ const ProfileCRUD = () => {
                                 onChange={handleChange}
                             />
 
+                            {/* TODO: change backend dto */}
+
                             <label>Birthday</label>
                             <div className="multiple-input-container">
                                 <input
