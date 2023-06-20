@@ -21,8 +21,21 @@ const getCurrentUser = () => {
     })
 }
 
+const getUserById = (id) => {
+    return new Promise((resolve, reject) => {
+        RequestService.getRequest(API_BASE_URL + "/api/user/" + id)
+            .then(response => {
+                resolve(response.data)
+            })
+            .catch(error => {
+                reject(getErrorMessage(error))
+            })
+    })
+}
+
 const UserService = {
-    getCurrentUser
+    getCurrentUser,
+    getUserById
 }
 
 export default UserService

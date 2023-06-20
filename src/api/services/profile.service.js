@@ -14,6 +14,18 @@ const editProfileInfo = (profileId, updatedProfileData) => {
     return RequestService.patchRequestJson(API_BASE_URL + `/api/profiles/${profileId}`, updatedProfileData)
 }
 
+const getProfileById = (id) => {
+    return new Promise((resolve, reject) => {
+        RequestService.getRequest(API_BASE_URL + "/api/profiles/" + id)
+            .then(response => {
+                resolve(response.data)
+            })
+            .catch(error => {
+                reject(getErrorMessage(error))
+            })
+    })
+}
+
 const getMyProfile = () => {
     return new Promise((resolve, reject) => {
         RequestService.getRequest(API_BASE_URL + "/api/profiles/me")
@@ -31,7 +43,8 @@ const ProfileService = {
     uploadProfileInfo,
     uploadProfileImage,
     editProfileInfo,
-    getMyProfile
+    getMyProfile,
+    getProfileById
 }
 
 export default ProfileService

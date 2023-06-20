@@ -11,6 +11,7 @@ import PlanCard from "../components/PlanCard.jsx";
 const DashBoard = () => {
     const navigate = useNavigate()
     const [plans, setPlans] = useState([])
+    const [myPlan, setMyPlan] = useState(null)
 
     useEffect(() => {
         async function myFunc() {
@@ -19,7 +20,6 @@ const DashBoard = () => {
                     if(data.imgUrl === null) {
                         navigate("/profile-image-creation")
                     }else {
-                        console.log(data)
                         localStorageService.add(PROFILE_ID, data.id)
                         localStorageService.add(USER_ID, data.userId)
                         localStorageService.add(PROFILE_IMG, data.imgUrl)
@@ -36,19 +36,34 @@ const DashBoard = () => {
                     setPlans(data._embedded.planList)
                 })
                 .catch(error => {
-                    console.log(error)
+                    console.log(getErrorMessage(error))
+                })
+
+            await PlanService.getMyPlan()
+                .then(data => {
+                    console.log("data", data)
+                    setMyPlan(data)
+                })
+                .catch(error => {
+                    console.log(getErrorMessage(error))
                 })
         }
         myFunc()
     }, [])
 
     console.log("plans", plans)
+    console.log("my plan", myPlan)
+
     return (
         <div className="dashboard-container">
             <VerticalNav />
             <div className="plans-container">
                 {plans.map(plan => {
-                    return <PlanCard key={plan.id} planInfo={plan}/>
+                    if(myPlan && plan.id === myPlan.id) {
+                        return <PlanCard key={plan.id} planInfo={plan} isOwner={true}/>
+                    }else {
+                        return <PlanCard key={plan.id} planInfo={plan}/>
+                    }
                 })}
             </div>
         </div>

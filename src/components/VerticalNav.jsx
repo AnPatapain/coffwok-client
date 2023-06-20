@@ -5,7 +5,7 @@ import {IoIosAddCircleOutline, IoMdNotificationsOutline} from "react-icons/io";
 import {CgProfile} from "react-icons/cg";
 import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
-import {PROFILE_IMG} from "../api/constant/index.js";
+import {PROFILE_ID, PROFILE_IMG} from "../api/constant/index.js";
 import ImageService from "../api/services/image.service.js";
 
 const VerticalNav = () => {
@@ -42,7 +42,7 @@ const VerticalNav = () => {
                     <BiMessageSquareAdd className="ver-nav-icon"/>
                     <span className="nav-text">Create plan</span>
                 </li>
-                <li onClick={()=> {navigate("/profile")} }>
+                <li onClick={()=> {navigate("/profile/" + localStorage.getItem(PROFILE_ID))} }>
                     {profileImg ? <img src={profileImg} className="profile-img"/> : <CgProfile className="ver-nav-icon"/>}
                     <span className="nav-text">Profile</span>
                 </li>

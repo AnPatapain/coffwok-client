@@ -13,7 +13,7 @@ const App = () => {
         <BrowserRouter>
             <Routes>
                 <Route path={"/"} element={<Home/>}/>
-                <Route path={"/profile"} element={<MyProfile/>}/>
+                <Route path={"/profile/:id"} element={<MyProfile />}/>
                 <Route path={"/dashboard"} element={<DashBoard />}/>
                 <Route path={"/profile-info-creation"} element={<ProfileCRUD />} />
                 <Route path={"/profile-image-creation"} element={<ProfileImageCRUD/>} />
