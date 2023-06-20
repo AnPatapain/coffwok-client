@@ -12,8 +12,9 @@ import localStorageService from "../api/services/localStorage.service.js";
 const ProfileImageCRUD = () => {
     const navigate = useNavigate()
     const [loading, setLoading] = useState(false)
-    const [selectedFile, setSelectedFile] = useState()
+    const [selectedFile, setSelectedFile] = useState(null)
     const [preview, setPreview] = useState(null)
+    const [errorMessage, setErrorMessage] = useState(null)
 
     useEffect(() => {
         if (!selectedFile) {
@@ -31,47 +32,88 @@ const ProfileImageCRUD = () => {
 
     const onSelectFile = e => {
         if (!e.target.files || e.target.files.length === 0) {
-            setSelectedFile(undefined)
-            return
+            setSelectedFile(undefined);
+            return;
         }
-        setSelectedFile(e.target.files[0])
-    }
+
+        const file = e.target.files[0];
+        const fileReader = new FileReader();
+
+        fileReader.onloadend = () => {
+            const arrayBuffer = fileReader.result;
+            const uintArray = new Uint8Array(arrayBuffer);
+            let isImage = false;
+
+            // Check the file signature to determine if it's an image
+            if (uintArray && uintArray.length >= 2) {
+                const signature = uintArray.subarray(0, 2);
+
+                // JPEG/JFIF files start with the following signature: [0xFF, 0xD8]
+                // PNG files start with the following signature: [0x89, 0x50]
+                // GIF files start with the following signature: [0x47, 0x49]
+                if (
+                    (signature[0] === 0xFF && signature[1] === 0xD8) ||
+                    (signature[0] === 0x89 && signature[1] === 0x50) ||
+                    (signature[0] === 0x47 && signature[1] === 0x49)
+                ) {
+                    isImage = true;
+                }
+            }
+
+            if (isImage) {
+                setSelectedFile(file);
+                // Perform further processing for image file
+            } else {
+                setErrorMessage("File must be image :  )")
+            }
+        };
+
+        fileReader.readAsArrayBuffer(file);
+    };
+
 
     const handleClick = () => {
-        if(selectedFile && preview) {
+        if (selectedFile && preview) {
             setSelectedFile(undefined)
             setPreview(null)
+            setErrorMessage(null)
         }
     }
 
     const handleSubmit = () => {
-        UserService.getCurrentUser()
-            .then(user => {
-                if(user.profileId === null) {
-                    navigate("/profile-info-creation?isEdit=false")
-                }else {
-                    setLoading(true)
-                    ProfileService.uploadProfileImage(user.profileId, selectedFile)
-                        .then(
-                            response => {
-                                console.log(response)
-                                localStorageService.add(PROFILE_IMG, response.data.imgUrl)
-                                navigate("/profile")
-                            },
-                            error => {
-                                const resMessage = getErrorMessage(error)
-                                console.log(resMessage)
-                            }
-                        )
-                }
-            })
-            .catch(error => {
-                console.log(error)
-                if(localStorage.getItem(ACCESS_TOKEN)) {
-                    localStorage.removeItem(ACCESS_TOKEN)
-                }
-                navigate("/")
-            })
+        if (selectedFile === null) {
+            setErrorMessage("You must upload image")
+        } else {
+            UserService.getCurrentUser()
+                .then(user => {
+                    if (user.profileId === null) {
+                        navigate("/profile-info-creation?isEdit=false")
+                    } else {
+                        setLoading(true)
+                        ProfileService.uploadProfileImage(user.profileId, selectedFile)
+                            .then(
+                                response => {
+                                    console.log(response)
+                                    localStorageService.add(PROFILE_IMG, response.data.imgUrl)
+                                    navigate("/profile")
+                                },
+                                error => {
+                                    setLoading(false)
+                                    setErrorMessage("Max file size is 500kb : )")
+                                    const resMessage = getErrorMessage(error)
+                                    console.log("image upload error", resMessage)
+                                }
+                            )
+                    }
+                })
+                .catch(error => {
+                    console.log(error)
+                    if (localStorage.getItem(ACCESS_TOKEN)) {
+                        localStorage.removeItem(ACCESS_TOKEN)
+                    }
+                    navigate("/")
+                })
+        }
 
     }
 
@@ -84,18 +126,22 @@ const ProfileImageCRUD = () => {
                     {preview ?
                         <div className="image-container">
                             <img src={preview}/>
-                            <button className="secondary-button" onClick={() => {handleClick()}}>remove</button>
+                            <button className="secondary-button" onClick={() => {
+                                handleClick()
+                            }}>remove
+                            </button>
                         </div> : ""
                     }
-                    <div className={`${preview ? "image-choose selected":"image-choose"}`}>
+                    <div className={`${preview ? "image-choose selected" : "image-choose"}`}>
                         <>
                             <label htmlFor="file">
                                 <BiImageAdd className="user-option"/>
                             </label>
-                            <input id="file" type='file' className="inputfile" onChange={onSelectFile} />
+                            <input id="file" type='file' className="inputfile" onChange={onSelectFile}/>
                         </>
                     </div>
                 </section>
+                {errorMessage ? <p className="error-msg">{errorMessage}</p> : ""}
                 {loading ?
                     <div className="loader"><RotatingSquare
                         height="100"
@@ -107,7 +153,9 @@ const ProfileImageCRUD = () => {
                         wrapperClass=""
                         visible={true}
                     /></div>
-                    : <button className="primary-button" onClick={() => {handleSubmit()}}>lets goo</button>
+                    : <button className="primary-button" onClick={() => {
+                        handleSubmit()
+                    }}>lets goo</button>
                 }
 
             </div>

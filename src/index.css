@@ -957,6 +957,10 @@ nav .logo-container h3 {
     display: none;
 }
 
+.upload-profile-image-container .error-msg {
+    color: #ee0256;
+}
+
 /*----------------------- Plan Card Component ---------------------- */
 
 .plan-card {

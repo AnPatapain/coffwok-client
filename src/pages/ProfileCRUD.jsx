@@ -36,11 +36,8 @@ const ProfileCRUD = () => {
 
     const [formData, setFormData] = useState({
         name: "",
-        dob_day: "",
-        dob_month: "",
-        dob_year: "",
+        dob: "",
         gender: "",
-        url: "",
         about: "",
         school: "",
         strength_subjects: [],
@@ -63,6 +60,7 @@ const ProfileCRUD = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+
         try {
             console.log("before sending ", formData)
             if(isEdit) {
@@ -180,15 +178,14 @@ const ProfileCRUD = () => {
 
                             {/* TODO: change backend dto */}
 
-                            <label>Birthday</label>
+                            <label htmlFor="dob">Birthday</label>
                             <div className="multiple-input-container">
                                 <input
-                                    id="dob_day"
+                                    id="dob"
                                     type="date"
-                                    name="dob_day"
-                                    placeholder={placeHolder.dob_day}
+                                    name="dob"
                                     required={true}
-                                    value={formData.dob_day}
+                                    value={formData.dob}
                                     onChange={handleChange}
                                 />
                                 
