@@ -6,6 +6,7 @@ import {useNavigate} from "react-router-dom";
 import localStorageService from "../api/services/localStorage.service.js";
 import {PROFILE_ID, PROFILE_IMG, USER_ID} from "../api/constant/index.js";
 import PlanService from "../api/services/plan.service.js";
+import PlanCard from "../components/PlanCard.jsx";
 
 const DashBoard = () => {
     const navigate = useNavigate()
@@ -36,10 +37,15 @@ const DashBoard = () => {
         myFunc()
     }, [])
 
-    console.log(plans)
+    console.log("plans", plans)
     return (
-        <div className="plans-container">
+        <div className="dashboard-container">
             <VerticalNav />
+            <div className="plans-container">
+                {plans.map(plan => {
+                    return <PlanCard key={plan.id} planInfo={plan}/>
+                })}
+            </div>
         </div>
     )
 }
