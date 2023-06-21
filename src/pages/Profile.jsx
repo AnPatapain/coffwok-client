@@ -1,22 +1,24 @@
 import VerticalNav from "../components/VerticalNav.jsx";
 
 import {TbSchool} from "react-icons/tb"
-import {AiOutlineLike} from "react-icons/ai"
+import {AiOutlineLike, AiOutlineMessage} from "react-icons/ai"
 import {AiOutlineDislike} from "react-icons/ai"
 import {useNavigate, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import ProfileService from "../api/services/profile.service.js";
 import {getErrorMessage} from "../api/error/errorMessage.js";
-import {PROFILE_IMG} from "../api/constant/index.js";
 import ImageService from "../api/services/image.service.js";
 import PlanCard from "../components/PlanCard.jsx";
 import PlanService from "../api/services/plan.service.js";
 import {IoIosAddCircleOutline} from "react-icons/io"
+import {PROFILE_ID} from "../api/constant/index.js";
+import ChatService from "../api/services/chat.service.js";
 
 
-const MyProfile = () => {
+const Profile = () => {
     const navigate = useNavigate()
     const {id} = useParams()
+    const isMe = id === localStorage.getItem(PROFILE_ID) ? true : false
     const [profile, setProfile] = useState({
         name: "",
         dob_day: "",
@@ -97,6 +99,10 @@ const MyProfile = () => {
             })
     }
 
+    const handleClickChatIcon = (userId) => {
+        ChatService.handleNavigate(userId, navigate)
+    }
+
     return (
         <div className="profile-container">
             <VerticalNav/>
@@ -105,19 +111,25 @@ const MyProfile = () => {
                     <div>
                         <section className="image-container">
                             <img src={profile.imgUrl}/>
-                            <button className="primary-button" onClick={() => {
-                                navigate(`/profile-image-creation`)
-                            }}>Change image
-                            </button>
+                            {isMe ?
+                                <button className="primary-button" onClick={() => {
+                                    navigate(`/profile-image-creation`)
+                                }}>Change image</button> : null}
+
                         </section>
 
                         <section className="personal-info">
                             <section className="name-button">
                                 <span className="username">{profile.name}</span>
-                                <button className="primary-button" onClick={() => {
-                                    navigate(`/profile-info-creation?isEdit=true`)
-                                }}>Edit Info
-                                </button>
+                                {isMe ?
+                                    <button className="primary-button" onClick={() => {
+                                        navigate(`/profile-info-creation?isEdit=true`)
+                                    }}>Edit Info
+                                    </button> :
+                                    <AiOutlineMessage className="chat-icon" onClick={() => {
+                                        handleClickChatIcon(profile.userId)
+                                    }}/>
+                                }
                             </section>
                             <p className="about">{profile.about}</p>
                             <section className="profile-sub-info">
@@ -150,14 +162,18 @@ const MyProfile = () => {
                             navigate("/plan-creation")
                         }}/> :
                         <>
-                            <PlanCard planInfo={planInfo} isOwner={true}/>
-                            <div className="buttons">
-                                <button className="primary-button edit-button" onClick={() => {
-                                    navigate("/plan-creation")
-                                }}>Edit
-                                </button>
-                                <button className="primary-button delete-button" onClick={handleDelete}>Delete</button>
-                            </div>
+                            <PlanCard planInfo={planInfo} isOwner={!isMe}/>
+                            {isMe ?
+                                <div className="buttons">
+                                    <button className="primary-button edit-button" onClick={() => {
+                                        navigate("/plan-creation")
+                                    }}>Edit
+                                    </button>
+                                    <button className="primary-button delete-button" onClick={handleDelete}>Delete
+                                    </button>
+                                </div>:null
+                            }
+
                         </>}
                 </section>
             </div>
@@ -165,4 +181,4 @@ const MyProfile = () => {
     )
 }
 
-export default MyProfile
+export default Profile

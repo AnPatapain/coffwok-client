@@ -473,11 +473,19 @@ nav .logo-container h3 {
 }
 .profile-personal-info-section div .personal-info .name-button{
     display: flex;
+    align-items: center;
 }
 .profile-personal-info-section div .personal-info .name-button button {
     font-size: 10px;
     padding: 5px 20px;
     border: none;
+}
+
+.profile-personal-info-section div .personal-info .chat-icon {
+    width: 30px;
+    height: 30px;
+    color: #5FB51C;
+    cursor: pointer;
 }
 
 .profile-personal-info-section div .personal-info .about{
@@ -870,7 +878,7 @@ nav .logo-container h3 {
 
 }
 
-/*------------- MyProfile image Crud page -----------*/
+/*------------- Profile image Crud page -----------*/
 .upload-profile-image-container {
     display: flex;
     flex-direction: column;
@@ -1252,6 +1260,10 @@ nav .logo-container h3 {
     border-radius: 25px;
     border: 1px solid #a5ff00;
     margin-right: 10px;
+}
+
+.chat-container main .current-chat-room-container header p {
+    cursor: pointer;
 }
 
 

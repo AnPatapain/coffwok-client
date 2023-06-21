@@ -1,7 +1,6 @@
 import RequestService from "./request.service.js";
 import {API_BASE_URL, USER_ID} from "../constant/index.js";
 import {getErrorMessage} from "../error/errorMessage.js";
-import {useNavigate} from "react-router-dom";
 
 const getChatRoomByUsers = (userId1, userId2) => {
     return new Promise((resolve, reject) => {

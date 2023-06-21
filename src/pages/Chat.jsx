@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import ChatService from "../api/services/chat.service.js";
 import {USER_ID} from "../api/constant/index.js";
 import ImageService from "../api/services/image.service.js";
+import {useNavigate, useParams} from "react-router-dom";
 
 const Chat = () => {
     const {id} = useParams()
@@ -108,7 +109,7 @@ const Chat = () => {
                         <header>
                             <img
                                 src={ImageService.modifyImageURI(currentChatRoom.oppositeProfile.imgUrl, ["w_50", "h_50", "q_100", "c_thumb"])}/>
-                            <p>{currentChatRoom.oppositeProfile.name}</p>
+                            <p onClick={() => {navigate("/profile/" + currentChatRoom.oppositeProfile.id)}}>{currentChatRoom.oppositeProfile.name}</p>
                         </header>
                     </div>
                 }
