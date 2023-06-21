@@ -27,8 +27,8 @@ const PlanCard = ({planInfo, isOwner}) => {
     return (
         <div className="plan-card">
             <section className="image-container">
-                <img
-                    src={ImageService.modifyImageURI(planInfo.imgUrl, ["w_350", "h_250", "c_fill", "g_face", "q_100"])}/>
+                {planInfo.imgUrl !== null ? <img
+                    src={ImageService.modifyImageURI(planInfo.imgUrl, ["w_350", "h_250", "c_fill", "g_face", "q_100"])}/> : null}
             </section>
             <section className="name-button-section">
                 <p onClick={() => {handleClickName(planInfo.userId)} }>{planInfo.name}</p>

@@ -1154,19 +1154,19 @@ nav .logo-container h3 {
 
 /*----------------------------- Chat -----------------------*/
 .chat-container {
-    width: 80%;
-    height: 600px;
+    width: 60%;
+    height: 750px;
     background: #f6f6f6;
-    margin: 30px auto;
-    border-radius: 5px;
+    margin-top: 20px;
+    margin-left: 28%;
     overflow: hidden;
-    border: 1px solid;
+    border: 1px solid rgb(213, 213, 213);
     border-radius: 10px;
     display: flex;
 }
 
 .chat-container aside {
-    width: 30%;
+    width: 40%;
     height: 100%;
     background-color: #ffffff;
     font-size: 15px;
@@ -1183,6 +1183,7 @@ nav .logo-container h3 {
 
 .chat-container aside li {
     padding: 10px 0;
+    display: flex;
 }
 
 .chat-container aside li:hover {
@@ -1247,12 +1248,17 @@ nav .logo-container h3 {
 }
 
 .chat-container main {
-    width: 70%;
+    width: 60%;
+    background-color: white;
+}
+
+.chat-container main .current-chat-room-container {
+    height: 100%;
 }
 
 .chat-container main .current-chat-room-container header {
     display: flex;
-    border-bottom: 1px solid;
+    border-bottom: 1px solid rgb(213, 213, 213);
     padding: 10px 10px;
 }
 
@@ -1264,6 +1270,121 @@ nav .logo-container h3 {
 
 .chat-container main .current-chat-room-container header p {
     cursor: pointer;
+}
+
+.show-message-container {
+    padding-left: 0;
+    margin: 0;
+    list-style-type: none;
+    overflow-y: scroll;
+    height: 75%;
+    border-top: 2px solid #fff;
+}
+
+.show-message-container li {
+    padding: 10px 30px;
+}
+
+.show-message-container h2,
+.show-message-container h3 {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: normal;
+}
+
+.show-message-container h3 {
+    color: #bbb;
+}
+
+.show-message-container .entete {
+    margin-bottom: 5px;
+}
+
+.show-message-container .message {
+    padding: 20px;
+    line-height: 25px;
+    max-width: 90%;
+    display: inline-block;
+    text-align: left;
+    border-radius: 5px;
+}
+
+.show-message-container .me {
+    text-align: right;
+}
+
+.show-message-container .you {
+    text-align: left;
+}
+
+.show-message-container .message {
+    inline-size: 200px;
+    hyphens: manual;
+    overflow-wrap: break-word;
+}
+
+.show-message-container .you .message {
+    background-color: white;
+    border: 1px solid rgb(213, 213, 213);
+    border-radius: 30px;
+}
+
+.show-message-container .me .message {
+    background-color: #dddddd;
+    border-radius: 30px;
+}
+
+.show-message-container .triangle {
+    width: 0;
+    height: 0;
+    border-style: solid;
+}
+
+.show-message-container .you .triangle {
+    border-color: transparent transparent #58b666 transparent;
+    margin-left: 15px;
+}
+
+.show-message-container .me .triangle {
+    border-color: transparent transparent #6fbced transparent;
+    margin-left: 375px;
+}
+
+main footer {
+    height: 20%;
+    margin-left: 15px;
+    display: flex;
+    align-items: center;
+}
+
+main footer textarea {
+    resize: none;
+    display: block;
+    width: 80%;
+    height: 17px;
+    border-radius: 30px;
+    padding: 20px;
+    font-size: 13px;
+    margin-bottom: 13px;
+    border: 2px solid rgb(213, 213, 213);
+}
+
+main footer textarea::placeholder {
+    color: #ddd;
+}
+
+main footer img {
+    height: 30px;
+    cursor: pointer;
+}
+
+main footer a {
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #6fbced;
+
+    margin-left: 5px;
 }
 
 

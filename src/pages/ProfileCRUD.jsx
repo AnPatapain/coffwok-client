@@ -188,36 +188,6 @@ const ProfileCRUD = () => {
                                     value={formData.dob}
                                     onChange={handleChange}
                                 />
-                                
-                                {/* <input
-                                    id="dob_day"
-                                    type="number"
-                                    name="dob_day"
-                                    placeholder={placeHolder.dob_day}
-                                    required={true}
-                                    value={formData.dob_day}
-                                    onChange={handleChange}
-                                />
-
-                                <input
-                                    id="dob_month"
-                                    type="number"
-                                    name="dob_month"
-                                    placeholder={placeHolder.dob_month}
-                                    required={true}
-                                    value={formData.dob_month}
-                                    onChange={handleChange}
-                                />
-
-                                <input
-                                    id="dob_year"
-                                    type="number"
-                                    name="dob_year"
-                                    placeholder={placeHolder.dob_year}
-                                    required={true}
-                                    value={formData.dob_year}
-                                    onChange={handleChange}
-                                /> */}
                             </div>
 
                             <label>Gender</label>

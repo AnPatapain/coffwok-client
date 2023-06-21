@@ -55,12 +55,17 @@ const handleNavigate = (oppositeUserId, navigate) => {
         }).catch(error => console.log(error))
 }
 
+const sendMessage = (chat_room_id, messageDTO) => {
+    return RequestService.postRequestJson(API_BASE_URL + "/api/chat_rooms/" + chat_room_id, messageDTO)
+}
+
 
 const ChatService = {
     getAllMyChatRooms,
     getAllProfilesOfChatRooms,
     getChatRoomByUsers,
     getChatRoomById,
+    sendMessage,
     handleNavigate
 }
 
