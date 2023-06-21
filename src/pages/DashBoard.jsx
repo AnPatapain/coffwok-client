@@ -51,9 +51,6 @@ const DashBoard = () => {
         myFunc()
     }, [])
 
-    console.log(plans)
-    console.log(myPlan)
-
     return (
         <div className="dashboard-container">
             <VerticalNav />

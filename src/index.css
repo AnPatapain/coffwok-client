@@ -208,6 +208,10 @@ nav .logo-container h3 {
     cursor: pointer;
 }
 
+.vertical-nav li:last-child {
+    margin-top: 240px;
+}
+
 .vertical-nav li:hover {
     background-color: #dddddd;
     border-radius: 10px;
@@ -220,7 +224,7 @@ nav .logo-container h3 {
 .vertical-nav li .ver-nav-icon {
     width: 30px;
     height: 30px;
-    color: #5FB51C;
+    /*color: #5FB51C;*/
 }
 
 .vertical-nav li .profile-img {
@@ -241,6 +245,32 @@ nav .logo-container h3 {
 
 .vertical-nav .logo-container h3 {
     text-transform: uppercase;
+}
+
+.vertical-nav ul .setting-modal {
+    position: absolute;
+    top: 500px;
+    width: 200px;
+    height: 180px;
+    padding: 15px 15px;
+    border: 1px solid #dddddd;
+    background-color: white;
+    border-radius: 30px;
+}
+
+.vertical-nav ul .setting-modal .close-icon {
+    cursor: pointer;
+    float: right;
+}
+
+.vertical-nav ul .setting-modal ul {
+    display: flex;
+    flex-direction: column;
+}
+
+.vertical-nav ul .setting-modal ul li {
+    margin-bottom: 0;
+    margin-top: 0;
 }
 
 @media (max-width: 950px) {
@@ -279,6 +309,10 @@ nav .logo-container h3 {
         height: 100%;
         padding: 0 0;
         margin: auto;
+    }
+
+    .vertical-nav ul li:last-child {
+        margin-top: auto;
     }
 }
 

@@ -1,16 +1,20 @@
 import LogoContainer from "./LogoContainer.jsx";
 import {BiHomeAlt2, BiMessageSquareAdd} from "react-icons/bi";
 import {AiOutlineMessage} from "react-icons/ai";
-import {IoIosAddCircleOutline, IoMdNotificationsOutline} from "react-icons/io";
 import {CgProfile} from "react-icons/cg";
 import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {PROFILE_ID, PROFILE_IMG} from "../api/constant/index.js";
 import ImageService from "../api/services/image.service.js";
 
+import {GrUserSettings} from "react-icons/gr"
+import {IoMdNotificationsOutline} from "react-icons/io";
+import SettingModal from "./SettingModal.jsx";
+
 const VerticalNav = () => {
     const navigate = useNavigate()
     const [profileImg, setProfileImg] = useState("")
+    const [showSettingModal, setShowSettingModal] = useState(false)
 
     useEffect(() => {
         let imgUrl = localStorage.getItem(PROFILE_IMG)
@@ -43,6 +47,11 @@ const VerticalNav = () => {
                 <li onClick={()=> {navigate("/profile/" + localStorage.getItem(PROFILE_ID))} }>
                     {profileImg ? <img src={profileImg} className="profile-img"/> : <CgProfile className="ver-nav-icon"/>}
                     <span className="nav-text">Profile</span>
+                </li>
+                {showSettingModal ? <SettingModal setShowModal={setShowSettingModal}/> : null}
+                <li onClick={() => {setShowSettingModal(true)}}>
+                    <GrUserSettings className="ver-nav-icon"/>
+                    <span className="nav-text">Settings</span>
                 </li>
             </ul>
         </div>
