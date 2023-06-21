@@ -4,7 +4,6 @@ import {GoLocation} from "react-icons/go";
 import {MdSchedule} from "react-icons/md";
 import ImageService from "../api/services/image.service.js";
 import UserService from "../api/services/user.service.js";
-import ProfileService from "../api/services/profile.service.js";
 import {useNavigate} from "react-router-dom";
 import ChatService from "../api/services/chat.service.js";
 

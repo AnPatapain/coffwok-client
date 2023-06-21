@@ -62,7 +62,6 @@ const ProfileCRUD = () => {
         e.preventDefault()
 
         try {
-            console.log("before sending ", formData)
             if(isEdit) {
                 UserService.getCurrentUser()
                     .then(user => {
@@ -71,13 +70,12 @@ const ProfileCRUD = () => {
                         }else {
                             ProfileService.editProfileInfo(user.profileId, formData)
                                 .then(response => {
-                                    console.log("sent ", response.data)
-                                    navigate("/profile")
+                                    navigate("/profile/" + user.profileId)
                                 })
                                 .catch(error => {
                                     const errorMsg = getErrorMessage(error)
                                     console.log(errorMsg)
-                                    navigate("/profile")
+                                    navigate("/profile/" + user.profileId)
                                 })
                         }
                     })
@@ -93,7 +91,7 @@ const ProfileCRUD = () => {
                     .then(user => {
                         if(user.profileId) {
                             console.log("user has already profile")
-                            navigate("/profile")
+                            navigate("/profile/" + user.profileId)
                         }else {
                             ProfileService.uploadProfileInfo(formData)
                                 .then(
