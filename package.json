@@ -8,7 +8,8 @@
     "build": "vite build",
     "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "start": "vite --port $PORT"
+    "start": "vite --port $PORT --host 0.0.0.0"
+
   },
   "dependencies": {
     "axios": "^1.4.0",
