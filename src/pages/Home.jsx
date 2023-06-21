@@ -14,6 +14,7 @@ const Home = () => {
     useEffect(() => {
         UserService.getCurrentUser()
             .then(user => {
+                console.log(user)
                 if(user.profileId === null) {
                     navigate("/profile-info-creation?isEdit=false")
                 }else {

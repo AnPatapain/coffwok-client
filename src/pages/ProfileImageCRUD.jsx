@@ -95,7 +95,7 @@ const ProfileImageCRUD = () => {
                                 response => {
                                     console.log(response)
                                     localStorageService.add(PROFILE_IMG, response.data.imgUrl)
-                                    navigate("/profile")
+                                    navigate("/profile/" + user.profileId)
                                 },
                                 error => {
                                     setLoading(false)

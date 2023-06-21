@@ -6,6 +6,7 @@ import ImageService from "../api/services/image.service.js";
 import UserService from "../api/services/user.service.js";
 import ProfileService from "../api/services/profile.service.js";
 import {useNavigate} from "react-router-dom";
+import ChatService from "../api/services/chat.service.js";
 
 // eslint-disable-next-line react/prop-types
 const PlanCard = ({planInfo, isOwner}) => {
@@ -19,6 +20,10 @@ const PlanCard = ({planInfo, isOwner}) => {
                 console.log(error)
             })
     }
+
+    const handleClickChatIcon = (userId) => {
+        ChatService.handleNavigate(userId, navigate)
+    }
     return (
         <div className="plan-card">
             <section className="image-container">
@@ -27,7 +32,7 @@ const PlanCard = ({planInfo, isOwner}) => {
             </section>
             <section className="name-button-section">
                 <p onClick={() => {handleClickName(planInfo.userId)} }>{planInfo.name}</p>
-                {!isOwner ? <AiOutlineMessage className="chat-icon"/>:""}
+                {!isOwner ? <AiOutlineMessage className="chat-icon" onClick={() => {handleClickChatIcon(planInfo.userId)}}/>:""}
             </section>
             <ul className="plan-info-section">
                 <li className="plan-info-item">

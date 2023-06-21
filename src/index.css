@@ -1144,4 +1144,115 @@ nav .logo-container h3 {
     margin-top: 10px;
 }
 
+/*----------------------------- Chat -----------------------*/
+.chat-container {
+    width: 80%;
+    height: 600px;
+    background: #f6f6f6;
+    margin: 30px auto;
+    border-radius: 5px;
+    overflow: hidden;
+    border: 1px solid;
+    border-radius: 10px;
+    display: flex;
+}
+
+.chat-container aside {
+    width: 30%;
+    height: 100%;
+    background-color: #ffffff;
+    font-size: 15px;
+    vertical-align: top;
+}
+
+.chat-container aside ul {
+    padding-left: 0;
+    margin: 0;
+    list-style-type: none;
+    overflow-y: scroll;
+    height: 100%;
+}
+
+.chat-container aside li {
+    padding: 10px 0;
+}
+
+.chat-container aside li:hover {
+    background-color: #a5ff00;
+    cursor: pointer;
+}
+
+.chat-container aside .selected {
+    background-color: #a5ff00;
+}
+
+.chat-container aside li img {
+    border-radius: 50%;
+    margin-left: 20px;
+    margin-right: 8px;
+}
+
+.chat-container aside li div {
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 12px;
+}
+
+.chat-container aside li h2 {
+    font-size: 14px;
+    color: #000000;
+    font-weight: normal;
+    margin-bottom: 5px;
+}
+
+.chat-container aside li h3 {
+    font-size: 12px;
+    color: #7e818a;
+    font-weight: normal;
+}
+
+.chat-container .status {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 7px;
+}
+
+.chat-container .green {
+    background-color: #58b666;
+}
+
+.chat-container .orange {
+    background-color: #ff725d;
+}
+
+.chat-container .blue {
+    background-color: #6fbced;
+    margin-right: 0;
+    margin-left: 7px;
+}
+
+.chat-container main .primary-title {
+    margin-top: 200px;
+    color: #5FB51C;
+}
+
+.chat-container main {
+    width: 70%;
+}
+
+.chat-container main .current-chat-room-container header {
+    display: flex;
+    border-bottom: 1px solid;
+    padding: 10px 10px;
+}
+
+.chat-container main .current-chat-room-container header img {
+    border-radius: 25px;
+    border: 1px solid #a5ff00;
+    margin-right: 10px;
+}
+
+
 

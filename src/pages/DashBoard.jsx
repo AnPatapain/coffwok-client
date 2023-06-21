@@ -7,6 +7,7 @@ import localStorageService from "../api/services/localStorage.service.js";
 import {PROFILE_ID, PROFILE_IMG, USER_ID} from "../api/constant/index.js";
 import PlanService from "../api/services/plan.service.js";
 import PlanCard from "../components/PlanCard.jsx";
+import ChatService from "../api/services/chat.service.js";
 
 const DashBoard = () => {
     const navigate = useNavigate()
@@ -41,7 +42,6 @@ const DashBoard = () => {
 
             await PlanService.getMyPlan()
                 .then(data => {
-                    console.log("data", data)
                     setMyPlan(data)
                 })
                 .catch(error => {
@@ -50,9 +50,6 @@ const DashBoard = () => {
         }
         myFunc()
     }, [])
-
-    console.log("plans", plans)
-    console.log("my plan", myPlan)
 
     return (
         <div className="dashboard-container">
@@ -65,6 +62,10 @@ const DashBoard = () => {
                         return <PlanCard key={plan.id} planInfo={plan}/>
                     }
                 })}
+            </div>
+
+            <div className="incoming-message-container">
+                {/*TODO: for incoming message*/}
             </div>
         </div>
     )
