@@ -6,6 +6,7 @@ import {getErrorMessage} from "../api/error/errorMessage.js"
 import UserService from "../api/services/user.service.js";
 import {ACCESS_TOKEN} from "../api/constant/index.js";
 import VerticalNav from "../components/VerticalNav.jsx";
+import {SlPencil} from "react-icons/sl";
 
 const ProfileCRUD = () => {
     const url = new URL(window.location.href);
@@ -44,6 +45,18 @@ const ProfileCRUD = () => {
         weak_subjects: []
     })
 
+    const [isClickName, setIsClickName] = useState(false)
+
+    const [isClickDob,setIsClickDob] = useState(false)
+
+    const [isClickGender,setIsClickGender] = useState(false)
+
+    const [isClickAbout,setIsClickAbout]=useState(false)
+
+    const [isClickSchool,setIsClickSchool] =useState(false)
+
+    const [oldProfile,setOldprofile] =useState(null)
+
     let navigate = useNavigate()
 
     useEffect(() => {
@@ -51,6 +64,7 @@ const ProfileCRUD = () => {
             ProfileService.getMyProfile()
                 .then(data => {
                     setPlaceHolder(data)
+                    setOldprofile(data)
                 })
                 .catch(error => {
                     console.log(getErrorMessage(error))
@@ -135,6 +149,8 @@ const ProfileCRUD = () => {
                     ...prevState,
                     [name]: value
                 }
+
+
             }
         })
     }
@@ -164,85 +180,139 @@ const ProfileCRUD = () => {
                     <div>
                         <section>
                             <label htmlFor="name">Name</label>
-                            <input
-                                id="name"
-                                type='text'
-                                name="name"
-                                placeholder={placeHolder.name}
-                                required={true}
-                                value={formData.name}
-                                onChange={handleChange}
-                            />
+                            <span>
+                                {
+                                    oldProfile && !isClickName ?
+                                        <article>
+                                            <span className="text">
+                                                {oldProfile.name}
+                                                <SlPencil className="edit-icon" onClick={() => {setIsClickName(true)}}/>
+                                            </span>
+                                        </article> :
+
+                                    <input
+                                        id="name"
+                                        type='text'
+                                        name="name"
+                                        placeholder={placeHolder.name}
+                                        required={true}
+                                        value={formData.name}
+                                        onChange={handleChange}/>
+                                }
+                            </span>
 
                             {/* TODO: change backend dto */}
 
                             <label htmlFor="dob">Birthday</label>
                             <div className="multiple-input-container">
-                                <input
-                                    id="dob"
-                                    type="date"
-                                    name="dob"
-                                    required={true}
-                                    value={formData.dob}
-                                    onChange={handleChange}
-                                />
+                                <span>
+                                    {
+                                        oldProfile && !isClickDob ?
+                                            <article>
+                                            <span className="text">
+                                                {oldProfile.dob}
+                                                <SlPencil className="edit-icon" onClick={() => {setIsClickDob(true)}}/>
+                                            </span>
+                                            </article> :
+                                    <input
+                                        id="dob"
+                                        type="date"
+                                        name="dob"
+                                        required={true}
+                                        value={formData.dob}
+                                        onChange={handleChange}
+                                    />
+                                    }
+                                </span>
                             </div>
 
                             <label>Gender</label>
-                            <div className="multiple-input-container">
-                                <input
-                                    id="man-gender-identity"
-                                    type="radio"
-                                    name="gender"
-                                    value="man"
-                                    onChange={handleChange}
-                                    checked={formData.gender === "man"}
-                                />
-                                <label htmlFor="man-gender-identity">Man</label>
-                                <input
-                                    id="woman-gender-identity"
-                                    type="radio"
-                                    name="gender"
-                                    value="woman"
-                                    onChange={handleChange}
-                                    checked={formData.gender === "woman"}
-                                />
-                                <label htmlFor="woman-gender-identity">Woman</label>
-                                <input
-                                    id="more-gender-identity"
-                                    type="radio"
-                                    name="gender"
-                                    value="more"
-                                    onChange={handleChange}
-                                    checked={formData.gender === "more"}
-                                />
-                                <label htmlFor="more-gender-identity">Other</label>
-                            </div>
-
+                            <span>
+                                {
+                                    oldProfile && !isClickGender ?
+                                        <article>
+                                            <span className="text">
+                                                {oldProfile.gender}
+                                                <SlPencil className="edit-icon" onClick={() => {setIsClickGender(true)}}/>
+                                            </span>
+                                        </article> :
+                                <div className="multiple-input-container">
+                                    <input
+                                        id="man-gender-identity"
+                                        type="radio"
+                                        name="gender"
+                                        value="man"
+                                        onChange={handleChange}
+                                        checked={formData.gender === "man"}
+                                    />
+                                    <label htmlFor="man-gender-identity">Man</label>
+                                    <input
+                                        id="woman-gender-identity"
+                                        type="radio"
+                                        name="gender"
+                                        value="woman"
+                                        onChange={handleChange}
+                                        checked={formData.gender === "woman"}
+                                    />
+                                    <label htmlFor="woman-gender-identity">Woman</label>
+                                    <input
+                                        id="more-gender-identity"
+                                        type="radio"
+                                        name="gender"
+                                        value="more"
+                                        onChange={handleChange}
+                                        checked={formData.gender === "more"}
+                                    />
+                                    <label htmlFor="more-gender-identity">Other</label>
+                                </div>
+                                }
+                            </span>
                             <label htmlFor="about">About me</label>
-                            <input
-                                id="about"
-                                type="text"
-                                name="about"
-                                required={true}
-                                placeholder={placeHolder.about}
-                                value={formData.about}
-                                onChange={handleChange}
-                            />
+                            <span>
+                                {
+                                    oldProfile && !isClickAbout ?
+                                        <article>
+                                            <span className="text">
+                                                {oldProfile.about}
+                                                <SlPencil className="edit-icon" onClick={() => {setIsClickAbout(true)}}/>
+                                            </span>
+                                        </article> :
+                                <input
+                                    id="about"
+                                    type="text"
+                                    name="about"
+                                    required={true}
+                                    placeholder={placeHolder.about}
+                                    value={formData.about}
+                                    onChange={handleChange}
+                                />
+                                }
+                            </span>
                             {/*<input type="submit"/>*/}
                         </section>
 
                         <section>
                             <label htmlFor="school">School</label>
-                            <input
-                                id="school"
-                                type="text"
-                                name="school"
-                                required={true}
-                                placeholder={placeHolder.school}
-                                value={formData.school}
-                                onChange={handleChange}
-                            />
+                            <span>
+                                {
+                                    oldProfile && !isClickSchool ?
+                                        <article>
+                                            <span className="text">
+                                                {oldProfile.school}
+                                                <SlPencil className="edit-icon" onClick={() => {setIsClickSchool(true)}}/>
+                                            </span>
+                                        </article> :
+                                <input
+                                    id="school"
+                                    type="text"
+                                    name="school"
+                                    required={true}
+                                    placeholder={placeHolder.school}
+                                    value={formData.school}
+                                    onChange={handleChange}
+                                />
+                                }
+                            </span>
 
                             <label>Strengths</label>
                             <ul>
