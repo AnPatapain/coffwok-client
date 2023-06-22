@@ -1040,6 +1040,11 @@ nav .logo-container h3 {
     align-items: center;
 }
 
+.plan-card .name-button-section .small-profile-image {
+    border-radius: 25px;
+    margin-right: 15px;
+}
+
 .plan-card .name-button-section p {
     font-weight: 550;
     font-size: medium;
@@ -1188,6 +1193,7 @@ nav .logo-container h3 {
 
 .dashboard-container .plans-container .plan-card {
     margin-bottom: 50px;
+    max-width: 650px;
 }
 .dashboard-container .plans-container .plan-card:first-child {
     margin-top: 10px;

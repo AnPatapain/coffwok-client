@@ -14,25 +14,31 @@ const Home = () => {
     useEffect(() => {
         UserService.getCurrentUser()
             .then(user => {
-                console.log(user)
-                if(user.profileId === null) {
-                    navigate("/profile-info-creation?isEdit=false")
+                if(user) {
+                    if(user.profileId === null) {
+                        navigate("/profile-info-creation?isEdit=false")
+                    }else {
+                        ProfileService.getMyProfile()
+                            .then(data => {
+                                if(data.imgUrl === null) {
+                                    navigate("/profile-image-creation")
+                                }else {
+                                    navigate("/dashboard")
+                                }
+                            })
+                            .catch(error => {
+                                localStorage.clear()
+                                navigate("/")
+                            })
+                    }
                 }else {
-                    ProfileService.getMyProfile()
-                        .then(data => {
-                            if(data.imgUrl === null) {
-                                navigate("/profile-image-creation")
-                            }else {
-                                navigate("/dashboard")
-                            }
-                        })
+                    localStorage.clear()
+                    navigate("/")
                 }
             })
             .catch(error => {
                 console.log(error)
-                if(localStorage.getItem(ACCESS_TOKEN)) {
-                    localStorage.removeItem(ACCESS_TOKEN)
-                }
+                localStorage.clear()
                 navigate("/")
             })
     }, [])

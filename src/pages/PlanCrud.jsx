@@ -20,7 +20,7 @@ const PlanCrud = () => {
     const [errorMessage, setErrorMessage] = useState("")
 
     const [planInfo, setPlanInfo] = useState({
-        imgUrl: localStorage.getItem(PROFILE_IMG) ? ImageService.modifyImageURI(localStorage.getItem(PROFILE_IMG), ["w_350", "h_250", "c_fill", "g_face", "q_100"]) : "",
+        imgUrl: localStorage.getItem(PROFILE_IMG) ? ImageService.modifyImageURI(localStorage.getItem(PROFILE_IMG), ["w_50", "h_50", "c_fill", "g_face", "q_100"]) : "",
         name: "",
         school: "",
         strength_subjects: [],
@@ -37,13 +37,16 @@ const PlanCrud = () => {
                         .then(data => {
                             setPlanInfo(prevState => ({
                                 ...prevState,
-                                imgUrl: ImageService.modifyImageURI(data.imgUrl, ["w_350", "h_250", "c_fill", "g_face", "q_100"]),
+                                imgUrl: ImageService.modifyImageURI(data.imgUrl, ["w_50", "h_50", "c_fill", "g_face", "q_100"]),
                                 name: data.name,
                                 school: data.school,
                                 strength_subjects: data.strength_subjects,
                                 weak_subjects: data.weak_subjects
                             }))
                         })
+                }else {
+                    localStorage.clear()
+                    navigate("/")
                 }
                 if (user.planId) {
                     PlanService.getPlanById(user.planId)
@@ -62,10 +65,7 @@ const PlanCrud = () => {
                 }
             })
             .catch(error => {
-                console.log(error)
-                if (localStorage.getItem(ACCESS_TOKEN)) {
-                    localStorage.removeItem(ACCESS_TOKEN)
-                }
+                localStorage.clear()
                 navigate("/")
             })
     }, [])

@@ -4,6 +4,7 @@ import {GoLocation} from "react-icons/go";
 import {MdSchedule} from "react-icons/md";
 import {SlPencil} from "react-icons/sl"
 import {useState} from "react";
+import ImageService from "../api/services/image.service.js";
 
 // eslint-disable-next-line react/prop-types
 const PlanCreationEditCard = ({planInfo, planDTO, setPlanDTO, oldPlan}) => {
@@ -23,11 +24,14 @@ const PlanCreationEditCard = ({planInfo, planDTO, setPlanDTO, oldPlan}) => {
 
     return (
         <div className="plan-card">
-            <section className="image-container">
-                <img
-                    src={planInfo.imgUrl}/>
-            </section>
+            {/*<section className="image-container">*/}
+            {/*    <img*/}
+            {/*        src={planInfo.imgUrl}/>*/}
+            {/*</section>*/}
             <section className="name-button-section">
+                {/* eslint-disable-next-line react/prop-types */}
+                <img className="small-profile-image"
+                    src={planInfo.imgUrl}/>
                 <p>{planInfo.name}</p>
             </section>
             <ul className="plan-info-section">

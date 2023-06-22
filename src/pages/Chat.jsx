@@ -23,7 +23,6 @@ const Chat = () => {
     const [messageList, setMessageList] = useState([])
 
     useEffect(() => {
-        console.log("call again")
         async function fetchData() {
             if (id) {
                 await ChatService.getChatRoomById(id)
@@ -41,6 +40,7 @@ const Chat = () => {
             }
             await ChatService.getAllProfilesOfChatRooms()
                 .then(data => {
+                    data = data.filter(value => value !== null)
                     setProfileList(data)
                 }).catch(error => console.log(error))
 

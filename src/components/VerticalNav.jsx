@@ -2,7 +2,7 @@ import LogoContainer from "./LogoContainer.jsx";
 import {BiHomeAlt2, BiMessageSquareAdd} from "react-icons/bi";
 import {AiOutlineMessage} from "react-icons/ai";
 import {CgProfile} from "react-icons/cg";
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {PROFILE_ID, PROFILE_IMG} from "../api/constant/index.js";
 import ImageService from "../api/services/image.service.js";
@@ -13,6 +13,7 @@ import SettingModal from "./SettingModal.jsx";
 
 const VerticalNav = () => {
     const navigate = useNavigate()
+    const location = useLocation()
     const [profileImg, setProfileImg] = useState("")
     const [showSettingModal, setShowSettingModal] = useState(false)
 
@@ -24,11 +25,18 @@ const VerticalNav = () => {
             setProfileImg(imgUrl)
         }
     }, [])
+    const handleClickHome = () => {
+        if(location.pathname === "/dashboard") {
+            window.location.reload()
+        }else {
+            navigate("/dashboard")
+        }
+    }
     return (
         <div className="vertical-nav">
             <LogoContainer/>
             <ul>
-                <li onClick={()=> {navigate("/dashboard")} } >
+                <li onClick={()=> {handleClickHome()} } >
                     <BiHomeAlt2 className="ver-nav-icon"/>
                     <span className="nav-text">Home</span>
                 </li>

@@ -46,19 +46,18 @@ const Profile = () => {
         async function myFunc() {
             await ProfileService.getProfileById(id)
                 .then(data => {
-                    console.log(data)
                     setProfile(data)
                     setPlanInfo(prevState => ({
                         ...prevState,
-                        imgUrl: ImageService.modifyImageURI(data.imgUrl, ["w_350", "h_250", "c_fill", "g_face", "q_100"]),
+                        imgUrl: ImageService.modifyImageURI(data.imgUrl, ["w_50", "h_50", "c_fill", "g_face", "q_100"]),
                         name: data.name,
                         school: data.school,
                         strength_subjects: data.strength_subjects,
                         weak_subjects: data.weak_subjects
                     }))
                 }).catch(error => {
-                    const errMsg = getErrorMessage(error)
-                    console.log(errMsg)
+                    console.log(error)
+                    localStorage.clear()
                     navigate("/")
                 })
 
@@ -162,7 +161,7 @@ const Profile = () => {
                             navigate("/plan-creation")
                         }}/> :
                         <>
-                            <PlanCard planInfo={planInfo} isOwner={!isMe}/>
+                            <PlanCard planInfo={planInfo} isOwner={isMe}/>
                             {isMe ?
                                 <div className="buttons">
                                     <button className="primary-button edit-button" onClick={() => {

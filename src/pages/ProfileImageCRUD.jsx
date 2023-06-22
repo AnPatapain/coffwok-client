@@ -93,7 +93,6 @@ const ProfileImageCRUD = () => {
                         ProfileService.uploadProfileImage(user.profileId, selectedFile)
                             .then(
                                 response => {
-                                    console.log(response)
                                     localStorageService.add(PROFILE_IMG, response.data.imgUrl)
                                     navigate("/profile/" + user.profileId)
                                 },
@@ -107,10 +106,7 @@ const ProfileImageCRUD = () => {
                     }
                 })
                 .catch(error => {
-                    console.log(error)
-                    if (localStorage.getItem(ACCESS_TOKEN)) {
-                        localStorage.removeItem(ACCESS_TOKEN)
-                    }
+                    localStorage.clear()
                     navigate("/")
                 })
         }
