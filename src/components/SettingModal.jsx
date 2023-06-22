@@ -32,7 +32,7 @@ const SettingModal = ({setShowModal}) => {
                 &#10006;
             </div>
             <ul>
-                <li onClick={handleDeleteAccount}>Delete Account</li>
+                {/*<li onClick={handleDeleteAccount}>Delete Account</li>*/}
                 <li onClick={handleLogOut}>Log out</li>
             </ul>
         </div>
