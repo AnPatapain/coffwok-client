@@ -33,9 +33,14 @@ const getUserById = (id) => {
     })
 }
 
+const deleteUserById=(id) =>{
+    return RequestService.deleteRequest(API_BASE_URL+"/api/user/"+id)
+}
+
 const UserService = {
     getCurrentUser,
-    getUserById
+    getUserById,
+    deleteUserById
 }
 
 export default UserService
