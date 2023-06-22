@@ -7,7 +7,9 @@ import {useState} from "react";
 
 // eslint-disable-next-line react/prop-types
 const PlanCreationEditCard = ({planInfo, planDTO, setPlanDTO, oldPlan}) => {
-    const [isClick, setIsClick] = useState(false)
+    const [isClickCafe, setIsClickCafe] = useState(false)
+
+    const [isClickSchedule,setIsClickSchedule] =useState(false)
     const handleChange = (e) => {
         let value = e.target.value
         let name = e.target.name
@@ -40,11 +42,11 @@ const PlanCreationEditCard = ({planInfo, planDTO, setPlanDTO, oldPlan}) => {
                     </span>
                     <span>
                         {
-                            oldPlan && !isClick ?
+                            oldPlan && !isClickCafe ?
                                 <article>
                                     <span className="text">
                                         {oldPlan.coffeeShop}
-                                        <SlPencil className="edit-icon" onClick={() => {setIsClick(true)}}/>
+                                        <SlPencil className="edit-icon" onClick={() => {setIsClickCafe(true)}}/>
                                     </span>
                                 </article> :
                                 <input id="cafe"
@@ -64,11 +66,11 @@ const PlanCreationEditCard = ({planInfo, planDTO, setPlanDTO, oldPlan}) => {
                     </span>
                     <span>
                         {
-                            oldPlan && !isClick ?
+                            oldPlan && !isClickSchedule ?
                                 <article>
                                     <span className="text">
                                         {oldPlan.schedule}
-                                        <SlPencil className="edit-icon" onClick={() => {setIsClick(true)}}/>
+                                        <SlPencil className="edit-icon" onClick={() => {setIsClickSchedule(true)}}/>
                                     </span>
                                 </article> :
                                 <input id="schedule"
