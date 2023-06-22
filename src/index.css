@@ -871,6 +871,12 @@ nav .logo-container h3 {
     color: white;
 }
 
+.onboarding form .edit-icon {
+    cursor: pointer;
+    color: #00bbf9;
+    margin-left: 5px;
+}
+
 @media (max-width: 768px) {
     .onboarding form div{
         display: flex;
