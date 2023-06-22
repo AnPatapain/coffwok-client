@@ -209,7 +209,7 @@ nav .logo-container h3 {
 }
 
 .vertical-nav li:last-child {
-    margin-top: 240px;
+    margin-top: 200px;
 }
 
 .vertical-nav li:hover {
@@ -249,7 +249,8 @@ nav .logo-container h3 {
 
 .vertical-nav ul .setting-modal {
     position: absolute;
-    top: 500px;
+    top: 460px;
+    left: 40px;
     width: 200px;
     height: 180px;
     padding: 15px 15px;

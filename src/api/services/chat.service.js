@@ -59,6 +59,10 @@ const sendMessage = (chat_room_id, messageDTO) => {
     return RequestService.postRequestJson(API_BASE_URL + "/api/chat_rooms/" + chat_room_id, messageDTO)
 }
 
+const connect_socket = () => {
+
+}
+
 
 const ChatService = {
     getAllMyChatRooms,
