@@ -9,6 +9,7 @@ import VerticalNav from "../components/VerticalNav.jsx";
 const Chat = () => {
     const {id} = useParams()
     const navigate = useNavigate()
+    const [stompClient, setStompClient] = useState(null)
 
     const [currentChatRoom, setCurrentChatRoom] = useState({
         id: "",
@@ -19,8 +20,10 @@ const Chat = () => {
     })
     const [profileList, setProfileList] = useState([])
     const [text, setText] = useState("")
+    const [messageList, setMessageList] = useState([])
 
     useEffect(() => {
+        console.log("call again")
         async function fetchData() {
             if (id) {
                 await ChatService.getChatRoomById(id)
@@ -32,6 +35,8 @@ const Chat = () => {
                             userId2: data.userId2,
                             messages: data.messages
                         }))
+                        let stompClient_ = ChatService.connect_socket(id, onReceiveMessage)
+                        setStompClient(stompClient_)
                     }).catch(error => console.log(error))
             }
             await ChatService.getAllProfilesOfChatRooms()
@@ -73,10 +78,6 @@ const Chat = () => {
                 <img src={ImageService.modifyImageURI(profile.imgUrl, ["w_50", "h_50", "q_100", "c_thumb"])}/>
                 <div>
                     <h2>{profile.name}</h2>
-                    {/*<h3>*/}
-                    {/*    <span className="status green"></span>*/}
-                    {/*    online*/}
-                    {/*</h3>*/}
                 </div>
             </li>
         ));
@@ -88,6 +89,7 @@ const Chat = () => {
     }
 
     const handleSubmit = (e) => {
+
         if (text !== "") {
             e.preventDefault()
             let message = {
@@ -96,13 +98,27 @@ const Chat = () => {
                 text: text,
                 senderId: localStorage.getItem(USER_ID)
             }
-            ChatService.sendMessage(currentChatRoom.id, message)
-                .then(response => {
-                    console.log("updated chat_room", response.data)
-                    setText("")
-                }).catch(error => console.log(getErrorMessage(error)))
+            // ChatService.sendMessage(currentChatRoom.id, message)
+            //     .then(response => {
+            //         console.log("updated chat_room", response.data)
+            //         setText("")
+            //     }).catch(error => console.log(getErrorMessage(error)))
+            if(stompClient !== null) {
+                ChatService.sendMessageRealTime(stompClient, currentChatRoom.id, JSON.stringify(message))
+                setText("")
+            }
         }
     }
+
+    const onReceiveMessage = (messageJson) => {
+        const newMessage = JSON.parse(messageJson.body)
+        const isDuplicate = messageList.find(message => message.id === newMessage.id)
+        if(!isDuplicate) {
+            messageList.push(newMessage)
+            setMessageList([...messageList])
+        }
+    }
+
 
     return (
         <div>
@@ -116,10 +132,6 @@ const Chat = () => {
                                     src={ImageService.modifyImageURI(currentChatRoom.oppositeProfile.imgUrl, ["w_50", "h_50", "q_100", "c_thumb"])}/>
                                 <div>
                                     <h2>{currentChatRoom.oppositeProfile.name}</h2>
-                                    {/*<h3>*/}
-                                    {/*    <span className="status green"></span>*/}
-                                    {/*    online*/}
-                                    {/*</h3>*/}
                                 </div>
                             </li> : null
                         }
@@ -148,17 +160,17 @@ const Chat = () => {
                                         </li>
                                     )
                                 })}
-                                {/*<li className="me">*/}
-                                {/*    <div className="entete">*/}
-                                {/*        <h3>10:12AM, Today</h3>*/}
-                                {/*        <h2>Vincent</h2>*/}
-                                {/*        <span className="status blue"></span>*/}
-                                {/*    </div>*/}
-                                {/*    <div className="triangle"></div>*/}
-                                {/*    <div className="message">*/}
-                                {/*        OK*/}
-                                {/*    </div>*/}
-                                {/*</li>*/}
+
+                                {messageList.length !== 0 ? messageList.map(message => {
+                                    return (
+                                        <li className={message.senderId === localStorage.getItem(USER_ID) ? "me" : "you"}
+                                            key={message.id}>
+                                            <div className="message">
+                                                {message.text}
+                                            </div>
+                                        </li>
+                                    )
+                                }):null}
                             </ul>
                             <footer>
                             <textarea placeholder="Type your message"

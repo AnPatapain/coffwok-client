@@ -1,6 +1,8 @@
 import RequestService from "./request.service.js";
-import {API_BASE_URL, USER_ID} from "../constant/index.js";
+import {ACCESS_TOKEN, API_BASE_URL, USER_ID} from "../constant/index.js";
 import {getErrorMessage} from "../error/errorMessage.js";
+import SockJS from 'sockjs-client/dist/sockjs.js'
+import Stomp from 'stompjs'
 
 const getChatRoomByUsers = (userId1, userId2) => {
     return new Promise((resolve, reject) => {
@@ -8,7 +10,7 @@ const getChatRoomByUsers = (userId1, userId2) => {
             .then(response => {
                 resolve(response.data)
             }).catch(error => {
-                reject(getErrorMessage(error))
+            reject(getErrorMessage(error))
         })
     })
 }
@@ -19,7 +21,7 @@ const getAllMyChatRooms = () => {
             .then(response => {
                 resolve(response.data)
             }).catch(error => {
-                reject(getErrorMessage(error))
+            reject(getErrorMessage(error))
         })
     })
 }
@@ -59,8 +61,24 @@ const sendMessage = (chat_room_id, messageDTO) => {
     return RequestService.postRequestJson(API_BASE_URL + "/api/chat_rooms/" + chat_room_id, messageDTO)
 }
 
-const connect_socket = () => {
+const connect_socket = (chatRoomId, onReceiveMessage) => {
+    let socket = new SockJS(API_BASE_URL + "/web-socket-endpoint")
+    let stompClient = Stomp.over(socket)
+    const token = "Bearer " + localStorage.getItem(ACCESS_TOKEN)
+    console.log(token)
+    stompClient.connect(
+        {Authorization: token},
+        function (frame) {
+            console.log("connected: " + frame)
+            stompClient.unsubscribe("/chatroom/" + chatRoomId);
+            stompClient.subscribe("/chatroom/" + chatRoomId, onReceiveMessage)
+        })
+    return stompClient
+}
 
+const sendMessageRealTime = (stompClient, chatRoomId, message) => {
+    console.log("sending message")
+    stompClient.send("/api/chat/" + chatRoomId, {}, message)
 }
 
 
@@ -70,7 +88,9 @@ const ChatService = {
     getChatRoomByUsers,
     getChatRoomById,
     sendMessage,
-    handleNavigate
+    handleNavigate,
+    connect_socket,
+    sendMessageRealTime
 }
 
 export default ChatService
