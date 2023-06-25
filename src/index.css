@@ -1202,7 +1202,7 @@ nav .logo-container h3 {
 /*----------------------------- Chat -----------------------*/
 .chat-container {
     width: 60%;
-    height: 750px;
+    height: 700px;
     background: #f6f6f6;
     margin-top: 20px;
     margin-left: 28%;
@@ -1324,7 +1324,7 @@ nav .logo-container h3 {
     margin: 0;
     list-style-type: none;
     overflow-y: scroll;
-    height: 75%;
+    height: 80%;
     border-top: 2px solid #fff;
 }
 
@@ -1398,34 +1398,34 @@ nav .logo-container h3 {
 }
 
 main footer {
-    height: 20%;
+    height: 10%;
+}
+
+main footer form {
+    height: 100%;
     margin-left: 15px;
     display: flex;
     align-items: center;
 }
 
-main footer textarea {
+main footer form textarea {
     resize: none;
     display: block;
     width: 80%;
     height: 17px;
     border-radius: 30px;
-    padding: 20px;
+    padding: 10px;
     font-size: 13px;
     margin-bottom: 13px;
     border: 2px solid rgb(213, 213, 213);
 }
 
-main footer textarea::placeholder {
+main footer form textarea::placeholder {
     color: #ddd;
 }
 
-main footer img {
-    height: 30px;
-    cursor: pointer;
-}
 
-main footer a {
+main footer form a {
     text-decoration: none;
     text-transform: uppercase;
     font-weight: bold;

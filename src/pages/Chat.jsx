@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import ChatService from "../api/services/chat.service.js";
 import {USER_ID} from "../api/constant/index.js";
 import ImageService from "../api/services/image.service.js";
@@ -21,6 +21,8 @@ const Chat = () => {
     const [profileList, setProfileList] = useState([])
     const [text, setText] = useState("")
     const [messageList, setMessageList] = useState([])
+    const container = useRef(null)
+
 
     useEffect(() => {
         async function fetchData() {
@@ -89,7 +91,6 @@ const Chat = () => {
     }
 
     const handleSubmit = (e) => {
-
         if (text !== "") {
             e.preventDefault()
             let message = {
@@ -98,12 +99,7 @@ const Chat = () => {
                 text: text,
                 senderId: localStorage.getItem(USER_ID)
             }
-            // ChatService.sendMessage(currentChatRoom.id, message)
-            //     .then(response => {
-            //         console.log("updated chat_room", response.data)
-            //         setText("")
-            //     }).catch(error => console.log(getErrorMessage(error)))
-            if(stompClient !== null) {
+            if (stompClient !== null) {
                 ChatService.sendMessageRealTime(stompClient, currentChatRoom.id, JSON.stringify(message))
                 setText("")
             }
@@ -113,12 +109,32 @@ const Chat = () => {
     const onReceiveMessage = (messageJson) => {
         const newMessage = JSON.parse(messageJson.body)
         const isDuplicate = messageList.find(message => message.id === newMessage.id)
-        if(!isDuplicate) {
+        if (!isDuplicate) {
             messageList.push(newMessage)
             setMessageList([...messageList])
         }
     }
 
+    // For scroll message
+    const Scroll = () => {
+        const {offsetHeight, scrollHeight, scrollTop} = container.current
+        if (scrollHeight <= scrollTop + offsetHeight + 800) {
+            container.current?.scrollTo(0, scrollHeight)
+        }
+    }
+
+    useEffect(() => {
+        if (messageList.length !== 0) {
+            Scroll()
+        }
+    }, [messageList])
+
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            handleSubmit(e);
+        }
+    };
 
     return (
         <div>
@@ -149,7 +165,7 @@ const Chat = () => {
                                     navigate("/profile/" + currentChatRoom.oppositeProfile.id)
                                 }}>{currentChatRoom.oppositeProfile.name}</p>
                             </header>
-                            <ul className="show-message-container">
+                            <ul className="show-message-container" ref={container}>
                                 {currentChatRoom.messages.map(message => {
                                     return (
                                         <li className={message.senderId === localStorage.getItem(USER_ID) ? "me" : "you"}
@@ -170,14 +186,20 @@ const Chat = () => {
                                             </div>
                                         </li>
                                     )
-                                }):null}
+                                }) : null}
                             </ul>
                             <footer>
-                            <textarea placeholder="Type your message"
-                                      name="text"
-                                      value={text}
-                                      onChange={handleChangeText}></textarea>
-                                <a href="#" onClick={handleSubmit}>Send</a>
+                                <form onSubmit={handleSubmit}>
+                                    <textarea placeholder="Type your message"
+                                              name="text"
+                                              value={text}
+                                              onChange={handleChangeText}
+                                              onKeyDown={handleKeyDown}
+                                    >
+                                    </textarea>
+                                    {/*<button onClick={handleSubmit}>Send</button>*/}
+                                    <a href="#" onClick={handleSubmit}>Send</a>
+                                </form>
                             </footer>
                         </div>
                     }
