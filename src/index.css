@@ -191,8 +191,8 @@ nav .logo-container h3 {
 }
 
 .vertical-nav .nav-text {
-    color: #5FB51C;
-    font-weight: 400;
+    color: black;
+    font-weight: 600;
 }
 
 .vertical-nav ul {
@@ -272,6 +272,17 @@ nav .logo-container h3 {
 .vertical-nav ul .setting-modal ul li {
     margin-bottom: 0;
     margin-top: 0;
+}
+
+.vertical-nav ul li .red-dot {
+    position: relative;
+    top: -8px;
+    right: 8px;
+    width: 20px;
+    height: 20px;
+    color: white;
+    border-radius: 50%;
+    background-color: #5FB51C;
 }
 
 @media (max-width: 950px) {
@@ -1234,12 +1245,12 @@ nav .logo-container h3 {
 }
 
 .chat-container aside li:hover {
-    background-color: #a5ff00;
+    background-color: #dddddd;
     cursor: pointer;
 }
 
 .chat-container aside .selected {
-    background-color: #a5ff00;
+    background-color: #dddddd;
 }
 
 .chat-container aside li img {

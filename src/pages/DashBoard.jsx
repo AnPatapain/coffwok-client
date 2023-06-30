@@ -4,10 +4,11 @@ import ProfileService from "../api/services/profile.service.js";
 import {getErrorMessage} from "../api/error/errorMessage.js";
 import {useNavigate} from "react-router-dom";
 import localStorageService from "../api/services/localStorage.service.js";
-import {PROFILE_ID, PROFILE_IMG, USER_ID} from "../api/constant/index.js";
+import {PROFILE_ID, PROFILE_IMG, SHOW_NOTIFICATION, USER_ID} from "../api/constant/index.js";
 import PlanService from "../api/services/plan.service.js";
 import PlanCard from "../components/PlanCard.jsx";
 import UserService from "../api/services/user.service.js";
+import NotificationService from "../api/services/notification.service.js";
 
 
 const DashBoard = () => {
@@ -15,11 +16,16 @@ const DashBoard = () => {
     const [plans, setPlans] = useState([])
     const [myPlan, setMyPlan] = useState(null)
 
+    const [notifyStomp, setNotifyStomp] = useState(null)
+    const [notificationList, setNotificationList] = useState([])
+
     useEffect(() => {
         async function myFunc() {
             UserService.getCurrentUser()
                 .then(async (data) => {
                     if(data) {
+                        localStorage.setItem(SHOW_NOTIFICATION, data.notificationList.length)
+                        setNotificationList(data.notificationList)
                         await ProfileService.getMyProfile()
                             .then(data => {
                                 if (data.imgUrl === null) {
@@ -28,6 +34,8 @@ const DashBoard = () => {
                                     localStorageService.add(PROFILE_ID, data.id)
                                     localStorageService.add(USER_ID, data.userId)
                                     localStorageService.add(PROFILE_IMG, data.imgUrl)
+                                    let notifyStomp_ = NotificationService.connect_notification_endpoint(data.userId, onReceiveNotification)
+                                    setNotifyStomp(notifyStomp_)
                                 }
                             })
                             .catch(error => {
@@ -35,6 +43,7 @@ const DashBoard = () => {
                                 console.log(errMsg)
                                 navigate("/")
                             })
+
 
                         await PlanService.getAllPlans()
                             .then(data => {
@@ -66,6 +75,13 @@ const DashBoard = () => {
 
         myFunc()
     }, [])
+
+    const onReceiveNotification = (messageJson) => {
+        const newNotificationList = JSON.parse(messageJson.body)
+        localStorage.setItem(SHOW_NOTIFICATION, newNotificationList.length)
+        setNotificationList(newNotificationList)
+        console.log(newNotificationList)
+    }
 
     return (
         <div className="dashboard-container">

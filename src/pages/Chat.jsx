@@ -1,10 +1,11 @@
 import {useEffect, useRef, useState} from "react";
 import ChatService from "../api/services/chat.service.js";
-import {USER_ID} from "../api/constant/index.js";
+import {PROFILE_ID, SHOW_NOTIFICATION, USER_ID} from "../api/constant/index.js";
 import ImageService from "../api/services/image.service.js";
 import {useNavigate, useParams} from "react-router-dom";
 import {getErrorMessage} from "../api/error/errorMessage.js";
 import VerticalNav from "../components/VerticalNav.jsx";
+import NotificationService from "../api/services/notification.service.js";
 
 const Chat = () => {
     const {id} = useParams()
@@ -13,15 +14,14 @@ const Chat = () => {
 
     const [currentChatRoom, setCurrentChatRoom] = useState({
         id: "",
-        userId1: "",
-        userId2: "",
-        messages: [],
-        oppositeProfile: null
+        oppositeProfile: null,
+        messages: []
     })
-    const [profileList, setProfileList] = useState([])
+    const [chatRooms, setChatRooms] = useState([])
     const [text, setText] = useState("")
     const [messageList, setMessageList] = useState([])
     const container = useRef(null)
+    const [notificationList, setNotificationList] = useState([])
 
 
     useEffect(() => {
@@ -32,58 +32,38 @@ const Chat = () => {
                         setCurrentChatRoom(prevState => ({
                             ...prevState,
                             id: data.id,
-                            userId1: data.userId1,
-                            userId2: data.userId2,
+                            oppositeProfile: localStorage.getItem(PROFILE_ID) === data.profile1.id ? data.profile2:data.profile1,
                             messages: data.messages
                         }))
                         let stompClient_ = ChatService.connect_socket(id, onReceiveMessage)
                         setStompClient(stompClient_)
                     }).catch(error => console.log(error))
             }
-            await ChatService.getAllProfilesOfChatRooms()
+            await ChatService.getAllMyChatRooms()
                 .then(data => {
-                    data = data.filter(value => value !== null)
-                    setProfileList(data)
+
+                    data = data.map(chatRoom => {
+                        const reformatChatRoom = {}
+                        reformatChatRoom["id"] = chatRoom.id
+                        reformatChatRoom["oppositeProfile"] = localStorage.getItem(PROFILE_ID) === chatRoom.profile1.id ? chatRoom.profile2:chatRoom.profile1
+                        return reformatChatRoom
+                    })
+                    setChatRooms(data)
                 }).catch(error => console.log(error))
+
+            await NotificationService.getNotifications(localStorage.getItem(USER_ID))
+                .then(data => {
+                    setNotificationList(data)
+                }).catch(error => {
+                    console.log(error)
+                })
+
+            NotificationService.connect_notification_endpoint(localStorage.getItem(USER_ID), onReceiveNotification)
 
         }
 
         fetchData()
     }, [id])
-
-    useEffect(() => {
-        if (currentChatRoom !== null && profileList !== null) {
-            let oppositeUserId = localStorage.getItem(USER_ID) === currentChatRoom.userId1 ? currentChatRoom.userId2 : currentChatRoom.userId1
-
-            profileList.forEach(profile => {
-                if (profile.userId === oppositeUserId) {
-                    setCurrentChatRoom(prevState => ({
-                        ...prevState,
-                        oppositeProfile: profile
-                    }))
-                }
-            })
-        }
-    }, [profileList])
-
-    const renderProfileItems = () => {
-        let filteredProfileList = profileList
-        if (currentChatRoom.id !== "" && currentChatRoom.oppositeProfile !== null) {
-            filteredProfileList = profileList.filter(
-                (profile) => profile.userId !== currentChatRoom.oppositeProfile.userId
-            );
-        }
-        return filteredProfileList.map((profile) => (
-            <li key={profile.userId} onClick={() => {
-                ChatService.handleNavigate(profile.userId, navigate)
-            }}>
-                <img src={ImageService.modifyImageURI(profile.imgUrl, ["w_50", "h_50", "q_100", "c_thumb"])}/>
-                <div>
-                    <h2>{profile.name}</h2>
-                </div>
-            </li>
-        ));
-    };
 
     const handleChangeText = (e) => {
         let value = e.target.value
@@ -115,6 +95,13 @@ const Chat = () => {
         }
     }
 
+    const onReceiveNotification = (messageJson) => {
+        const newNotification = JSON.parse(messageJson.body)
+        setNotificationList(newNotification)
+        console.log(newNotification)
+        localStorage.setItem(SHOW_NOTIFICATION, newNotification.length)
+    }
+
     // For scroll message
     const Scroll = () => {
         const {offsetHeight, scrollHeight, scrollTop} = container.current
@@ -136,6 +123,45 @@ const Chat = () => {
         }
     };
 
+    const handleClickAsideChatRoom = async (oppositeUserId, chatRoomId) => {
+        const isInNotificationList = notificationList.some(notification => notification.chatRoomId === chatRoomId)
+        if(isInNotificationList) {
+            await NotificationService.removeNotificationForChatRoom(chatRoomId)
+                .then(data => {
+                    console.log("new notification list", data)
+                    setNotificationList(data)
+                    localStorage.setItem(SHOW_NOTIFICATION, data.length)
+                }).catch(error => {console.log(error)})
+        }
+        ChatService.handleNavigate(oppositeUserId, navigate)
+    }
+
+    const renderProfileItems = () => {
+        let filteredChatRooms = chatRooms
+        if (currentChatRoom.id !== "" && currentChatRoom.oppositeProfile !== null) {
+            filteredChatRooms = chatRooms.filter(
+                (chatRoom) => currentChatRoom.oppositeProfile.id !== chatRoom.oppositeProfile.id
+            );
+        }
+        return filteredChatRooms.map((chatRoom) => (
+            <li key={chatRoom.id} onClick={() => {
+                handleClickAsideChatRoom(chatRoom.oppositeProfile.userId, chatRoom.id)
+            }}>
+                <img src={ImageService.modifyImageURI(chatRoom.oppositeProfile.imgUrl, ["w_50", "h_50", "q_100", "c_thumb"])}/>
+                <div>
+                    <h2>{chatRoom.oppositeProfile.name}</h2>
+                    {
+                        notificationList.length > 0 && notificationList.some(
+                            (notification) => notification.chatRoomId === chatRoom.id
+                        ) ? "[new message]":null
+                    }
+                </div>
+            </li>
+        ));
+    };
+
+    console.log("chatRooms", chatRooms)
+    console.log(currentChatRoom)
     return (
         <div>
             <VerticalNav/>

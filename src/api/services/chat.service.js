@@ -54,6 +54,7 @@ const handleNavigate = (oppositeUserId, navigate) => {
     getChatRoomByUsers(oppositeUserId, localStorage.getItem(USER_ID))
         .then(data => {
             navigate("/chat/" + data.id)
+            window.location.reload()
         }).catch(error => console.log(error))
 }
 
@@ -65,12 +66,11 @@ const connect_socket = (chatRoomId, onReceiveMessage) => {
     let socket = new SockJS(API_BASE_URL + "/web-socket-endpoint")
     let stompClient = Stomp.over(socket)
     const token = "Bearer " + localStorage.getItem(ACCESS_TOKEN)
-    console.log(token)
     stompClient.connect(
         {Authorization: token},
         function (frame) {
             console.log("connected: " + frame)
-            stompClient.unsubscribe("/chatroom/" + chatRoomId);
+            // stompClient.unsubscribe("/chatroom/" + chatRoomId);
             stompClient.subscribe("/chatroom/" + chatRoomId, onReceiveMessage)
         })
     return stompClient

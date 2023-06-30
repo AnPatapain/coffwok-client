@@ -4,7 +4,7 @@ import {AiOutlineMessage} from "react-icons/ai";
 import {CgProfile} from "react-icons/cg";
 import {useLocation, useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
-import {PROFILE_ID, PROFILE_IMG} from "../api/constant/index.js";
+import {PROFILE_ID, PROFILE_IMG, SHOW_NOTIFICATION} from "../api/constant/index.js";
 import ImageService from "../api/services/image.service.js";
 
 import {GrUserSettings} from "react-icons/gr"
@@ -32,6 +32,10 @@ const VerticalNav = () => {
             navigate("/dashboard")
         }
     }
+
+    const handleClickMessage = () => {
+        navigate("/chat")
+    }
     return (
         <div className="vertical-nav">
             <LogoContainer/>
@@ -40,8 +44,9 @@ const VerticalNav = () => {
                     <BiHomeAlt2 className="ver-nav-icon"/>
                     <span className="nav-text">Home</span>
                 </li>
-                <li onClick={() => {navigate("/chat")} }>
+                <li onClick={() => {handleClickMessage()}}>
                     <AiOutlineMessage className="ver-nav-icon"/>
+                    {localStorage.getItem(SHOW_NOTIFICATION) && localStorage.getItem(SHOW_NOTIFICATION) !== "0" ? <div className="red-dot">{localStorage.getItem(SHOW_NOTIFICATION)}</div>:null}
                     <span className="nav-text">Messages</span>
                 </li>
                 <li>
