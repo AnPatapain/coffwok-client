@@ -14,6 +14,8 @@ if(!isProd) {
     OAUTH2_REDIRECT_URI = 'https://www.coffwok.com/oauth2/redirect'
 }
 
+export { API_BASE_URL, OAUTH2_REDIRECT_URI }
+
 export const GOOGLE_AUTH_URL = API_BASE_URL + '/oauth2/authorize/google?redirect_uri=' + OAUTH2_REDIRECT_URI;
 
 export const SHOW_NOTIFICATION = "showNotification"
