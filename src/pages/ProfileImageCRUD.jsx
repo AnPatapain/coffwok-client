@@ -99,8 +99,8 @@ const ProfileImageCRUD = () => {
                                 error => {
                                     setLoading(false)
                                     setErrorMessage("Max file size is 500kb : )")
-                                    const resMessage = getErrorMessage(error)
-                                    console.log("image upload error", resMessage)
+                                    // const resMessage = getErrorMessage(error)
+                                    // console.log("image upload error", resMessage)
                                 }
                             )
                     }

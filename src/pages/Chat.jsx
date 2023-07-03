@@ -98,14 +98,13 @@ const Chat = () => {
     const onReceiveNotification = (messageJson) => {
         const newNotification = JSON.parse(messageJson.body)
         setNotificationList(newNotification)
-        console.log(newNotification)
         localStorage.setItem(SHOW_NOTIFICATION, newNotification.length)
     }
 
     // For scroll message
     const Scroll = () => {
         const {offsetHeight, scrollHeight, scrollTop} = container.current
-        if (scrollHeight <= scrollTop + offsetHeight + 800) {
+        if (scrollHeight <= scrollTop + offsetHeight + 1800) {
             container.current?.scrollTo(0, scrollHeight)
         }
     }
@@ -114,7 +113,7 @@ const Chat = () => {
         if (messageList.length !== 0) {
             Scroll()
         }
-    }, [messageList])
+    }, [messageList, currentChatRoom])
 
     const handleKeyDown = (e) => {
         if (e.key === 'Enter' && !e.shiftKey) {
@@ -128,7 +127,6 @@ const Chat = () => {
         if(isInNotificationList) {
             await NotificationService.removeNotificationForChatRoom(chatRoomId)
                 .then(data => {
-                    console.log("new notification list", data)
                     setNotificationList(data)
                     localStorage.setItem(SHOW_NOTIFICATION, data.length)
                 }).catch(error => {console.log(error)})
@@ -160,8 +158,6 @@ const Chat = () => {
         ));
     };
 
-    console.log("chatRooms", chatRooms)
-    console.log(currentChatRoom)
     return (
         <div>
             <VerticalNav/>

@@ -56,7 +56,6 @@ const Profile = () => {
                         weak_subjects: data.weak_subjects
                     }))
                 }).catch(error => {
-                    console.log(error)
                     localStorage.clear()
                     navigate("/")
                 })
@@ -93,7 +92,6 @@ const Profile = () => {
                 navigate("/dashboard")
             })
             .catch(error => {
-                console.log(getErrorMessage(error))
                 navigate("/dashboard")
             })
     }

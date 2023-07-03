@@ -1,7 +1,6 @@
 import HomeNav from "../components/HomeNav.jsx";
 import AuthModal from "../components/AuthModal.jsx";
 import {useEffect, useState} from "react";
-import {ACCESS_TOKEN} from "../api/constant/index.js";
 import {useNavigate} from "react-router-dom";
 import UserService from "../api/services/user.service.js";
 import ProfileService from "../api/services/profile.service.js";
@@ -37,7 +36,6 @@ const Home = () => {
                 }
             })
             .catch(error => {
-                console.log(error)
                 localStorage.clear()
                 navigate("/")
             })

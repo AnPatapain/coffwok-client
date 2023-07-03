@@ -39,8 +39,8 @@ const DashBoard = () => {
                                 }
                             })
                             .catch(error => {
-                                const errMsg = getErrorMessage(error)
-                                console.log(errMsg)
+                                // const errMsg = getErrorMessage(error)
+                                // console.log(errMsg)
                                 navigate("/")
                             })
 
@@ -80,7 +80,6 @@ const DashBoard = () => {
         const newNotificationList = JSON.parse(messageJson.body)
         localStorage.setItem(SHOW_NOTIFICATION, newNotificationList.length)
         setNotificationList(newNotificationList)
-        console.log(newNotificationList)
     }
 
     return (
