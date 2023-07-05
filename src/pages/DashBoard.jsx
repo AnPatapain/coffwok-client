@@ -10,6 +10,10 @@ import PlanCard from "../components/PlanCard.jsx";
 import UserService from "../api/services/user.service.js";
 import NotificationService from "../api/services/notification.service.js";
 
+import {GrMapLocation} from "react-icons/gr"
+import ChatService from "../api/services/chat.service.js";
+import ImageService from "../api/services/image.service.js";
+
 
 const DashBoard = () => {
     const navigate = useNavigate()
@@ -19,11 +23,13 @@ const DashBoard = () => {
     const [notifyStomp, setNotifyStomp] = useState(null)
     const [notificationList, setNotificationList] = useState([])
 
+    const [chatRooms, setChatRooms] = useState([])
+
     useEffect(() => {
         async function myFunc() {
             UserService.getCurrentUser()
                 .then(async (data) => {
-                    if(data) {
+                    if (data) {
                         localStorage.setItem(SHOW_NOTIFICATION, data.notificationList.length)
                         setNotificationList(data.notificationList)
                         await ProfileService.getMyProfile()
@@ -60,7 +66,18 @@ const DashBoard = () => {
                             .catch(error => {
                                 console.log(getErrorMessage(error))
                             })
-                    }else {
+
+                        await ChatService.getAllMyChatRooms()
+                            .then(data => {
+                                data = data.map(chatRoom => {
+                                    const reformatChatRoom = {}
+                                    reformatChatRoom["id"] = chatRoom.id
+                                    reformatChatRoom["oppositeProfile"] = localStorage.getItem(PROFILE_ID) === chatRoom.profile1.id ? chatRoom.profile2 : chatRoom.profile1
+                                    return reformatChatRoom
+                                })
+                                setChatRooms(data)
+                            }).catch(error => console.log(error))
+                    } else {
                         localStorage.clear()
                         navigate("/")
                     }
@@ -82,17 +99,64 @@ const DashBoard = () => {
         setNotificationList(newNotificationList)
     }
 
-    return (
-        <div className="dashboard-container">
-            <VerticalNav/>
-            <div className="plans-container">
-                {plans.map(plan => {
-                    if (myPlan && plan.id === myPlan.id) {
-                        return <PlanCard key={plan.id} planInfo={plan} isOwner={true}/>
-                    } else {
-                        return <PlanCard key={plan.id} planInfo={plan}/>
+    const handleClickAsideChatRoom = async (oppositeUserId, chatRoomId) => {
+        const isInNotificationList = notificationList.some(notification => notification.chatRoomId === chatRoomId)
+        if (isInNotificationList) {
+            await NotificationService.removeNotificationForChatRoom(chatRoomId)
+                .then(data => {
+                    setNotificationList(data)
+                    localStorage.setItem(SHOW_NOTIFICATION, data.length)
+                }).catch(error => {
+                    console.log(error)
+                })
+        }
+        ChatService.handleNavigate(oppositeUserId, navigate)
+    }
+
+    const renderProfileItems = () => {
+        return chatRooms.map((chatRoom) => (
+            <li key={chatRoom.id} onClick={() => {
+                handleClickAsideChatRoom(chatRoom.oppositeProfile.userId, chatRoom.id)
+            }}>
+                <img
+                    src={ImageService.modifyImageURI(chatRoom.oppositeProfile.imgUrl, ["w_50", "h_50", "q_100", "c_thumb"])}/>
+                <div>
+                    <h2>{chatRoom.oppositeProfile.name}</h2>
+                    {
+                        notificationList.length > 0 && notificationList.some(
+                            (notification) => notification.chatRoomId === chatRoom.id
+                        ) ? <span>[new message]</span> : null
                     }
-                })}
+                </div>
+            </li>
+        ));
+    };
+
+    console.log(chatRooms)
+
+    return (
+        <div className="dashboard-page">
+            <VerticalNav/>
+            <div className="dashboard-container">
+                <div className="newfeed-container">
+                    <h2><GrMapLocation className="location-icon"/> Quy Nhơn</h2>
+                    <div className="plans-container">
+                        {plans.map(plan => {
+                            if (myPlan && plan.id === myPlan.id) {
+                                return <PlanCard key={plan.id} planInfo={plan} isOwner={true}/>
+                            } else {
+                                return <PlanCard key={plan.id} planInfo={plan}/>
+                            }
+                        })}
+                    </div>
+                </div>
+
+                <aside>
+                    <ul>
+                        <h2>cafe-study soulmates</h2>
+                        {renderProfileItems()}
+                    </ul>
+                </aside>
             </div>
         </div>
     )

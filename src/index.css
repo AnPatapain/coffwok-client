@@ -62,12 +62,12 @@ h2 {
     position: fixed;
     width: 100vw;
     height: 100vh;
-    background: linear-gradient(
-        to bottom,
-        rgba(0, 0, 0, 0.65) 0%,
-        rgba(0, 0, 0, 0) 100%
-    ), url("assets/hero_image.jpg");
-    background-size: cover;
+    /*background: linear-gradient(*/
+    /*    to bottom,*/
+    /*    rgba(0, 0, 0, 0.65) 0%,*/
+    /*    rgba(0, 0, 0, 0) 100%*/
+    /*), url("assets/hero_image.jpg");*/
+    /*background-size: cover;*/
 }
 
 .overlay nav {
@@ -83,12 +83,13 @@ h2 {
 
 .home h1 {
     margin-bottom: 0;
+    color: black;
 }
 .home article {
     text-align: center;
 }
 .home article p{
-    color: white;
+    color: black;
     letter-spacing: 1px;
 }
 
@@ -103,17 +104,19 @@ h2 {
 
 .home .home-buttons button {
     margin-bottom: 25px;
+    border: none;
+    color: black;
+    background-color: #9AFB4D;
+    /*font-weight: normal;*/
+    font-size: 14px;
 }
 
-.home .home-buttons .transparent-button {
-    color: white;
-    background: transparent;
-}
+/*.home .home-buttons .transparent-button {*/
+/*    color: white;*/
+/*    background: transparent;*/
+/*}*/
 
 @media (max-width: 430px) {
-    .primary-title {
-        font-size: 30px;
-    }
 
     .primary-button {
         font-size: 10px;
@@ -124,11 +127,12 @@ h2 {
     }
 
     .home .home-buttons {
-        margin-top: 25vh;
+        margin-top: 15vh;
     }
     .home .primary-title {
-        font-size: 20px;
+        font-size: 30px;
         margin-top: 50px;
+        margin-bottom: 20px;
     }
     .home .home-buttons button {
         margin-bottom: 10px;
@@ -165,18 +169,19 @@ nav .logo-container {
 }
 
 nav .logo-container .logo {
-    width: 32px;
-    height: 32px;
+    width: 45px;
+    height: 45px;
 }
 
 nav .logo-container h3 {
     text-transform: uppercase;
+    font-size: 25px;
     color: #5FB51C;
 }
 
 /*------------------- Vertical Nav -----------------*/
 .vertical-nav {
-    width: 18%;
+    width: 20%;
     /*border: solid 2px;*/
     border-radius: 10px;
     background-color: white;
@@ -280,9 +285,9 @@ nav .logo-container h3 {
     right: 8px;
     width: 20px;
     height: 20px;
-    color: white;
+    color: #fff;
     border-radius: 50%;
-    background-color: #5FB51C;
+    background-color: #FF3040;
 }
 
 @media (max-width: 950px) {
@@ -305,6 +310,7 @@ nav .logo-container h3 {
         align-items: baseline;
         justify-content: center;
         top: auto;
+        background-color: #f6f6f6;
     }
 
     .vertical-nav .logo-container {
@@ -340,7 +346,7 @@ nav .logo-container h3 {
     max-width: 360px;
     height: 500px;
     background-color: white;
-    border: solid 3px black;
+    /*border: solid 3px black;*/
     border-radius: 10px;
     padding: 40px;
 }
@@ -363,7 +369,7 @@ nav .logo-container h3 {
     padding: 8px;
     margin: 8px;
     font-size: 17px;
-    border: solid 2px;
+    border: 2px solid rgb(213, 213, 213);
     border-radius: 30px;
 }
 
@@ -399,6 +405,7 @@ nav .logo-container h3 {
 
 .auth-modal .google-button a {
     width: 100%;
+    text-decoration: none;
 }
 
 .auth-modal .google-button-style {
@@ -445,6 +452,11 @@ nav .logo-container h3 {
     text-transform: uppercase;
 }
 
+.auth-modal button {
+    border: none;
+    font-weight: normal;
+}
+
 /*------------------- Profile -------------------*/
 
 /* Profile nav  */
@@ -462,10 +474,14 @@ nav .logo-container h3 {
 }
 
 .profile-section-container .profile-section {
-    margin-bottom: 30px;
+    margin-bottom: 10px;
     border-radius: 20px;
     background-color: white;
     display: flex;
+}
+
+.profile-section-container .profile-coffee-study-plan-section {
+    margin-bottom: 30px;
 }
 
 /* profile-personal-info-section */
@@ -515,7 +531,7 @@ nav .logo-container h3 {
 .profile-personal-info-section div .personal-info .name-button .username{
     font-weight: bold;
     margin-right: 20px;
-    font-size: 1rem;
+    font-size: 1.2rem;
 }
 .profile-personal-info-section div .personal-info .name-button{
     display: flex;
@@ -595,7 +611,7 @@ nav .logo-container h3 {
 
 .profile-study-info-section article .category{
     font-weight: bold;
-    color: #5FB51C;
+    color: #6C6C6C;
     margin-right: 20px;
     display: flex;
     align-items: center;
@@ -608,7 +624,8 @@ nav .logo-container h3 {
 }
 
 .profile-coffee-study-plan-section h2 {
-    color: #5FB51C;
+    font-size: 20px;
+    color: #6C6C6C;
 }
 
 .profile-coffee-study-plan-section .add-plan-icon {
@@ -625,7 +642,8 @@ nav .logo-container h3 {
 
 
 .profile-coffee-study-plan-section .plan-card {
-    border: solid 2px #5FB51C;
+    width: 90%;
+    background-color: #f6f6f6;
 }
 
 .profile-coffee-study-plan-section .buttons {
@@ -659,7 +677,7 @@ nav .logo-container h3 {
 
 @media (max-width: 767px) {
     .profile-container .profile-section-container {
-        width: 90%;
+        width: 100%;
         margin-left: auto;
         margin-right: auto;
     }
@@ -700,8 +718,23 @@ nav .logo-container h3 {
 
 @media (max-width: 444px) {
 
+    .profile-section article{
+        font-size: 12px;
+    }
+    .profile-coffee-study-plan-section h2 {
+        font-size: 18px;
+    }
+
+    .profile-coffee-study-plan-section .plan-card .name-button-section .name {
+        font-size: 16px;
+    }
+
+    .profile-coffee-study-plan-section .plan-card .plan-info-section li {
+        font-size: 14px;
+    }
+
     .profile-personal-info-section div .personal-info {
-        width: 40%;
+        width: 60%;
     }
 
     .profile-personal-info-section div img {
@@ -713,6 +746,7 @@ nav .logo-container h3 {
 
     .profile-personal-info-section div .personal-info .name-button{
         flex-direction: column;
+        align-items: start;
     }
 
     .profile-personal-info-section div .personal-info .name-button button{
@@ -737,7 +771,7 @@ nav .logo-container h3 {
 
     .profile-personal-info-section div .about {
         /*display: none;*/
-        font-size: 14px;
+        font-size: 12px;
         font-weight: 400;
         margin-top: 20px;
     }
@@ -768,7 +802,7 @@ nav .logo-container h3 {
 
 .onboarding h2, .onboarding label {
     font-weight: bold;
-    color: #5FB51C;
+    color: black;
 }
 
 .onboarding form div{
@@ -845,10 +879,18 @@ nav .logo-container h3 {
     cursor: pointer;
 }
 
-.onboarding form input[type=submit] {
+/*.onboarding form input[type=submit] {*/
+/*    background-color: #6bff00;*/
+/*    font-size: large;*/
+/*    width: 40%;*/
+/*}*/
+
+.onboarding form .primary-button {
     background-color: #6bff00;
-    font-size: large;
-    width: 40%;
+    /*font-size: large;*/
+    border-radius: 20px;
+    border: solid 1px #dddddd;
+    width: 50%;
 }
 
 .onboarding form .photo-container img {
@@ -870,7 +912,7 @@ nav .logo-container h3 {
     margin-right: 10px;
     list-style: none;
     font-weight: bold;
-    color: #5FB51C;
+    /*color: #5FB51C;*/
     cursor: pointer;
     margin-bottom: 10px;
     font-size: 14px;
@@ -1027,13 +1069,13 @@ nav .logo-container h3 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-width: 350px;
+    width: 440px;
     max-height: 650px;
     margin: auto;
     border-radius: 20px;
     padding: 10px 15px;
     background-color: white;
-    color: #5FB51C;
+    /*color: #5FB51C;*/
 }
 
 .plan-card .image-container {
@@ -1049,6 +1091,20 @@ nav .logo-container h3 {
     width: 90%;
     display: flex;
     align-items: center;
+}
+
+.plan-card .name-button-section .name{
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.plan-card .name-button-section .message-button {
+    background-color: #9AFB4D;
+    padding: 5px 15px;
+    border-radius: 10px;
+    margin-left: 25px;
+    color: black;
+    font-size: 15px;
 }
 
 .plan-card .name-button-section .small-profile-image {
@@ -1093,6 +1149,7 @@ nav .logo-container h3 {
     display: flex;
     align-items: center;
     margin-right: 10px;
+    color: #6C6C6C;
 }
 
 .plan-card .plan-info-section li .text {
@@ -1193,30 +1250,159 @@ nav .logo-container h3 {
 }
 
 /*-------------------------------- Dash Board ------------------------*/
-.dashboard-container .plans-container {
-    max-width: 450px;
-    margin: auto;
+.dashboard-container {
+    display: flex;
 }
 
-.dashboard-container .plans-container .plan-card .image-container img {
+.dashboard-page {
     width: 100%;
 }
 
-.dashboard-container .plans-container .plan-card {
-    margin-bottom: 50px;
+.dashboard-page .dashboard-container {
+    width: 100%;
+}
+
+.dashboard-container .newfeed-container {
+    width: 75%;
+    margin-left: 160px;
+}
+
+.dashboard-container .newfeed-container h2 {
+    font-size: 20px;
+    color: #6C6C6C;
+    margin-left: -200px;
+}
+
+.dashboard-container .newfeed-container h2 .location-icon {
+    color: #6C6C6C;
+}
+
+.dashboard-container .newfeed-container .plans-container {
+    width: 100%;
+}
+
+.dashboard-container .newfeed-container .plans-container .plan-card .image-container img {
+    width: 100%;
+}
+
+.dashboard-container .newfeed-container .plans-container .plan-card {
+    margin-bottom: 20px;
     max-width: 650px;
 }
-.dashboard-container .plans-container .plan-card:first-child {
+.dashboard-container .newfeed-container .plans-container .plan-card:first-child {
     margin-top: 10px;
 }
 
+.dashboard-container aside {
+    position: fixed;
+    height: 100%;
+    bottom: 0;
+    right: 0;
+    width: 25%;
+}
+
+
+.dashboard-container aside ul {
+    padding-left: 0;
+    list-style-type: none;
+    overflow-y: scroll;
+}
+
+.dashboard-container aside ul h2 {
+    font-size: 18px;
+    color: #6C6C6C;
+}
+
+.dashboard-container aside li {
+    padding: 10px 0;
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.dashboard-container aside li div span{
+    color: #FF3040;
+}
+
+.dashboard-container aside li:hover {
+    background-color: #dddddd;
+    cursor: pointer;
+}
+
+.dashboard-container aside .selected {
+    background-color: #dddddd;
+}
+
+.dashboard-container aside li img {
+    border-radius: 50%;
+    margin-left: 20px;
+    margin-right: 8px;
+    max-height: 50px;
+}
+
+.dashboard-container aside li h2 {
+    font-size: 14px;
+    color: #000000;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.dashboard-container aside li h3 {
+    font-size: 12px;
+    color: #7e818a;
+    font-weight: normal;
+}
+@media (min-width: 768px) and (max-width: 1024px) {
+    .dashboard-container .newfeed-container {
+        margin-left: 250px;
+    }
+}
+@media (max-width: 768px) {
+    .dashboard-container .newfeed-container{
+        margin: auto;
+    }
+    .dashboard-container aside {
+        display: none;
+    }
+}
+
+@media (max-width: 375px) {
+    .dashboard-container .newfeed-container .plans-container .plan-card{
+        font-size: 12px;
+        width: 90%;
+    }
+
+    .dashboard-container .newfeed-container .plans-container .plan-card .name-button-section .name {
+        font-size: 14px;
+    }
+
+    .dashboard-container .newfeed-container .plans-container .plan-card .name-button-section .message-button {
+        font-size: 10px;
+    }
+
+    .dashboard-container .newfeed-container {
+        width: 100%;
+    }
+}
+
 /*----------------------------- Chat -----------------------*/
+.chat-page .vertical-nav .nav-text {
+    display: none;
+}
+
+.chat-page .vertical-nav h3 {
+    display: none;
+}
+
+.chat-page .vertical-nav{
+    width: 80px;
+}
+
 .chat-container {
-    width: 60%;
-    height: 700px;
+    width: 93%;
+    height: 100vh;
     background: #f6f6f6;
-    margin-top: 20px;
-    margin-left: 28%;
+    /*margin-top: px;*/
+    margin-left: 6%;
     overflow: hidden;
     border: 1px solid rgb(213, 213, 213);
     border-radius: 10px;
@@ -1224,11 +1410,12 @@ nav .logo-container h3 {
 }
 
 .chat-container aside {
-    width: 40%;
+    width: 35%;
     height: 100%;
     background-color: #ffffff;
     font-size: 15px;
     vertical-align: top;
+    border-right: solid 1px rgb(213, 213, 213);
 }
 
 .chat-container aside ul {
@@ -1237,6 +1424,11 @@ nav .logo-container h3 {
     list-style-type: none;
     overflow-y: scroll;
     height: 100%;
+}
+
+.chat-container aside ul h2 {
+    text-align: start;
+    margin-left: 30px;
 }
 
 .chat-container aside li {
@@ -1306,7 +1498,7 @@ nav .logo-container h3 {
 }
 
 .chat-container main {
-    width: 60%;
+    width: 65%;
     background-color: white;
 }
 
@@ -1359,13 +1551,20 @@ nav .logo-container h3 {
 }
 
 .show-message-container .message {
-    padding: 20px;
+    padding: 10px;
     line-height: 25px;
-    max-width: 90%;
+    max-width: 60%;
+    width: fit-content;
     display: inline-block;
     text-align: left;
     border-radius: 5px;
+    hyphens: manual;
+    /*inline-size: 200px;*/
+    overflow-wrap: break-word;
+    font-size: 14px;
 }
+
+
 
 .show-message-container .me {
     text-align: right;
@@ -1373,12 +1572,6 @@ nav .logo-container h3 {
 
 .show-message-container .you {
     text-align: left;
-}
-
-.show-message-container .message {
-    inline-size: 200px;
-    hyphens: manual;
-    overflow-wrap: break-word;
 }
 
 .show-message-container .you .message {
@@ -1441,8 +1634,42 @@ main footer form a {
     text-transform: uppercase;
     font-weight: bold;
     color: #6fbced;
+    margin-left: 10px;
+    margin-bottom: 15px;
+}
 
-    margin-left: 5px;
+@media (max-width: 767px) {
+    .chat-container {
+        width: 100%;
+        height: 93vh;
+        margin-left: 0;
+    }
+
+    .chat-page .vertical-nav {
+        background-color: rgba(255, 255, 255, 0.64);
+        width: 100%;
+    }
+}
+
+@media (max-width: 425px) {
+    .chat-container {
+        height: 93vh;
+        width: 100%;
+        margin: 0;
+    }
+    .chat-container main {
+        display: none;
+    }
+    .chat-container .hide-aside {
+        display: none;
+    }
+    .chat-container .show-main {
+        display: block;
+        width: 100%;
+    }
+    .chat-container aside {
+        width: 100%;
+    }
 }
 
 

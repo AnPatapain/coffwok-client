@@ -25,41 +25,44 @@ const PlanCard = ({planInfo, isOwner}) => {
     }
     return (
         <div className="plan-card">
-            {/*<section className="image-container">*/}
-            {/*    {planInfo.imgUrl !== null ? <img*/}
-            {/*        src={ImageService.modifyImageURI(planInfo.imgUrl, ["w_350", "h_250", "c_fill", "g_face", "q_100"])}/> : null}*/}
-            {/*</section>*/}
             <section className="name-button-section">
                 {/* eslint-disable-next-line react/prop-types */}
                 {planInfo.imgUrl !== null ?
                     <img className="small-profile-image"
-                        src={ImageService.modifyImageURI(planInfo.imgUrl, ["w_50", "h_50", "c_fill", "g_face", "q_100"])}/> : null}
+                         src={ImageService.modifyImageURI(planInfo.imgUrl, ["w_50", "h_50", "c_fill", "g_face", "q_100"])}/> : null}
+
                 <p onClick={() => {
                     handleClickName(planInfo.userId)
-                }}>{planInfo.name}</p>
-                {!isOwner ? <AiOutlineMessage className="chat-icon" onClick={() => {
-                    handleClickChatIcon(planInfo.userId)
-                }}/> : ""}
+                }} className="name">
+                    {planInfo.name}
+                </p>
+
+                {!isOwner ?
+                    <span className="message-button" onClick={() => {
+                        handleClickChatIcon(planInfo.userId)
+                    }}>
+                        Nhắn tin
+                    </span> : ""}
             </section>
             <ul className="plan-info-section">
+                {/*<li className="plan-info-item">*/}
+                {/*    <span><TbSchool className="icon"/>Học tại</span>*/}
+                {/*    <span className="text">{planInfo.school}</span>*/}
+                {/*</li>*/}
                 <li className="plan-info-item">
-                    <span><TbSchool className="icon"/>School</span>
-                    <span className="text">{planInfo.school}</span>
-                </li>
-                <li className="plan-info-item">
-                    <span><GoLocation className="icon"/>Café</span>
+                    <span><GoLocation className="icon"/>Cà Phê</span>
                     <span className="text">{planInfo.coffeeShop}</span>
                 </li>
                 <li className="plan-info-item">
-                    <span><MdSchedule className="icon"/>Schedule</span>
+                    <span><MdSchedule className="icon"/>Thời Gian</span>
                     <span className="text">{planInfo.schedule}</span>
                 </li>
                 <li className="plan-info-item">
-                    <span><AiOutlineLike className="icon"/>Strengths</span>
+                    <span><AiOutlineLike className="icon"/>Có thể kèm</span>
                     <span className="text">{planInfo.strength_subjects.slice(0, 3).join(", ")} ...</span>
                 </li>
                 <li className="plan-info-item">
-                    <span><AiOutlineDislike className="icon"/>Weakness</span>
+                    <span><AiOutlineDislike className="icon"/>Cần người kèm</span>
                     <span className="text">{planInfo.weak_subjects.slice(0, 3).join(", ")} ...</span>
                 </li>
             </ul>

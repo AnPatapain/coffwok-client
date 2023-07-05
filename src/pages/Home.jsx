@@ -55,14 +55,13 @@ const Home = () => {
         <div className="overlay">
             <HomeNav/>
             <div className="home">
-                <h1 className="primary-title">Swipe Right to Study together at Café</h1>
+                <h1 className="primary-title">Tìm bạn học bài chung tại Glife</h1>
                 <article>
-                    <p>share next study plan at your favorite café, find study partner, connect and study together.</p>
-                    <p>The best place for sapiosexuals</p>
+                    <p>Chia sẻ kế hoạch đi cà phê học bài sắp tới của bạn, kết nối với các bạn khác và ra Glife học bài chung</p>
                 </article>
                 <div className="home-buttons">
-                    <button className="primary-button" onClick={handleSignupClick}>create account</button>
-                    <button className="primary-button transparent-button" onClick={handleLoginClick}>log in</button>
+                    <button className="primary-button" onClick={handleSignupClick}>Tạo tài khoản</button>
+                    <button className="primary-button transparent-button" onClick={handleLoginClick}>Đăng nhập</button>
                 </div>
 
                 {showModal && (

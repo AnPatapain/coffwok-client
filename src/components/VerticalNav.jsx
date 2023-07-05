@@ -10,6 +10,7 @@ import ImageService from "../api/services/image.service.js";
 import {GrUserSettings} from "react-icons/gr"
 import {IoMdNotificationsOutline} from "react-icons/io";
 import SettingModal from "./SettingModal.jsx";
+import {FiLogOut} from "react-icons/fi";
 
 const VerticalNav = () => {
     const navigate = useNavigate()
@@ -36,35 +37,40 @@ const VerticalNav = () => {
     const handleClickMessage = () => {
         navigate("/chat")
     }
+
+    const handleLogOut = () => {
+        localStorage.clear()
+        navigate("/")
+    }
     return (
         <div className="vertical-nav">
             <LogoContainer/>
             <ul>
                 <li onClick={()=> {handleClickHome()} } >
                     <BiHomeAlt2 className="ver-nav-icon"/>
-                    <span className="nav-text">Home</span>
+
+                    <span className="nav-text">Trang Chủ</span>
                 </li>
                 <li onClick={() => {handleClickMessage()}}>
                     <AiOutlineMessage className="ver-nav-icon"/>
                     {localStorage.getItem(SHOW_NOTIFICATION) && localStorage.getItem(SHOW_NOTIFICATION) !== "0" ? <div className="red-dot">{localStorage.getItem(SHOW_NOTIFICATION)}</div>:null}
-                    <span className="nav-text">Messages</span>
+                    <span className="nav-text">Tin Nhắn</span>
                 </li>
-                <li>
-                    <IoMdNotificationsOutline className="ver-nav-icon"/>
-                    <span className="nav-text">Notifications</span>
-                </li>
+                {/*<li>*/}
+                {/*    <IoMdNotificationsOutline className="ver-nav-icon"/>*/}
+                {/*    <span className="nav-text">Notifications</span>*/}
+                {/*</li>*/}
                 <li onClick={() => {navigate("/plan-creation")}}>
                     <BiMessageSquareAdd className="ver-nav-icon"/>
-                    <span className="nav-text">Create plan</span>
+                    <span className="nav-text">Tạo Kế Hoạch</span>
                 </li>
                 <li onClick={()=> {navigate("/profile/" + localStorage.getItem(PROFILE_ID))} }>
                     {profileImg ? <img src={profileImg} className="profile-img"/> : <CgProfile className="ver-nav-icon"/>}
                     <span className="nav-text">Profile</span>
                 </li>
-                {showSettingModal ? <SettingModal setShowModal={setShowSettingModal}/> : null}
-                <li onClick={() => {setShowSettingModal(true)}}>
-                    <GrUserSettings className="ver-nav-icon"/>
-                    <span className="nav-text">Settings</span>
+                <li onClick={() => {handleLogOut()}}>
+                    <FiLogOut className="ver-nav-icon"/>
+                    <span className="nav-text">Đăng xuất</span>
                 </li>
             </ul>
         </div>

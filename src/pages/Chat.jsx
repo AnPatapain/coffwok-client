@@ -104,13 +104,13 @@ const Chat = () => {
     // For scroll message
     const Scroll = () => {
         const {offsetHeight, scrollHeight, scrollTop} = container.current
-        if (scrollHeight <= scrollTop + offsetHeight + 1800) {
+        if (scrollHeight <= scrollTop + offsetHeight + 18000) {
             container.current?.scrollTo(0, scrollHeight)
         }
     }
 
     useEffect(() => {
-        if (messageList.length !== 0) {
+        if (messageList.length !== 0 || currentChatRoom.messages.length !== 0) {
             Scroll()
         }
     }, [messageList, currentChatRoom])
@@ -145,7 +145,7 @@ const Chat = () => {
             <li key={chatRoom.id} onClick={() => {
                 handleClickAsideChatRoom(chatRoom.oppositeProfile.userId, chatRoom.id)
             }}>
-                <img src={ImageService.modifyImageURI(chatRoom.oppositeProfile.imgUrl, ["w_50", "h_50", "q_100", "c_thumb"])}/>
+                <img src={ImageService.modifyImageURI(chatRoom.oppositeProfile.imgUrl, ["w_60", "h_60", "q_100", "c_thumb"])}/>
                 <div>
                     <h2>{chatRoom.oppositeProfile.name}</h2>
                     {
@@ -159,11 +159,12 @@ const Chat = () => {
     };
 
     return (
-        <div>
+        <div className="chat-page">
             <VerticalNav/>
             <div className="chat-container">
-                <aside>
+                <aside className={currentChatRoom.id !== "" && currentChatRoom.oppositeProfile !== null ? "hide-aside":""}>
                     <ul>
+                        <h2>Tin nhắn</h2>
                         {currentChatRoom.id !== "" && currentChatRoom.oppositeProfile !== null ?
                             <li className="selected">
                                 <img
@@ -176,7 +177,7 @@ const Chat = () => {
                         {renderProfileItems()}
                     </ul>
                 </aside>
-                <main>
+                <main className={currentChatRoom.id !== "" && currentChatRoom.oppositeProfile !== null ? "show-main":""}>
                     {currentChatRoom.id === "" || currentChatRoom.oppositeProfile == null ?
                         <h1 className="primary-title">Chat</h1> :
                         <div className="current-chat-room-container">
@@ -219,7 +220,6 @@ const Chat = () => {
                                               onKeyDown={handleKeyDown}
                                     >
                                     </textarea>
-                                    {/*<button onClick={handleSubmit}>Send</button>*/}
                                     <a href="#" onClick={handleSubmit}>Send</a>
                                 </form>
                             </footer>

@@ -21,7 +21,7 @@ const App = () => {
                 <Route path={"/oauth2/redirect"} element={<OAuth2Redirect/>}/>
                 <Route path={"/localAuth/redirect"} element={<LocalAuthRedirect/>}/>
                 <Route path={"/plan-creation"} element={<PlanCrud/>}/>
-                <Route path={"/chat"} element={<Chat/>}/>
+                <Route exact path={"/chat"} element={<Chat/>}/>
                 <Route path={"/chat/:id"} element={<Chat/>}/>
             </Routes>
         </BrowserRouter>

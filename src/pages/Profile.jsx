@@ -111,7 +111,7 @@ const Profile = () => {
                             {isMe ?
                                 <button className="primary-button" onClick={() => {
                                     navigate(`/profile-image-creation`)
-                                }}>Change image</button> : null}
+                                }}>Thay đổi</button> : null}
 
                         </section>
 
@@ -121,7 +121,7 @@ const Profile = () => {
                                 {isMe ?
                                     <button className="primary-button" onClick={() => {
                                         navigate(`/profile-info-creation?isEdit=true`)
-                                    }}>Edit Info
+                                    }}>Chỉnh sửa
                                     </button> :
                                     <AiOutlineMessage className="chat-icon" onClick={() => {
                                         handleClickChatIcon(profile.userId)
@@ -129,32 +129,32 @@ const Profile = () => {
                                 }
                             </section>
                             <p className="about">{profile.about}</p>
-                            <section className="profile-sub-info">
-                                <article>
-                                    <span>130 visitors</span>
-                                    <span>10 love</span>
-                                </article>
-                            </section>
+                            {/*<section className="profile-sub-info">*/}
+                            {/*    <article>*/}
+                            {/*        <span>130 visitors</span>*/}
+                            {/*        <span>10 love</span>*/}
+                            {/*    </article>*/}
+                            {/*</section>*/}
                         </section>
                     </div>
                 </section>
 
                 <section className="profile-section profile-study-info-section">
                     <article>
-                        <span className="category"><TbSchool className="study-info-icon"/> School</span>
+                        <span className="category"><TbSchool className="study-info-icon"/> Học tại</span>
                         <span>{profile.school}</span>
                     </article>
                     <article>
-                        <span className="category"><AiOutlineLike className="study-info-icon"/> Good</span>
+                        <span className="category"><AiOutlineLike className="study-info-icon"/> Thế Mạnh</span>
                         <span>{profile.strength_subjects.join(", ")}</span>
                     </article>
                     <article>
-                        <span className="category"><AiOutlineDislike className="study-info-icon"/> Bad</span>
+                        <span className="category"><AiOutlineDislike className="study-info-icon"/> Điểm yếu</span>
                         <span>{profile.weak_subjects.join(", ")}</span>
                     </article>
                 </section>
                 <section className="profile-section profile-coffee-study-plan-section">
-                    {!planInfo.id ? <h2>Create Café-Study Plan</h2> : <h2>Café-Study Plan</h2>}
+                    {!planInfo.id ? <h2>Create Café-Study Plan</h2> : <h2>Kế hoạch cà phê - học bài</h2>}
                     {!planInfo.id ? <IoIosAddCircleOutline className="add-plan-icon" onClick={() => {
                             navigate("/plan-creation")
                         }}/> :
@@ -164,9 +164,9 @@ const Profile = () => {
                                 <div className="buttons">
                                     <button className="primary-button edit-button" onClick={() => {
                                         navigate("/plan-creation")
-                                    }}>Edit
+                                    }}>Chỉnh sửa
                                     </button>
-                                    <button className="primary-button delete-button" onClick={handleDelete}>Delete
+                                    <button className="primary-button delete-button" onClick={handleDelete}>Xóa
                                     </button>
                                 </div>:null
                             }

@@ -20,19 +20,19 @@ const ProfileCRUD = () => {
         school: "School"
     })
     const subjects = [
-        "physic",
-        "english",
-        "ielts",
-        "coding",
-        "literature",
-        "math",
-        "chemistry",
-        "biology",
-        "history",
-        "geography",
-        "french",
-        "marketing",
-        "finance"
+        "Vật lý",
+        "Tiếng anh",
+        "Ielts",
+        "Tin học",
+        "Văn",
+        "Toán",
+        "Hóa",
+        "Sinh",
+        "Sử",
+        "Địa",
+        "Tiếng Pháp",
+        "Marketing",
+        "Tài chính"
     ]
 
     const [formData, setFormData] = useState({
@@ -165,12 +165,12 @@ const ProfileCRUD = () => {
         <div className="onboarding-container">
             <HomeNav/>
             <div className="onboarding">
-                {isEdit ? (<h2>EDIT PROFILE</h2>) : <h2>CREATE PROFILE</h2>}
+                {isEdit ? (<h2>CHỈNH SỬA PROFILE</h2>) : <h2>TẠO PROFILE</h2>}
 
                 <form onSubmit={handleSubmit}>
                     <div>
                         <section>
-                            <label htmlFor="name">Name</label>
+                            <label htmlFor="name">Tên</label>
                             <span>
                                 {
                                     oldProfile && !isClickName ?
@@ -196,7 +196,7 @@ const ProfileCRUD = () => {
 
                             {/* TODO: change backend dto */}
 
-                            <label htmlFor="dob">Birthday</label>
+                            <label htmlFor="dob">Ngày sinh</label>
                             <div className="multiple-input-container">
                                 <span>
                                     {
@@ -221,7 +221,7 @@ const ProfileCRUD = () => {
                                 </span>
                             </div>
 
-                            <label>Gender</label>
+                            <label>Giới tính</label>
                             <span>
                                 {
                                     oldProfile && !isClickGender ?
@@ -242,7 +242,7 @@ const ProfileCRUD = () => {
                                                 onChange={handleChange}
                                                 checked={formData.gender === "man"}
                                             />
-                                            <label htmlFor="man-gender-identity">Man</label>
+                                            <label htmlFor="man-gender-identity">Nam</label>
                                             <input
                                                 id="woman-gender-identity"
                                                 type="radio"
@@ -251,7 +251,7 @@ const ProfileCRUD = () => {
                                                 onChange={handleChange}
                                                 checked={formData.gender === "woman"}
                                             />
-                                            <label htmlFor="woman-gender-identity">Woman</label>
+                                            <label htmlFor="woman-gender-identity">Nữ</label>
                                             <input
                                                 id="more-gender-identity"
                                                 type="radio"
@@ -260,11 +260,11 @@ const ProfileCRUD = () => {
                                                 onChange={handleChange}
                                                 checked={formData.gender === "more"}
                                             />
-                                            <label htmlFor="more-gender-identity">Other</label>
+                                            <label htmlFor="more-gender-identity">Khác</label>
                                         </div>
                                 }
                             </span>
-                            <label htmlFor="about">About me</label>
+                            <label htmlFor="about">Giới Thiệu</label>
                             <span>
                                 {
                                     oldProfile && !isClickAbout ?
@@ -291,7 +291,7 @@ const ProfileCRUD = () => {
                         </section>
 
                         <section>
-                            <label htmlFor="school">School</label>
+                            <label htmlFor="school">Học tại</label>
                             <span>
                                 {
                                     oldProfile && !isClickSchool ?
@@ -315,7 +315,7 @@ const ProfileCRUD = () => {
                                 }
                             </span>
 
-                            <label>Strengths</label>
+                            <label>Thế mạnh</label>
                             <ul>
                                 {subjects.map((value, index) => {
                                     return <li key={index}
@@ -328,7 +328,7 @@ const ProfileCRUD = () => {
                                 })}
                             </ul>
 
-                            <label>Weakness</label>
+                            <label>Cần người kèm</label>
                             <ul>
                                 {subjects.map((value, index) => {
                                     return <li key={index}
@@ -343,7 +343,8 @@ const ProfileCRUD = () => {
 
                         </section>
                     </div>
-                    <input type="submit"/>
+                    {/*<input type="submit"/>*/}
+                    <button className="primary-button" onClick={handleSubmit}>Lưu</button>
                 </form>
             </div>
         </div>

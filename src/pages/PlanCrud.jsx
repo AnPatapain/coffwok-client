@@ -115,15 +115,15 @@ const PlanCrud = () => {
     return (
         <div className="plan-crud-container">
             <VerticalNav/>
-            <h2>{oldPlan ? "You already had" : "Create"} Café-Study plan</h2>
+            <h2>{oldPlan ? "Thay đổi" : "Tạo"} Kế hoạch cà phê học bài</h2>
             <PlanCreationEditCard planInfo={planInfo} planDTO={planDTO} setPlanDTO={setPlanDTO} oldPlan={oldPlan}/>
             {errorMessage ? <p className="error-msg">{errorMessage}</p> : ""}
 
             {
                 oldPlan ?
                     <div className="button-group">
-                        <button className="primary-button" onClick={editPlan}>Save</button>
-                        <button className="primary-button" onClick={deletePlan}>Delete</button>
+                        <button className="primary-button" onClick={editPlan}>Lưu</button>
+                        <button className="primary-button" onClick={deletePlan}>Xóa</button>
                     </div>:
                     <button className="primary-button" onClick={submitPlan}>Publish Plan</button>
             }
