@@ -1410,7 +1410,7 @@ nav .logo-container h3 {
 }
 
 .chat-container aside {
-    width: 35%;
+    width: 26%;
     height: 100%;
     background-color: #ffffff;
     font-size: 15px;
@@ -1434,6 +1434,11 @@ nav .logo-container h3 {
 .chat-container aside li {
     padding: 10px 0;
     display: flex;
+    margin-bottom: 20px;
+}
+
+.chat-container aside li div span{
+    color: #FF3040;
 }
 
 .chat-container aside li:hover {
@@ -1449,25 +1454,14 @@ nav .logo-container h3 {
     border-radius: 50%;
     margin-left: 20px;
     margin-right: 8px;
-}
-
-.chat-container aside li div {
-    display: inline-block;
-    vertical-align: top;
-    margin-top: 12px;
+    max-height: 50px;
 }
 
 .chat-container aside li h2 {
     font-size: 14px;
     color: #000000;
-    font-weight: normal;
-    margin-bottom: 5px;
-}
-
-.chat-container aside li h3 {
-    font-size: 12px;
-    color: #7e818a;
-    font-weight: normal;
+    font-weight: bold;
+    margin-left: 2px;
 }
 
 .chat-container .status {
@@ -1498,7 +1492,7 @@ nav .logo-container h3 {
 }
 
 .chat-container main {
-    width: 65%;
+    width: 74%;
     background-color: white;
 }
 
@@ -1572,6 +1566,14 @@ nav .logo-container h3 {
 
 .show-message-container .you {
     text-align: left;
+    display: flex;
+    align-items: start;
+}
+
+.show-message-container .you .message-img {
+    border-radius: 20px;
+    max-height: 40px;
+    margin-right: 5px;
 }
 
 .show-message-container .you .message {
@@ -1653,7 +1655,7 @@ main footer form a {
 
 @media (max-width: 425px) {
     .chat-container {
-        height: 93vh;
+        height: 89vh;
         width: 100%;
         margin: 0;
     }
@@ -1668,6 +1670,130 @@ main footer form a {
         width: 100%;
     }
     .chat-container aside {
+        width: 100%;
+    }
+}
+
+/*---------------------------- ChatList -----------------------------------*/
+.chat-list-page .vertical-nav .nav-text {
+    display: none;
+}
+
+.chat-list-page .vertical-nav h3 {
+    display: none;
+}
+
+.chat-list-page .vertical-nav{
+    width: 80px;
+}
+
+.chat-list-container {
+    width: 93%;
+    height: 100vh;
+    background: #f6f6f6;
+    /*margin-top: px;*/
+    margin-left: 6%;
+    overflow: hidden;
+    border: 1px solid rgb(213, 213, 213);
+    border-radius: 10px;
+    display: flex;
+}
+
+.chat-list-container aside {
+    width: 35%;
+    height: 100%;
+    background-color: #ffffff;
+    font-size: 15px;
+    vertical-align: top;
+    border-right: solid 1px rgb(213, 213, 213);
+}
+
+.chat-list-container aside ul {
+    padding-left: 0;
+    margin: 0;
+    list-style-type: none;
+    overflow-y: scroll;
+    height: 100%;
+}
+
+.chat-list-container aside ul h2 {
+    text-align: start;
+    margin-left: 20px;
+}
+
+.chat-list-container aside li {
+    padding: 10px 0;
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.chat-list-container aside li div span{
+    color: #FF3040;
+}
+
+.chat-list-container aside li:hover {
+    background-color: #dddddd;
+    cursor: pointer;
+}
+
+.chat-list-container aside .selected {
+    background-color: #dddddd;
+}
+
+.chat-list-container aside li img {
+    border-radius: 50%;
+    margin-left: 20px;
+    margin-right: 8px;
+    max-height: 50px;
+}
+
+.chat-list-container aside li h2 {
+    font-size: 14px;
+    color: #000000;
+    font-weight: bold;
+    margin-left: 2px;
+}
+
+.chat-list-container main .primary-title {
+    margin-top: 200px;
+    color: #5FB51C;
+}
+
+.chat-list-container main {
+    width: 65%;
+    background-color: white;
+}
+
+@media (max-width: 767px) {
+    .chat-list-container {
+        width: 100%;
+        height: 93vh;
+        margin-left: 0;
+    }
+
+    .chat-list-page .vertical-nav {
+        background-color: rgba(255, 255, 255, 0.64);
+        width: 100%;
+    }
+}
+
+@media (max-width: 425px) {
+    .chat-list-container {
+        height: 93vh;
+        width: 100%;
+        margin: 0;
+    }
+    .chat-list-container main {
+        display: none;
+    }
+    .chat-list-container .hide-aside {
+        display: none;
+    }
+    .chat-list-container .show-main {
+        display: block;
+        width: 100%;
+    }
+    .chat-list-container aside {
         width: 100%;
     }
 }

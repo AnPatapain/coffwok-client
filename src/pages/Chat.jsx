@@ -193,6 +193,10 @@ const Chat = () => {
                                     return (
                                         <li className={message.senderId === localStorage.getItem(USER_ID) ? "me" : "you"}
                                             key={message.id}>
+                                            {message.senderId === currentChatRoom.oppositeProfile.userId ?
+                                                <img className="message-img" src={ImageService.modifyImageURI(currentChatRoom.oppositeProfile.imgUrl, ["w_40", "h_40", "q_100", "c_thumb"])}/>
+                                                :null
+                                            }
                                             <div className="message">
                                                 {message.text}
                                             </div>
@@ -204,6 +208,10 @@ const Chat = () => {
                                     return (
                                         <li className={message.senderId === localStorage.getItem(USER_ID) ? "me" : "you"}
                                             key={message.id}>
+                                            {message.senderId === currentChatRoom.oppositeProfile.userId ?
+                                                <img className="message-img" src={ImageService.modifyImageURI(currentChatRoom.oppositeProfile.imgUrl, ["w_40", "h_40", "q_100", "c_thumb"])}/>
+                                                :null
+                                            }
                                             <div className="message">
                                                 {message.text}
                                             </div>

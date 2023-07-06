@@ -8,6 +8,7 @@ import ProfileCRUD from "./pages/ProfileCRUD.jsx";
 import ProfileImageCRUD from "./pages/ProfileImageCRUD.jsx";
 import PlanCrud from "./pages/PlanCrud.jsx";
 import Chat from "./pages/Chat.jsx";
+import ChatList from "./pages/ChatList.jsx";
 
 const App = () => {
     return (
@@ -21,7 +22,7 @@ const App = () => {
                 <Route path={"/oauth2/redirect"} element={<OAuth2Redirect/>}/>
                 <Route path={"/localAuth/redirect"} element={<LocalAuthRedirect/>}/>
                 <Route path={"/plan-creation"} element={<PlanCrud/>}/>
-                <Route exact path={"/chat"} element={<Chat/>}/>
+                <Route exact path={"/chat"} element={<ChatList/>}/>
                 <Route path={"/chat/:id"} element={<Chat/>}/>
             </Routes>
         </BrowserRouter>
