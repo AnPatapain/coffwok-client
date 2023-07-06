@@ -1365,7 +1365,7 @@ nav .logo-container h3 {
     }
 }
 
-@media (max-width: 375px) {
+@media (max-width: 550px) {
     .dashboard-container .newfeed-container .plans-container .plan-card{
         font-size: 12px;
         width: 90%;
