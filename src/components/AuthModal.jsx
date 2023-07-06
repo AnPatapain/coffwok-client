@@ -67,7 +67,7 @@ const AuthModal = ({setShowModal, isSignup, setIsSignup}) => {
             <div className="google-button">
                 <a href={GOOGLE_AUTH_URL}>
                     <button className="google-button-style">
-                        Tạo tài khoản bằng google
+                        {isSignup ? 'Tạo tài khoản bằng Google' : 'Đăng nhập bằng Google'}
                         <img src={googleLogo} alt="Google Logo" className="google-logo" />
                     </button>
                 </a>

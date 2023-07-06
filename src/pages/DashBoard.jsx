@@ -13,6 +13,7 @@ import NotificationService from "../api/services/notification.service.js";
 import {GrMapLocation} from "react-icons/gr"
 import ChatService from "../api/services/chat.service.js";
 import ImageService from "../api/services/image.service.js";
+import {BiMessageSquareAdd} from "react-icons/bi";
 
 
 const DashBoard = () => {
@@ -139,7 +140,8 @@ const DashBoard = () => {
             <VerticalNav/>
             <div className="dashboard-container">
                 <div className="newfeed-container">
-                    <h2><GrMapLocation className="location-icon"/>Các kế hoạch café-học bài tại Quy Nhơn</h2>
+                    <h2 className="location-title"><GrMapLocation className="location-icon"/> Quy Nhơn</h2>
+                    <h2 className="create-plan-title" onClick={() => {navigate("/plan-creation")}}>Tạo kế hoạch Café - Học bài của bạn </h2>
                     <div className="plans-container">
                         {plans.map(plan => {
                             if (myPlan && plan.id === myPlan.id) {

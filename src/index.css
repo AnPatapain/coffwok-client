@@ -154,6 +154,12 @@ h2 {
     }
 }
 
+@media (max-height: 565px) {
+    .home {
+        margin-top: 10px;
+    }
+}
+
 
 /*------------------- HomeNav -------------------*/
 nav {
@@ -178,6 +184,17 @@ nav .logo-container h3 {
     font-size: 25px;
     color: #5FB51C;
 }
+
+@media (max-width: 375px) {
+    nav .logo-container .logo {
+        width: 35px;
+        height: 35px;
+    }
+    nav .logo-container h3 {
+        font-size: 20px;
+    }
+}
+
 
 /*------------------- Vertical Nav -----------------*/
 .vertical-nav {
@@ -229,7 +246,6 @@ nav .logo-container h3 {
 .vertical-nav li .ver-nav-icon {
     width: 30px;
     height: 30px;
-    /*color: #5FB51C;*/
 }
 
 .vertical-nav li .profile-img {
@@ -305,12 +321,17 @@ nav .logo-container h3 {
         display: flex;
         position: fixed;
         bottom: 0;
-        max-height: 50px;
+        max-height: 40px;
         width: 100%;
-        align-items: baseline;
         justify-content: center;
         top: auto;
         background-color: #f6f6f6;
+    }
+
+    .vertical-nav li .ver-nav-icon {
+        width: 25px;
+        height: 25px;
+        /*color: #5FB51C;*/
     }
 
     .vertical-nav .logo-container {
@@ -455,6 +476,12 @@ nav .logo-container h3 {
 .auth-modal button {
     border: none;
     font-weight: normal;
+}
+
+@media (max-height: 565px) {
+    .auth-modal {
+        top: 0;
+    }
 }
 
 /*------------------- Profile -------------------*/
@@ -1267,14 +1294,31 @@ nav .logo-container h3 {
     margin-left: 160px;
 }
 
-.dashboard-container .newfeed-container h2 {
-    font-size: 20px;
+.dashboard-container .newfeed-container .location-title {
+    font-size: 18px;
     color: #6C6C6C;
-    margin-left: -200px;
+    margin-left: -300px;
+
+    margin-bottom: 30px;
 }
 
 .dashboard-container .newfeed-container h2 .location-icon {
+    width: 20px;
+    height: 20px;
+}
+
+.dashboard-container .newfeed-container .create-plan-title {
+    font-size: 20px;
     color: #6C6C6C;
+    margin-left: -30px;
+    cursor: pointer;
+    text-decoration: underline;
+    margin-bottom: 30px;
+}
+
+.dashboard-container .newfeed-container h2 .add-icon {
+    width: 30px;
+    height: 30px;
 }
 
 .dashboard-container .newfeed-container .plans-container {
@@ -1381,6 +1425,28 @@ nav .logo-container h3 {
 
     .dashboard-container .newfeed-container {
         width: 100%;
+    }
+}
+
+@media (max-width: 425px){
+    .dashboard-container .newfeed-container .location-title {
+        font-size: 14px;
+        margin-left: 0;
+    }
+
+    .dashboard-container .newfeed-container h2 .location-icon {
+        width: 16px;
+        height: 16px;
+    }
+
+    .dashboard-container .newfeed-container .create-plan-title {
+        font-size: 16px;
+        margin-left: 0;
+    }
+
+    .dashboard-container .newfeed-container h2 .add-icon {
+        width: 25px;
+        height: 25px;
     }
 }
 
@@ -1504,12 +1570,14 @@ nav .logo-container h3 {
     display: flex;
     border-bottom: 1px solid rgb(213, 213, 213);
     padding: 10px 10px;
+    height: 10%;
 }
 
 .chat-container main .current-chat-room-container header img {
     border-radius: 25px;
     border: 1px solid #a5ff00;
     margin-right: 10px;
+    max-height: 50px;
 }
 
 .chat-container main .current-chat-room-container header p {
@@ -1655,12 +1723,16 @@ main footer form a {
 
 @media (max-width: 425px) {
     .chat-container {
-        height: 89vh;
+        height: 90vh;
         width: 100%;
         margin: 0;
     }
     .chat-container main {
         display: none;
+    }
+
+    .chat-container main .current-chat-room-container header {
+        padding: 0;
     }
     .chat-container .hide-aside {
         display: none;
