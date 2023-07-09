@@ -1,9 +1,8 @@
-// import {TbSchool} from "react-icons/tb";
-// import {GoLocation} from "react-icons/go";
-// import {MdSchedule} from "react-icons/md";
-// import {SlPencil} from "react-icons/sl"
-// import {BsBook, BsPeople} from "react-icons/bs"
 import {useState} from "react";
+import pink_location_icon from "../assets/icons/pink-location-icon.svg"
+import clock_icon from "../assets/icons/clock-icon.svg"
+import study_icon from "../assets/icons/study-icon.svg"
+import edit_icon from "../assets/icons/edit-icon.svg"
 
 // eslint-disable-next-line react/prop-types
 const PlanCreationEditCard = ({planInfo, planDTO, setPlanDTO, oldPlan}) => {
@@ -33,12 +32,8 @@ const PlanCreationEditCard = ({planInfo, planDTO, setPlanDTO, oldPlan}) => {
             </section>
             <ul className="plan-info-section">
                 <li className="plan-info-item">
-                    {/*<span><TbSchool className="icon"/>Học tại</span>*/}
-                    <span className="text">{planInfo.school}</span>
-                </li>
-                <li className="plan-info-item">
                     <span>
-                        {/*<GoLocation className="icon"/>*/}
+                        <img src={pink_location_icon} className="icon"/>
                         <label htmlFor="cafe">Cà phê</label>
                     </span>
                     <span>
@@ -47,6 +42,7 @@ const PlanCreationEditCard = ({planInfo, planDTO, setPlanDTO, oldPlan}) => {
                                 <article>
                                     <span className="text">
                                         {oldPlan.coffeeShop}
+                                        <img src={edit_icon} className="edit-icon" onClick={() => {setIsClickCafe(true)}} />
                                         {/*<SlPencil className="edit-icon" onClick={() => {setIsClickCafe(true)}}/>*/}
                                     </span>
                                 </article> :
@@ -63,6 +59,7 @@ const PlanCreationEditCard = ({planInfo, planDTO, setPlanDTO, oldPlan}) => {
                 <li className="plan-info-item">
                     <span>
                         {/*<MdSchedule className="icon"/>*/}
+                        <img src={clock_icon} className="icon"/>
                         <label htmlFor="schedule">Thời gian</label>
                     </span>
                     <span>
@@ -71,6 +68,7 @@ const PlanCreationEditCard = ({planInfo, planDTO, setPlanDTO, oldPlan}) => {
                                 <article>
                                     <span className="text">
                                         {oldPlan.schedule}
+                                        <img src={edit_icon} className="edit-icon" onClick={() => {setIsClickSchedule(true)}} />
                                         {/*<SlPencil className="edit-icon" onClick={() => {setIsClickSchedule(true)}}/>*/}
                                     </span>
                                 </article> :
@@ -87,8 +85,7 @@ const PlanCreationEditCard = ({planInfo, planDTO, setPlanDTO, oldPlan}) => {
                 </li>
                 <li className="plan-info-item">
                     <span>
-                        {/*<BsPeople className="icon"/>*/}
-                        {/*<BsBook className="icon"/>*/}
+                        <img src={study_icon} className="icon"/>
                         <label htmlFor="planDetails">Tìm bạn học chung</label>
                     </span>
                     <span>
@@ -97,6 +94,7 @@ const PlanCreationEditCard = ({planInfo, planDTO, setPlanDTO, oldPlan}) => {
                                 <article>
                                     <span className="text">
                                         {oldPlan.planDetails}
+                                        <img src={edit_icon} className="edit-icon" onClick={() => {setIsClickPlanDetails(true)}} />
                                         {/*<SlPencil className="edit-icon" onClick={() => {setIsClickPlanDetails(true)}}/>*/}
                                     </span>
                                 </article> :

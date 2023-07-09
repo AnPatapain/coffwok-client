@@ -245,8 +245,8 @@ nav .logo-container h3 {
 }
 
 .vertical-nav li .ver-nav-icon {
-    width: 30px;
-    height: 30px;
+    width: 28px;
+    height: 28px;
 }
 
 .vertical-nav li .profile-img {
@@ -372,6 +372,17 @@ nav .logo-container h3 {
     align-items: center;
 }
 
+.horizontal-nav .location-icon {
+    width: 28px;
+    height: 28px;
+}
+
+@media (min-width: 768px) and (max-width: 1024px){
+    .horizontal-nav {
+        margin-left: 250px;
+    }
+}
+
 @media (max-width: 768px) {
     .horizontal-nav {
         width: 60%;
@@ -385,6 +396,23 @@ nav .logo-container h3 {
         width: 100%;
         margin-left: 0;
         margin-right: 0;
+    }
+}
+
+@media (max-width: 375px){
+    .horizontal-nav {
+        margin-bottom: 20px;
+    }
+    .horizontal-nav h2 {
+        font-size: 18px;
+    }
+    .horizontal-nav span .location-icon {
+        width: 20px;
+        height: 20px;
+        margin-right: 5px;
+    }
+    .horizontal-nav span h4 {
+        font-size: 14px;
     }
 }
 
@@ -696,7 +724,6 @@ nav .logo-container h3 {
     height: 60px;
     width: 60px;
     cursor: pointer;
-    border-radius: 20px;
 }
 
 .profile-coffee-study-plan-section .add-plan-icon:hover {
@@ -988,6 +1015,7 @@ nav .logo-container h3 {
     cursor: pointer;
     color: #00bbf9;
     margin-left: 5px;
+    height: 20px;
 }
 
 @media (max-width: 768px) {
@@ -1133,7 +1161,7 @@ nav .logo-container h3 {
     max-height: 650px;
     margin: auto;
     border-radius: 10px;
-    padding: 10px 15px;
+    padding: 15px 15px;
     background-color: white;
     /*color: #5FB51C;*/
 }
@@ -1150,6 +1178,7 @@ nav .logo-container h3 {
 .plan-card .name-button-section {
     width: 90%;
     display: flex;
+    margin-left: -30px;
 }
 
 .plan-card .name-button-section article{
@@ -1185,19 +1214,6 @@ nav .logo-container h3 {
     cursor: pointer;
 }
 
-.plan-card .name-button-section .chat-icon {
-    margin-left: 8%;
-    width: 30px;
-    height: 30px;
-    color: #5FB51C;
-}
-
-.plan-card .name-button-section .chat-icon:hover {
-    background-color: #dddddd;
-    border-radius: 10px;
-    cursor: pointer;
-}
-
 .plan-card .plan-info-section {
     display: flex;
     flex-direction: column;
@@ -1225,9 +1241,9 @@ nav .logo-container h3 {
     font-weight: normal;
 }
 
-.plan-card .plan-info-section li span .icon {
-    width: 20px;
-    height: 20px;
+.plan-card .plan-info-section li .icon {
+    width: 25px;
+    height: 25px;
     margin-right: 5px;
 }
 
@@ -1235,6 +1251,7 @@ nav .logo-container h3 {
     margin-left: 5px;
     cursor: pointer;
     color: #00bbf9;
+    height: 14px;
 }
 
 /*--------------- plan crud page ---------------------*/
@@ -1284,7 +1301,7 @@ nav .logo-container h3 {
 }
 
 
-@media (max-width: 320px) {
+@media (max-width: 375px) {
     .plan-crud-container h2 {
         font-size: 16px;
     }
@@ -1299,7 +1316,7 @@ nav .logo-container h3 {
     }
 }
 
-@media (min-width: 321px) and (max-width: 767px){
+@media (min-width: 376px) and (max-width: 767px){
     .plan-crud-container h2 {
         font-size: 20px;
         margin: 10px auto 5px;
@@ -1428,7 +1445,7 @@ nav .logo-container h3 {
 }
 @media (min-width: 768px) and (max-width: 1024px) {
     .dashboard-container .newfeed-container {
-        margin-left: 250px;
+        margin-left: 100px;
     }
 }
 @media (max-width: 768px) {
@@ -1448,10 +1465,13 @@ nav .logo-container h3 {
         flex-direction: column;
         align-items: start;
     }
+    .dashboard-container .newfeed-container .plans-container .plan-card .name-button-section article p {
+        margin-bottom: 5px;
+    }
 
     .dashboard-container .newfeed-container .plans-container .plan-card .name-button-section article .message-button {
         margin-left: 0;
-        font-size: 12px;
+        font-size: 14px;
     }
 
     .dashboard-container .newfeed-container .plans-container .plan-card .name-button-section article .name {
@@ -1464,6 +1484,10 @@ nav .logo-container h3 {
 }
 
 @media (max-width: 425px){
+    .dashboard-container .newfeed-container .plans-container .plan-card{
+        width: 96%;
+        padding: 10px 5px;
+    }
     .dashboard-container .newfeed-container .location-title {
         font-size: 14px;
         margin-left: 0;

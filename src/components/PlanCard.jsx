@@ -1,12 +1,12 @@
-// import {TbSchool} from "react-icons/tb";
-// import {GoLocation} from "react-icons/go";
-// import {MdSchedule} from "react-icons/md";
-// import {BsBook} from "react-icons/bs";
-
 import ImageService from "../api/services/image.service.js";
 import UserService from "../api/services/user.service.js";
 import {useNavigate} from "react-router-dom";
 import ChatService from "../api/services/chat.service.js";
+
+import school_icon from "../assets/icons/school-icon.svg"
+import pink_location_icon from "../assets/icons/pink-location-icon.svg"
+import clock_icon from "../assets/icons/clock-icon.svg"
+import study_icon from "../assets/icons/study-icon.svg"
 
 // eslint-disable-next-line react/prop-types
 const PlanCard = ({planInfo, isOwner}) => {
@@ -51,15 +51,18 @@ const PlanCard = ({planInfo, isOwner}) => {
             </section>
             <ul className="plan-info-section">
                 <li className="plan-info-item">
-                    {/*<span><TbSchool className="icon"/>Trường</span>*/}
+                    <img src={school_icon} className="icon" />
+                    <span>Trường</span>
                     <span className="text">{planInfo.school}</span>
                 </li>
                 <li className="plan-info-item">
-                    {/*<span><GoLocation className="icon"/>Cà Phê</span>*/}
+                    <img src={pink_location_icon} className="icon" />
+                    <span>Quán Cafe</span>
                     <span className="text">{planInfo.coffeeShop}</span>
                 </li>
                 <li className="plan-info-item">
-                    {/*<span><MdSchedule className="icon"/>Thời Gian</span>*/}
+                    <img src={clock_icon} className="icon" />
+                    <span>Thời gian</span>
                     <span className="text">{planInfo.schedule}</span>
                 </li>
 
@@ -67,6 +70,8 @@ const PlanCard = ({planInfo, isOwner}) => {
                     {/*<span>*/}
                     {/*    <BsBook className="icon"/>Tìm bạn học chung*/}
                     {/*</span>*/}
+                    <img src={study_icon} className="icon" />
+                    <span>Tìm bạn học chung</span>
                     <span className="text">{planInfo.planDetails}</span>
                 </li>
             </ul>

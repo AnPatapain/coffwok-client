@@ -227,7 +227,7 @@ const Chat = () => {
                                               onKeyDown={handleKeyDown}
                                     >
                                     </textarea>
-                                    <a href="#" onClick={handleSubmit}>Send</a>
+                                    <a href="#" onClick={handleSubmit}>Gửi</a>
                                 </form>
                             </footer>
                         </div>

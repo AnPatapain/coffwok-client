@@ -1,5 +1,4 @@
 import {useEffect, useState} from "react";
-// import {BiImageAdd} from "react-icons/bi"
 import HomeNav from "../components/HomeNav.jsx";
 import ProfileService from "../api/services/profile.service.js";
 import {useNavigate} from "react-router-dom";
@@ -7,6 +6,8 @@ import UserService from "../api/services/user.service.js";
 import {PROFILE_IMG} from "../api/constant/index.js";
 import {RotatingSquare} from 'react-loader-spinner';
 import localStorageService from "../api/services/localStorage.service.js";
+
+import add_icon from "../assets/icons/add-icon.svg"
 
 const ProfileImageCRUD = () => {
     const navigate = useNavigate()
@@ -129,11 +130,8 @@ const ProfileImageCRUD = () => {
                     }
                     <div className={`${preview ? "image-choose selected" : "image-choose"}`}>
                         <>
-                            {/*<label htmlFor="file">*/}
-                            {/*    <BiImageAdd className="user-option"/>*/}
-                            {/*</label>*/}
                             <label htmlFor="file">
-                                add image
+                                <img className="user-option" src={add_icon}/>
                             </label>
                             <input id="file" type='file' className="inputfile" onChange={onSelectFile}/>
                         </>

@@ -4,7 +4,7 @@ import HomeNav from "../components/HomeNav.jsx";
 import ProfileService from "../api/services/profile.service.js";
 import {getErrorMessage} from "../api/error/errorMessage.js"
 import UserService from "../api/services/user.service.js";
-// import {SlPencil} from "react-icons/sl";
+import edit_icon from "../assets/icons/edit-icon.svg"
 
 const ProfileCRUD = () => {
     const url = new URL(window.location.href);
@@ -175,9 +175,7 @@ const ProfileCRUD = () => {
                                         <article>
                                             <span className="text">
                                                 {oldProfile.name}
-                                                {/*<SlPencil className="edit-icon" onClick={() => {*/}
-                                                {/*    setIsClickName(true)*/}
-                                                {/*}}/>*/}
+                                                <img className="edit-icon" src={edit_icon} onClick={() => setIsClickName(true)}/>
                                             </span>
                                         </article> :
 
@@ -192,8 +190,6 @@ const ProfileCRUD = () => {
                                 }
                             </span>
 
-                            {/* TODO: change backend dto */}
-
                             <label htmlFor="dob">Ngày sinh</label>
                             <div className="multiple-input-container">
                                 <span>
@@ -202,9 +198,7 @@ const ProfileCRUD = () => {
                                             <article>
                                             <span className="text">
                                                 {oldProfile.dob}
-                                                {/*<SlPencil className="edit-icon" onClick={() => {*/}
-                                                {/*    setIsClickDob(true)*/}
-                                                {/*}}/>*/}
+                                                <img className="edit-icon" src={edit_icon} onClick={() => setIsClickDob(true)}/>
                                             </span>
                                             </article> :
                                             <input
@@ -226,9 +220,7 @@ const ProfileCRUD = () => {
                                         <article>
                                             <span className="text">
                                                 {oldProfile.gender}
-                                                {/*<SlPencil className="edit-icon" onClick={() => {*/}
-                                                {/*    setIsClickGender(true)*/}
-                                                {/*}}/>*/}
+                                                <img className="edit-icon" src={edit_icon} onClick={() => setIsClickGender(true)}/>
                                             </span>
                                         </article> :
                                         <div className="multiple-input-container">
@@ -269,9 +261,7 @@ const ProfileCRUD = () => {
                                         <article>
                                             <span className="text">
                                                 {oldProfile.about}
-                                                {/*<SlPencil className="edit-icon" onClick={() => {*/}
-                                                {/*    setIsClickAbout(true)*/}
-                                                {/*}}/>*/}
+                                                <img className="edit-icon" src={edit_icon} onClick={() => setIsClickAbout(true)}/>
                                             </span>
                                         </article> :
                                         <input
@@ -285,7 +275,6 @@ const ProfileCRUD = () => {
                                         />
                                 }
                             </span>
-                            {/*<input type="submit"/>*/}
                         </section>
 
                         <section>
@@ -296,9 +285,7 @@ const ProfileCRUD = () => {
                                         <article>
                                             <span className="text">
                                                 {oldProfile.school}
-                                                {/*<SlPencil className="edit-icon" onClick={() => {*/}
-                                                {/*    setIsClickSchool(true)*/}
-                                                {/*}}/>*/}
+                                                <img className="edit-icon" src={edit_icon} onClick={() => setIsClickSchool(true)}/>
                                             </span>
                                         </article> :
                                         <input
@@ -341,7 +328,6 @@ const ProfileCRUD = () => {
 
                         </section>
                     </div>
-                    {/*<input type="submit"/>*/}
                     <button className="primary-button" onClick={handleSubmit}>Lưu</button>
                 </form>
             </div>

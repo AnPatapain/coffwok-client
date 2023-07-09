@@ -132,8 +132,6 @@ const DashBoard = () => {
         ));
     };
 
-    console.log(chatRooms)
-
     return (
         <div className="dashboard-page">
             <VerticalNav selectedItem={"dashboard"}/>

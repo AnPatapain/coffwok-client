@@ -1,10 +1,5 @@
 import VerticalNav from "../components/VerticalNav.jsx";
 
-// import {TbSchool} from "react-icons/tb"
-// import {AiOutlineLike} from "react-icons/ai"
-// import {AiOutlineDislike} from "react-icons/ai"
-// import {IoIosAddCircleOutline} from "react-icons/io"
-
 import {useNavigate, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import ProfileService from "../api/services/profile.service.js";
@@ -13,6 +8,8 @@ import PlanCard from "../components/PlanCard.jsx";
 import PlanService from "../api/services/plan.service.js";
 import {PROFILE_ID} from "../api/constant/index.js";
 import ChatService from "../api/services/chat.service.js";
+
+import add_icon from "../assets/icons/add-icon.svg"
 
 
 const Profile = () => {
@@ -129,7 +126,8 @@ const Profile = () => {
                                     //     handleClickChatIcon(profile.userId)
                                     // }}/>
                                     <span className="message-button" onClick={() => {
-                                        handleClickChatIcon(profile.userId)}}>
+                                        handleClickChatIcon(profile.userId)
+                                    }}>
                                         Nhắn tin
                                     </span>
                                 }
@@ -158,23 +156,23 @@ const Profile = () => {
                 </section>
                 <section className="profile-section profile-coffee-study-plan-section">
                     {!planInfo.id ? <h2>Create Café-Study Plan</h2> : <h2>Kế hoạch cà phê - học bài</h2>}
-                    {/*{!planInfo.id ? <IoIosAddCircleOutline className="add-plan-icon" onClick={() => {*/}
-                    {/*        navigate("/plan-creation")*/}
-                    {/*    }}/> :*/}
-                    {/*    <>*/}
-                    {/*        <PlanCard planInfo={planInfo} isOwner={isMe}/>*/}
-                    {/*        {isMe ?*/}
-                    {/*            <div className="buttons">*/}
-                    {/*                <button className="primary-button edit-button" onClick={() => {*/}
-                    {/*                    navigate("/plan-creation")*/}
-                    {/*                }}>Chỉnh sửa*/}
-                    {/*                </button>*/}
-                    {/*                <button className="primary-button delete-button" onClick={handleDelete}>Xóa*/}
-                    {/*                </button>*/}
-                    {/*            </div>:null*/}
-                    {/*        }*/}
+                    {!planInfo.id ? <img src={add_icon} className="add-plan-icon" onClick={() => {
+                            navigate("/plan-creation")
+                        }}/> :
+                        <>
+                            <PlanCard planInfo={planInfo} isOwner={isMe}/>
+                            {isMe ?
+                                <div className="buttons">
+                                    <button className="primary-button edit-button" onClick={() => {
+                                        navigate("/plan-creation")
+                                    }}>Chỉnh sửa
+                                    </button>
+                                    <button className="primary-button delete-button" onClick={handleDelete}>Xóa
+                                    </button>
+                                </div> : null
+                            }
 
-                    {/*    </>}*/}
+                        </>}
                 </section>
             </div>
         </div>

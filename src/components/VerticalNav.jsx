@@ -10,6 +10,12 @@ import {useEffect, useState} from "react";
 import {PROFILE_ID, PROFILE_IMG, SHOW_NOTIFICATION} from "../api/constant/index.js";
 import ImageService from "../api/services/image.service.js";
 
+import home_icon from "../assets/icons/home-icon.svg"
+import chat_icon from "../assets/icons/message-icon.svg"
+import add_icon from "../assets/icons/add-icon.svg"
+import profile_icon from "../assets/icons/profile-icon.svg"
+import logout_icon from "../assets/icons/logout-icon.svg"
+
 
 const VerticalNav = ({selectedItem}) => {
     const navigate = useNavigate()
@@ -55,28 +61,31 @@ const VerticalNav = ({selectedItem}) => {
             <ul>
                 <li onClick={()=> {handleClickHome()} } className={selectedItem === 'dashboard' ? 'clicked' : ''}>
                     {/*<BiHomeAlt2 className="ver-nav-icon"/>*/}
+                    <img src={home_icon} className="ver-nav-icon"/>
                     <span className="nav-text">Trang Chủ</span>
                 </li>
 
                 <li onClick={() => {handleClickMessage()}} className={selectedItem === 'message' ? 'clicked' : ''}>
                     {/*<AiOutlineMessage className="ver-nav-icon"/>*/}
+                    <img src={chat_icon} className="ver-nav-icon"/>
                     {localStorage.getItem(SHOW_NOTIFICATION) && localStorage.getItem(SHOW_NOTIFICATION) !== "0" ? <div className="red-dot">{localStorage.getItem(SHOW_NOTIFICATION)}</div>:null}
                     <span className="nav-text">Tin Nhắn</span>
                 </li>
 
                 <li onClick={() => {handleClickPlan()}} className={selectedItem === 'plan' ? 'clicked' : ''}>
                     {/*<BiMessageSquareAdd className="ver-nav-icon"/>*/}
+                    <img src={add_icon} className="ver-nav-icon"/>
                     <span className="nav-text">Tạo Kế Hoạch</span>
                 </li>
 
                 <li onClick={()=> {handleClickProfile()}} className={selectedItem === 'profile' ? 'clicked' : ''}>
-                    {/*{profileImg ? <img src={profileImg} className="profile-img"/> : <CgProfile className="ver-nav-icon"/>}*/}
-                    {profileImg ? <img src={profileImg} className="profile-img"/> : "TODO"}
+                    {profileImg ? <img src={profileImg} className="profile-img"/> : <img src={profileImg} className="ver-nav-icon"/>}
                     <span className="nav-text">Profile</span>
                 </li>
 
                 <li onClick={() => {handleLogOut()}}>
                     {/*<FiLogOut className="ver-nav-icon"/>*/}
+                    <img src={logout_icon} className="ver-nav-icon"/>
                     <span className="nav-text">Đăng xuất</span>
                 </li>
             </ul>
