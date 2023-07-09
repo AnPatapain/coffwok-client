@@ -5,7 +5,7 @@ import PlanService from "../api/services/plan.service.js";
 import {useNavigate} from "react-router-dom";
 import {getErrorMessage} from "../api/error/errorMessage.js";
 import ImageService from "../api/services/image.service.js";
-import {ACCESS_TOKEN, PROFILE_IMG} from "../api/constant/index.js";
+import {PROFILE_IMG} from "../api/constant/index.js";
 import UserService from "../api/services/user.service.js";
 import ProfileService from "../api/services/profile.service.js";
 

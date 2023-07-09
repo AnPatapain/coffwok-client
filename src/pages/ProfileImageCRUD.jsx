@@ -1,11 +1,10 @@
 import {useEffect, useState} from "react";
-import {BiImageAdd} from "react-icons/bi"
+// import {BiImageAdd} from "react-icons/bi"
 import HomeNav from "../components/HomeNav.jsx";
 import ProfileService from "../api/services/profile.service.js";
 import {useNavigate} from "react-router-dom";
-import {getErrorMessage} from "../api/error/errorMessage.js";
 import UserService from "../api/services/user.service.js";
-import {ACCESS_TOKEN, PROFILE_IMG} from "../api/constant/index.js";
+import {PROFILE_IMG} from "../api/constant/index.js";
 import {RotatingSquare} from 'react-loader-spinner';
 import localStorageService from "../api/services/localStorage.service.js";
 
@@ -130,8 +129,11 @@ const ProfileImageCRUD = () => {
                     }
                     <div className={`${preview ? "image-choose selected" : "image-choose"}`}>
                         <>
+                            {/*<label htmlFor="file">*/}
+                            {/*    <BiImageAdd className="user-option"/>*/}
+                            {/*</label>*/}
                             <label htmlFor="file">
-                                <BiImageAdd className="user-option"/>
+                                add image
                             </label>
                             <input id="file" type='file' className="inputfile" onChange={onSelectFile}/>
                         </>

@@ -3,7 +3,6 @@ import ChatService from "../api/services/chat.service.js";
 import {PROFILE_ID, SHOW_NOTIFICATION, USER_ID} from "../api/constant/index.js";
 import ImageService from "../api/services/image.service.js";
 import {useNavigate, useParams} from "react-router-dom";
-import {getErrorMessage} from "../api/error/errorMessage.js";
 import VerticalNav from "../components/VerticalNav.jsx";
 import NotificationService from "../api/services/notification.service.js";
 

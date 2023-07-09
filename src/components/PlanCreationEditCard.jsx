@@ -1,11 +1,9 @@
-import {AiOutlineDislike, AiOutlineLike} from "react-icons/ai";
-import {TbSchool} from "react-icons/tb";
-import {GoLocation} from "react-icons/go";
-import {MdSchedule} from "react-icons/md";
-import {SlPencil} from "react-icons/sl"
-import {BsBook, BsPeople} from "react-icons/bs"
+// import {TbSchool} from "react-icons/tb";
+// import {GoLocation} from "react-icons/go";
+// import {MdSchedule} from "react-icons/md";
+// import {SlPencil} from "react-icons/sl"
+// import {BsBook, BsPeople} from "react-icons/bs"
 import {useState} from "react";
-import ImageService from "../api/services/image.service.js";
 
 // eslint-disable-next-line react/prop-types
 const PlanCreationEditCard = ({planInfo, planDTO, setPlanDTO, oldPlan}) => {
@@ -35,12 +33,12 @@ const PlanCreationEditCard = ({planInfo, planDTO, setPlanDTO, oldPlan}) => {
             </section>
             <ul className="plan-info-section">
                 <li className="plan-info-item">
-                    <span><TbSchool className="icon"/>Học tại</span>
+                    {/*<span><TbSchool className="icon"/>Học tại</span>*/}
                     <span className="text">{planInfo.school}</span>
                 </li>
                 <li className="plan-info-item">
                     <span>
-                        <GoLocation className="icon"/>
+                        {/*<GoLocation className="icon"/>*/}
                         <label htmlFor="cafe">Cà phê</label>
                     </span>
                     <span>
@@ -49,7 +47,7 @@ const PlanCreationEditCard = ({planInfo, planDTO, setPlanDTO, oldPlan}) => {
                                 <article>
                                     <span className="text">
                                         {oldPlan.coffeeShop}
-                                        <SlPencil className="edit-icon" onClick={() => {setIsClickCafe(true)}}/>
+                                        {/*<SlPencil className="edit-icon" onClick={() => {setIsClickCafe(true)}}/>*/}
                                     </span>
                                 </article> :
                                 <input id="cafe"
@@ -64,7 +62,7 @@ const PlanCreationEditCard = ({planInfo, planDTO, setPlanDTO, oldPlan}) => {
                 </li>
                 <li className="plan-info-item">
                     <span>
-                        <MdSchedule className="icon"/>
+                        {/*<MdSchedule className="icon"/>*/}
                         <label htmlFor="schedule">Thời gian</label>
                     </span>
                     <span>
@@ -73,7 +71,7 @@ const PlanCreationEditCard = ({planInfo, planDTO, setPlanDTO, oldPlan}) => {
                                 <article>
                                     <span className="text">
                                         {oldPlan.schedule}
-                                        <SlPencil className="edit-icon" onClick={() => {setIsClickSchedule(true)}}/>
+                                        {/*<SlPencil className="edit-icon" onClick={() => {setIsClickSchedule(true)}}/>*/}
                                     </span>
                                 </article> :
                                 <input id="schedule"
@@ -89,8 +87,8 @@ const PlanCreationEditCard = ({planInfo, planDTO, setPlanDTO, oldPlan}) => {
                 </li>
                 <li className="plan-info-item">
                     <span>
-                        <BsPeople className="icon"/>
-                        <BsBook className="icon"/>
+                        {/*<BsPeople className="icon"/>*/}
+                        {/*<BsBook className="icon"/>*/}
                         <label htmlFor="planDetails">Tìm bạn học chung</label>
                     </span>
                     <span>
@@ -99,7 +97,7 @@ const PlanCreationEditCard = ({planInfo, planDTO, setPlanDTO, oldPlan}) => {
                                 <article>
                                     <span className="text">
                                         {oldPlan.planDetails}
-                                        <SlPencil className="edit-icon" onClick={() => {setIsClickPlanDetails(true)}}/>
+                                        {/*<SlPencil className="edit-icon" onClick={() => {setIsClickPlanDetails(true)}}/>*/}
                                     </span>
                                 </article> :
                                 <input id="planDetails"

@@ -4,9 +4,7 @@ import HomeNav from "../components/HomeNav.jsx";
 import ProfileService from "../api/services/profile.service.js";
 import {getErrorMessage} from "../api/error/errorMessage.js"
 import UserService from "../api/services/user.service.js";
-import {ACCESS_TOKEN} from "../api/constant/index.js";
-import VerticalNav from "../components/VerticalNav.jsx";
-import {SlPencil} from "react-icons/sl";
+// import {SlPencil} from "react-icons/sl";
 
 const ProfileCRUD = () => {
     const url = new URL(window.location.href);
@@ -177,9 +175,9 @@ const ProfileCRUD = () => {
                                         <article>
                                             <span className="text">
                                                 {oldProfile.name}
-                                                <SlPencil className="edit-icon" onClick={() => {
-                                                    setIsClickName(true)
-                                                }}/>
+                                                {/*<SlPencil className="edit-icon" onClick={() => {*/}
+                                                {/*    setIsClickName(true)*/}
+                                                {/*}}/>*/}
                                             </span>
                                         </article> :
 
@@ -204,9 +202,9 @@ const ProfileCRUD = () => {
                                             <article>
                                             <span className="text">
                                                 {oldProfile.dob}
-                                                <SlPencil className="edit-icon" onClick={() => {
-                                                    setIsClickDob(true)
-                                                }}/>
+                                                {/*<SlPencil className="edit-icon" onClick={() => {*/}
+                                                {/*    setIsClickDob(true)*/}
+                                                {/*}}/>*/}
                                             </span>
                                             </article> :
                                             <input
@@ -228,9 +226,9 @@ const ProfileCRUD = () => {
                                         <article>
                                             <span className="text">
                                                 {oldProfile.gender}
-                                                <SlPencil className="edit-icon" onClick={() => {
-                                                    setIsClickGender(true)
-                                                }}/>
+                                                {/*<SlPencil className="edit-icon" onClick={() => {*/}
+                                                {/*    setIsClickGender(true)*/}
+                                                {/*}}/>*/}
                                             </span>
                                         </article> :
                                         <div className="multiple-input-container">
@@ -271,9 +269,9 @@ const ProfileCRUD = () => {
                                         <article>
                                             <span className="text">
                                                 {oldProfile.about}
-                                                <SlPencil className="edit-icon" onClick={() => {
-                                                    setIsClickAbout(true)
-                                                }}/>
+                                                {/*<SlPencil className="edit-icon" onClick={() => {*/}
+                                                {/*    setIsClickAbout(true)*/}
+                                                {/*}}/>*/}
                                             </span>
                                         </article> :
                                         <input
@@ -298,9 +296,9 @@ const ProfileCRUD = () => {
                                         <article>
                                             <span className="text">
                                                 {oldProfile.school}
-                                                <SlPencil className="edit-icon" onClick={() => {
-                                                    setIsClickSchool(true)
-                                                }}/>
+                                                {/*<SlPencil className="edit-icon" onClick={() => {*/}
+                                                {/*    setIsClickSchool(true)*/}
+                                                {/*}}/>*/}
                                             </span>
                                         </article> :
                                         <input

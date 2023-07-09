@@ -1,16 +1,16 @@
 import VerticalNav from "../components/VerticalNav.jsx";
 
-import {TbSchool} from "react-icons/tb"
-import {AiOutlineLike, AiOutlineMessage} from "react-icons/ai"
-import {AiOutlineDislike} from "react-icons/ai"
+// import {TbSchool} from "react-icons/tb"
+// import {AiOutlineLike} from "react-icons/ai"
+// import {AiOutlineDislike} from "react-icons/ai"
+// import {IoIosAddCircleOutline} from "react-icons/io"
+
 import {useNavigate, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import ProfileService from "../api/services/profile.service.js";
-import {getErrorMessage} from "../api/error/errorMessage.js";
 import ImageService from "../api/services/image.service.js";
 import PlanCard from "../components/PlanCard.jsx";
 import PlanService from "../api/services/plan.service.js";
-import {IoIosAddCircleOutline} from "react-icons/io"
 import {PROFILE_ID} from "../api/constant/index.js";
 import ChatService from "../api/services/chat.service.js";
 
@@ -141,37 +141,40 @@ const Profile = () => {
 
                 <section className="profile-section profile-study-info-section">
                     <article>
-                        <span className="category"><TbSchool className="study-info-icon"/>Trường</span>
+                        {/*<span className="category"><TbSchool className="study-info-icon"/>Trường</span>*/}
+                        <span className="category">Trường</span>
                         <span>{profile.school}</span>
                     </article>
                     <article>
-                        <span className="category"><AiOutlineLike className="study-info-icon"/> Thế Mạnh</span>
+                        {/*<span className="category"><AiOutlineLike className="study-info-icon"/> Thế Mạnh</span>*/}
+                        <span className="category">Thế Mạnh</span>
                         <span>{profile.strength_subjects.join(", ")}</span>
                     </article>
                     <article>
-                        <span className="category"><AiOutlineDislike className="study-info-icon"/> Điểm yếu</span>
+                        {/*<span className="category"><AiOutlineDislike className="study-info-icon"/> Điểm yếu</span>*/}
+                        <span className="category">Điểm yếu</span>
                         <span>{profile.weak_subjects.join(", ")}</span>
                     </article>
                 </section>
                 <section className="profile-section profile-coffee-study-plan-section">
                     {!planInfo.id ? <h2>Create Café-Study Plan</h2> : <h2>Kế hoạch cà phê - học bài</h2>}
-                    {!planInfo.id ? <IoIosAddCircleOutline className="add-plan-icon" onClick={() => {
-                            navigate("/plan-creation")
-                        }}/> :
-                        <>
-                            <PlanCard planInfo={planInfo} isOwner={isMe}/>
-                            {isMe ?
-                                <div className="buttons">
-                                    <button className="primary-button edit-button" onClick={() => {
-                                        navigate("/plan-creation")
-                                    }}>Chỉnh sửa
-                                    </button>
-                                    <button className="primary-button delete-button" onClick={handleDelete}>Xóa
-                                    </button>
-                                </div>:null
-                            }
+                    {/*{!planInfo.id ? <IoIosAddCircleOutline className="add-plan-icon" onClick={() => {*/}
+                    {/*        navigate("/plan-creation")*/}
+                    {/*    }}/> :*/}
+                    {/*    <>*/}
+                    {/*        <PlanCard planInfo={planInfo} isOwner={isMe}/>*/}
+                    {/*        {isMe ?*/}
+                    {/*            <div className="buttons">*/}
+                    {/*                <button className="primary-button edit-button" onClick={() => {*/}
+                    {/*                    navigate("/plan-creation")*/}
+                    {/*                }}>Chỉnh sửa*/}
+                    {/*                </button>*/}
+                    {/*                <button className="primary-button delete-button" onClick={handleDelete}>Xóa*/}
+                    {/*                </button>*/}
+                    {/*            </div>:null*/}
+                    {/*        }*/}
 
-                        </>}
+                    {/*    </>}*/}
                 </section>
             </div>
         </div>

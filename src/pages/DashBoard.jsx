@@ -10,10 +10,8 @@ import PlanCard from "../components/PlanCard.jsx";
 import UserService from "../api/services/user.service.js";
 import NotificationService from "../api/services/notification.service.js";
 
-import {GrMapLocation} from "react-icons/gr"
 import ChatService from "../api/services/chat.service.js";
 import ImageService from "../api/services/image.service.js";
-import {BiMessageSquareAdd} from "react-icons/bi";
 import HorizontalNav from "../components/HorizontalNav.jsx";
 
 

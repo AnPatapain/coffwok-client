@@ -1,12 +1,12 @@
-import {AiOutlineDislike, AiOutlineLike, AiOutlineMessage} from "react-icons/ai";
-import {TbSchool} from "react-icons/tb";
-import {GoLocation} from "react-icons/go";
-import {MdSchedule} from "react-icons/md";
+// import {TbSchool} from "react-icons/tb";
+// import {GoLocation} from "react-icons/go";
+// import {MdSchedule} from "react-icons/md";
+// import {BsBook} from "react-icons/bs";
+
 import ImageService from "../api/services/image.service.js";
 import UserService from "../api/services/user.service.js";
 import {useNavigate} from "react-router-dom";
 import ChatService from "../api/services/chat.service.js";
-import {BsBook, BsPeople} from "react-icons/bs";
 
 // eslint-disable-next-line react/prop-types
 const PlanCard = ({planInfo, isOwner}) => {
@@ -51,29 +51,22 @@ const PlanCard = ({planInfo, isOwner}) => {
             </section>
             <ul className="plan-info-section">
                 <li className="plan-info-item">
-                    <span><TbSchool className="icon"/>Trường</span>
+                    {/*<span><TbSchool className="icon"/>Trường</span>*/}
                     <span className="text">{planInfo.school}</span>
                 </li>
                 <li className="plan-info-item">
-                    <span><GoLocation className="icon"/>Cà Phê</span>
+                    {/*<span><GoLocation className="icon"/>Cà Phê</span>*/}
                     <span className="text">{planInfo.coffeeShop}</span>
                 </li>
                 <li className="plan-info-item">
-                    <span><MdSchedule className="icon"/>Thời Gian</span>
+                    {/*<span><MdSchedule className="icon"/>Thời Gian</span>*/}
                     <span className="text">{planInfo.schedule}</span>
                 </li>
-                {/*<li className="plan-info-item">*/}
-                {/*    <span><AiOutlineLike className="icon"/>Có thể kèm</span>*/}
-                {/*    <span className="text">{planInfo.strength_subjects.slice(0, 3).join(", ")} ...</span>*/}
-                {/*</li>*/}
-                {/*<li className="plan-info-item">*/}
-                {/*    <span><AiOutlineDislike className="icon"/>Cần người kèm</span>*/}
-                {/*    <span className="text">{planInfo.weak_subjects.slice(0, 3).join(", ")} ...</span>*/}
-                {/*</li>*/}
+
                 <li className="plan-info-item">
-                    <span>
-                        <BsBook className="icon"/>Tìm bạn học chung
-                    </span>
+                    {/*<span>*/}
+                    {/*    <BsBook className="icon"/>Tìm bạn học chung*/}
+                    {/*</span>*/}
                     <span className="text">{planInfo.planDetails}</span>
                 </li>
             </ul>
