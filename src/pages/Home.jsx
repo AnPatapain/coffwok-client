@@ -57,7 +57,7 @@ const Home = () => {
             <div className="home">
                 <h1 className="primary-title">Tìm bạn học bài chung tại Glife</h1>
                 <article>
-                    <p>Chia sẻ kế hoạch đi cà phê học bài sắp tới của bạn, kết nối với các bạn khác và ra Glife học bài chung</p>
+                    <p>Xem các kế hoạch đi Cà phê Học bài, kết nối và đi Glife học bài chung</p>
                 </article>
                 <div className="home-buttons">
                     <button className="primary-button" onClick={handleSignupClick}>Tạo tài khoản</button>

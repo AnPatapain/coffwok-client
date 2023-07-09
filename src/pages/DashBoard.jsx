@@ -14,6 +14,7 @@ import {GrMapLocation} from "react-icons/gr"
 import ChatService from "../api/services/chat.service.js";
 import ImageService from "../api/services/image.service.js";
 import {BiMessageSquareAdd} from "react-icons/bi";
+import HorizontalNav from "../components/HorizontalNav.jsx";
 
 
 const DashBoard = () => {
@@ -137,11 +138,12 @@ const DashBoard = () => {
 
     return (
         <div className="dashboard-page">
-            <VerticalNav/>
+            <VerticalNav selectedItem={"dashboard"}/>
+            <HorizontalNav/>
             <div className="dashboard-container">
                 <div className="newfeed-container">
-                    <h2 className="location-title"><GrMapLocation className="location-icon"/> Quy Nhơn</h2>
-                    <h2 className="create-plan-title" onClick={() => {navigate("/plan-creation")}}>Tạo kế hoạch Café - Học bài của bạn </h2>
+                    {/*<h2 className="location-title"><GrMapLocation className="location-icon"/> Quy Nhơn</h2>*/}
+                    {/*<h2 className="create-plan-title" onClick={() => {navigate("/plan-creation")}}>Tạo kế hoạch Café - Học bài của bạn </h2>*/}
                     <div className="plans-container">
                         {plans.map(plan => {
                             if (myPlan && plan.id === myPlan.id) {
@@ -155,7 +157,7 @@ const DashBoard = () => {
 
                 <aside>
                     <ul>
-                        <h2>café - học bài soulmates</h2>
+                        <h2 className="soulmates-title">café - học bài soulmates</h2>
                         {renderProfileItems()}
                     </ul>
                 </aside>

@@ -7,12 +7,9 @@ import {useEffect, useState} from "react";
 import {PROFILE_ID, PROFILE_IMG, SHOW_NOTIFICATION} from "../api/constant/index.js";
 import ImageService from "../api/services/image.service.js";
 
-import {GrUserSettings} from "react-icons/gr"
-import {IoMdNotificationsOutline} from "react-icons/io";
-import SettingModal from "./SettingModal.jsx";
 import {FiLogOut} from "react-icons/fi";
 
-const VerticalNav = () => {
+const VerticalNav = ({selectedItem}) => {
     const navigate = useNavigate()
     const location = useLocation()
     const [profileImg, setProfileImg] = useState("")
@@ -38,6 +35,14 @@ const VerticalNav = () => {
         navigate("/chat")
     }
 
+    const handleClickPlan = () => {
+        navigate("/plan-creation")
+    }
+
+    const handleClickProfile = () => {
+        navigate("/profile/" + localStorage.getItem(PROFILE_ID))
+    }
+
     const handleLogOut = () => {
         localStorage.clear()
         navigate("/")
@@ -46,28 +51,27 @@ const VerticalNav = () => {
         <div className="vertical-nav">
             <LogoContainer/>
             <ul>
-                <li onClick={()=> {handleClickHome()} } >
+                <li onClick={()=> {handleClickHome()} } className={selectedItem === 'dashboard' ? 'clicked' : ''}>
                     <BiHomeAlt2 className="ver-nav-icon"/>
-
                     <span className="nav-text">Trang Chủ</span>
                 </li>
-                <li onClick={() => {handleClickMessage()}}>
+
+                <li onClick={() => {handleClickMessage()}} className={selectedItem === 'message' ? 'clicked' : ''}>
                     <AiOutlineMessage className="ver-nav-icon"/>
                     {localStorage.getItem(SHOW_NOTIFICATION) && localStorage.getItem(SHOW_NOTIFICATION) !== "0" ? <div className="red-dot">{localStorage.getItem(SHOW_NOTIFICATION)}</div>:null}
                     <span className="nav-text">Tin Nhắn</span>
                 </li>
-                {/*<li>*/}
-                {/*    <IoMdNotificationsOutline className="ver-nav-icon"/>*/}
-                {/*    <span className="nav-text">Notifications</span>*/}
-                {/*</li>*/}
-                <li onClick={() => {navigate("/plan-creation")}}>
+
+                <li onClick={() => {handleClickPlan()}} className={selectedItem === 'plan' ? 'clicked' : ''}>
                     <BiMessageSquareAdd className="ver-nav-icon"/>
                     <span className="nav-text">Tạo Kế Hoạch</span>
                 </li>
-                <li onClick={()=> {navigate("/profile/" + localStorage.getItem(PROFILE_ID))} }>
+
+                <li onClick={()=> {handleClickProfile()}} className={selectedItem === 'profile' ? 'clicked' : ''}>
                     {profileImg ? <img src={profileImg} className="profile-img"/> : <CgProfile className="ver-nav-icon"/>}
                     <span className="nav-text">Profile</span>
                 </li>
+
                 <li onClick={() => {handleLogOut()}}>
                     <FiLogOut className="ver-nav-icon"/>
                     <span className="nav-text">Đăng xuất</span>

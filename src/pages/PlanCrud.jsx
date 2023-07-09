@@ -14,7 +14,8 @@ const PlanCrud = () => {
 
     const [planDTO, setPlanDTO] = useState({
         coffeeShop: "",
-        schedule: ""
+        schedule: "",
+        planDetails: ""
     })
 
     const [errorMessage, setErrorMessage] = useState("")
@@ -22,9 +23,7 @@ const PlanCrud = () => {
     const [planInfo, setPlanInfo] = useState({
         imgUrl: localStorage.getItem(PROFILE_IMG) ? ImageService.modifyImageURI(localStorage.getItem(PROFILE_IMG), ["w_50", "h_50", "c_fill", "g_face", "q_100"]) : "",
         name: "",
-        school: "",
-        strength_subjects: [],
-        weak_subjects: []
+        school: ""
     })
 
     const [oldPlan, setOldPlan] = useState(null)
@@ -39,9 +38,7 @@ const PlanCrud = () => {
                                 ...prevState,
                                 imgUrl: ImageService.modifyImageURI(data.imgUrl, ["w_50", "h_50", "c_fill", "g_face", "q_100"]),
                                 name: data.name,
-                                school: data.school,
-                                strength_subjects: data.strength_subjects,
-                                weak_subjects: data.weak_subjects
+                                school: data.school
                             }))
                         })
                 }else {
@@ -55,7 +52,8 @@ const PlanCrud = () => {
                             setPlanDTO(prevState => ({
                                 ...prevState,
                                 coffeeShop: data.coffeeShop,
-                                schedule: data.schedule
+                                schedule: data.schedule,
+                                planDetails: data.planDetails
                             }))
                         })
                         .catch(error => {
@@ -72,7 +70,7 @@ const PlanCrud = () => {
 
     const submitPlan = () => {
         if (planDTO.coffeeShop === "" || planDTO.schedule === "") {
-            setErrorMessage("Please fill the form : )")
+            setErrorMessage("Xin bạn điền thông tin ^^")
         } else {
             setErrorMessage("")
             PlanService.uploadPlan(planDTO)
@@ -101,7 +99,6 @@ const PlanCrud = () => {
     }
 
     const deletePlan = () => {
-        //TODO: delete request
         return PlanService.deletePlan(oldPlan.id)
             .then(response => {
                 console.log("response data after delete", response.data)
@@ -114,7 +111,7 @@ const PlanCrud = () => {
     }
     return (
         <div className="plan-crud-container">
-            <VerticalNav/>
+            <VerticalNav selectedItem={"plan"}/>
             <h2>{oldPlan ? "Thay đổi" : "Tạo"} Kế hoạch cà phê học bài</h2>
             <PlanCreationEditCard planInfo={planInfo} planDTO={planDTO} setPlanDTO={setPlanDTO} oldPlan={oldPlan}/>
             {errorMessage ? <p className="error-msg">{errorMessage}</p> : ""}
@@ -125,7 +122,7 @@ const PlanCrud = () => {
                         <button className="primary-button" onClick={editPlan}>Lưu</button>
                         <button className="primary-button" onClick={deletePlan}>Xóa</button>
                     </div>:
-                    <button className="primary-button" onClick={submitPlan}>Publish Plan</button>
+                    <button className="primary-button" onClick={submitPlan}>Đăng Kế Hoạch</button>
             }
         </div>
     )

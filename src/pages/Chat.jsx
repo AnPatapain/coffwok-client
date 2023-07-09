@@ -160,7 +160,7 @@ const Chat = () => {
 
     return (
         <div className="chat-page">
-            <VerticalNav/>
+            <VerticalNav selectedItem={"message"}/>
             <div className="chat-container">
                 <aside className={currentChatRoom.id !== "" && currentChatRoom.oppositeProfile !== null ? "hide-aside":""}>
                     <ul>

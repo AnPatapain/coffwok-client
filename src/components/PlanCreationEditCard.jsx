@@ -3,6 +3,7 @@ import {TbSchool} from "react-icons/tb";
 import {GoLocation} from "react-icons/go";
 import {MdSchedule} from "react-icons/md";
 import {SlPencil} from "react-icons/sl"
+import {BsBook, BsPeople} from "react-icons/bs"
 import {useState} from "react";
 import ImageService from "../api/services/image.service.js";
 
@@ -10,7 +11,9 @@ import ImageService from "../api/services/image.service.js";
 const PlanCreationEditCard = ({planInfo, planDTO, setPlanDTO, oldPlan}) => {
     const [isClickCafe, setIsClickCafe] = useState(false)
 
-    const [isClickSchedule,setIsClickSchedule] =useState(false)
+    const [isClickSchedule,setIsClickSchedule] = useState(false)
+
+    const [isClickPlanDetails, setIsClickPlanDetails] = useState(false)
     const handleChange = (e) => {
         let value = e.target.value
         let name = e.target.name
@@ -24,10 +27,6 @@ const PlanCreationEditCard = ({planInfo, planDTO, setPlanDTO, oldPlan}) => {
 
     return (
         <div className="plan-card">
-            {/*<section className="image-container">*/}
-            {/*    <img*/}
-            {/*        src={planInfo.imgUrl}/>*/}
-            {/*</section>*/}
             <section className="name-button-section">
                 {/* eslint-disable-next-line react/prop-types */}
                 <img className="small-profile-image"
@@ -58,7 +57,7 @@ const PlanCreationEditCard = ({planInfo, planDTO, setPlanDTO, oldPlan}) => {
                                        name="coffeeShop"
                                        required={true}
                                        value={planDTO.coffeeShop}
-                                       placeholder="Glife"
+                                       placeholder="Glife 111 Phan Đình Phùng"
                                        onChange={handleChange}/>
                         }
                     </span>
@@ -82,22 +81,39 @@ const PlanCreationEditCard = ({planInfo, planDTO, setPlanDTO, oldPlan}) => {
                                        name="schedule"
                                        required={true}
                                        value={planDTO.schedule}
-                                       placeholder="7h-9h tomorrow"
+                                       placeholder="7h-9h Ngày mai / Hôm nay "
                                        onChange={handleChange}/>
                         }
 
                     </span>
                 </li>
                 <li className="plan-info-item">
-                    <span><AiOutlineLike className="icon"/>Giỏi</span>
-                    <span className="text">{planInfo.strength_subjects.slice(0, 2).join(", ")} ...</span>
-                </li>
-                <li className="plan-info-item">
-                    <span><AiOutlineDislike className="icon"/>Cần người kèm</span>
-                    <span className="text">{planInfo.weak_subjects.slice(0, 2).join(", ")} ...</span>
+                    <span>
+                        <BsPeople className="icon"/>
+                        <BsBook className="icon"/>
+                        <label htmlFor="planDetails">Tìm bạn học chung</label>
+                    </span>
+                    <span>
+                        {
+                            oldPlan && !isClickPlanDetails ?
+                                <article>
+                                    <span className="text">
+                                        {oldPlan.planDetails}
+                                        <SlPencil className="edit-icon" onClick={() => {setIsClickPlanDetails(true)}}/>
+                                    </span>
+                                </article> :
+                                <input id="planDetails"
+                                       type="text"
+                                       name="planDetails"
+                                       required={true}
+                                       value={planDTO.planDetails}
+                                       placeholder="Anh, Toán, Lý, Văn ..."
+                                       onChange={handleChange}/>
+                        }
+
+                    </span>
                 </li>
             </ul>
-            {/*<button className="primary-button" onClick={submitPlan}>Publish Plan</button>*/}
         </div>
     )
 }

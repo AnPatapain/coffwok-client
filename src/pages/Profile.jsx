@@ -37,6 +37,7 @@ const Profile = () => {
         name: "",
         coffeeShop: "",
         schedule: "",
+        planDetails: "",
         school: "",
         strength_subjects: [],
         weak_subjects: []
@@ -66,7 +67,8 @@ const Profile = () => {
                         ...prevState,
                         id: data.id,
                         coffeeShop: data.coffeeShop,
-                        schedule: data.schedule
+                        schedule: data.schedule,
+                        planDetails: data.planDetails
                     }))
                 }).catch(error => {
                     console.log(error)
@@ -102,7 +104,7 @@ const Profile = () => {
 
     return (
         <div className="profile-container">
-            <VerticalNav/>
+            <VerticalNav selectedItem={"profile"}/>
             <div className="profile-section-container">
                 <section className="profile-section profile-personal-info-section">
                     <div>
@@ -123,25 +125,23 @@ const Profile = () => {
                                         navigate(`/profile-info-creation?isEdit=true`)
                                     }}>Chỉnh sửa
                                     </button> :
-                                    <AiOutlineMessage className="chat-icon" onClick={() => {
-                                        handleClickChatIcon(profile.userId)
-                                    }}/>
+                                    // <AiOutlineMessage className="chat-icon" onClick={() => {
+                                    //     handleClickChatIcon(profile.userId)
+                                    // }}/>
+                                    <span className="message-button" onClick={() => {
+                                        handleClickChatIcon(profile.userId)}}>
+                                        Nhắn tin
+                                    </span>
                                 }
                             </section>
                             <p className="about">{profile.about}</p>
-                            {/*<section className="profile-sub-info">*/}
-                            {/*    <article>*/}
-                            {/*        <span>130 visitors</span>*/}
-                            {/*        <span>10 love</span>*/}
-                            {/*    </article>*/}
-                            {/*</section>*/}
                         </section>
                     </div>
                 </section>
 
                 <section className="profile-section profile-study-info-section">
                     <article>
-                        <span className="category"><TbSchool className="study-info-icon"/> Học tại</span>
+                        <span className="category"><TbSchool className="study-info-icon"/>Trường</span>
                         <span>{profile.school}</span>
                     </article>
                     <article>

@@ -77,7 +77,7 @@ const ChatList = () => {
     };
     return (
         <div className="chat-list-page">
-            <VerticalNav/>
+            <VerticalNav selectedItem={"message"}/>
             <div className="chat-list-container">
                 <aside>
                     <ul>

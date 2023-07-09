@@ -6,6 +6,7 @@ import ImageService from "../api/services/image.service.js";
 import UserService from "../api/services/user.service.js";
 import {useNavigate} from "react-router-dom";
 import ChatService from "../api/services/chat.service.js";
+import {BsBook, BsPeople} from "react-icons/bs";
 
 // eslint-disable-next-line react/prop-types
 const PlanCard = ({planInfo, isOwner}) => {
@@ -31,24 +32,28 @@ const PlanCard = ({planInfo, isOwner}) => {
                     <img className="small-profile-image"
                          src={ImageService.modifyImageURI(planInfo.imgUrl, ["w_50", "h_50", "c_fill", "g_face", "q_100"])}/> : null}
 
-                <p onClick={() => {
-                    handleClickName(planInfo.userId)
-                }} className="name">
-                    {planInfo.name}
-                </p>
+                <article>
+                    <p onClick={() => {
+                        handleClickName(planInfo.userId)
+                    }} className="name">
+                        {planInfo.name}
+                    </p>
 
-                {!isOwner ?
-                    <span className="message-button" onClick={() => {
-                        handleClickChatIcon(planInfo.userId)
-                    }}>
-                        Nhắn tin
-                    </span> : ""}
+                    {
+                        !isOwner ?
+                        <span className="message-button" onClick={() => {
+                            handleClickChatIcon(planInfo.userId)
+                        }}>
+                            Rủ đi học chung
+                        </span> : ""
+                    }
+                </article>
             </section>
             <ul className="plan-info-section">
-                {/*<li className="plan-info-item">*/}
-                {/*    <span><TbSchool className="icon"/>Học tại</span>*/}
-                {/*    <span className="text">{planInfo.school}</span>*/}
-                {/*</li>*/}
+                <li className="plan-info-item">
+                    <span><TbSchool className="icon"/>Trường</span>
+                    <span className="text">{planInfo.school}</span>
+                </li>
                 <li className="plan-info-item">
                     <span><GoLocation className="icon"/>Cà Phê</span>
                     <span className="text">{planInfo.coffeeShop}</span>
@@ -57,13 +62,19 @@ const PlanCard = ({planInfo, isOwner}) => {
                     <span><MdSchedule className="icon"/>Thời Gian</span>
                     <span className="text">{planInfo.schedule}</span>
                 </li>
+                {/*<li className="plan-info-item">*/}
+                {/*    <span><AiOutlineLike className="icon"/>Có thể kèm</span>*/}
+                {/*    <span className="text">{planInfo.strength_subjects.slice(0, 3).join(", ")} ...</span>*/}
+                {/*</li>*/}
+                {/*<li className="plan-info-item">*/}
+                {/*    <span><AiOutlineDislike className="icon"/>Cần người kèm</span>*/}
+                {/*    <span className="text">{planInfo.weak_subjects.slice(0, 3).join(", ")} ...</span>*/}
+                {/*</li>*/}
                 <li className="plan-info-item">
-                    <span><AiOutlineLike className="icon"/>Có thể kèm</span>
-                    <span className="text">{planInfo.strength_subjects.slice(0, 3).join(", ")} ...</span>
-                </li>
-                <li className="plan-info-item">
-                    <span><AiOutlineDislike className="icon"/>Cần người kèm</span>
-                    <span className="text">{planInfo.weak_subjects.slice(0, 3).join(", ")} ...</span>
+                    <span>
+                        <BsBook className="icon"/>Tìm bạn học chung
+                    </span>
+                    <span className="text">{planInfo.planDetails}</span>
                 </li>
             </ul>
         </div>
