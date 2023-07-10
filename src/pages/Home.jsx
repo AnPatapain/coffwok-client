@@ -4,6 +4,7 @@ import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import UserService from "../api/services/user.service.js";
 import ProfileService from "../api/services/profile.service.js";
+import {Helmet} from "react-helmet-async";
 
 const Home = () => {
     const navigate = useNavigate()
@@ -53,6 +54,10 @@ const Home = () => {
 
     return (
         <div className="overlay">
+            <Helmet>
+                <title>Coffwok | Tìm bạn đi cafe-học bài tại Quy Nhơn</title>
+                <meta name="description" content="Bạn sống ở Quy Nhơn và yêu thích học bài tại quán Cà phê? Đừng đi một mình : ) Tìm bạn đi cà phê học bài chung ngay hôm nay. Tạo mối quan hệ, cùng nhau học các môn bạn yêu thích tại các quán Cà phê như: Glife, E-coffee, ..." />
+            </Helmet>
             <HomeNav/>
             <div className="home">
                 <h1 className="primary-title">Tìm bạn học bài chung tại Glife</h1>

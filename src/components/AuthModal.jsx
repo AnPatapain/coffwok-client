@@ -34,9 +34,9 @@ const AuthModal = ({setShowModal, isSignup, setIsSignup}) => {
                     setMessage("Register successfully, please login")
                 },
                 error => {
-                    console.log(error)
                     const resMessage = getErrorMessage(error)
-                    setError(resMessage)
+                    console.log(resMessage)
+                    setError(resMessage.message)
                 }
             )
         }else {

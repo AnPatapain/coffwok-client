@@ -138,8 +138,6 @@ const DashBoard = () => {
             <HorizontalNav/>
             <div className="dashboard-container">
                 <div className="newfeed-container">
-                    {/*<h2 className="location-title"><GrMapLocation className="location-icon"/> Quy Nhơn</h2>*/}
-                    {/*<h2 className="create-plan-title" onClick={() => {navigate("/plan-creation")}}>Tạo kế hoạch Café - Học bài của bạn </h2>*/}
                     <div className="plans-container">
                         {plans.map(plan => {
                             if (myPlan && plan.id === myPlan.id) {

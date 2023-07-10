@@ -10,6 +10,9 @@ import localStorageService from "../api/services/localStorage.service.js";
 import add_icon from "../assets/icons/add-icon.svg"
 
 const ProfileImageCRUD = () => {
+    const url = new URL(window.location.href);
+    let isEdit = url.searchParams.get("isEdit") === 'true'
+
     const navigate = useNavigate()
     const [loading, setLoading] = useState(false)
     const [selectedFile, setSelectedFile] = useState(null)
@@ -90,6 +93,7 @@ const ProfileImageCRUD = () => {
                         navigate("/profile-info-creation?isEdit=false")
                     } else {
                         setLoading(true)
+                        
                         ProfileService.uploadProfileImage(user.profileId, selectedFile)
                             .then(
                                 response => {
@@ -99,8 +103,6 @@ const ProfileImageCRUD = () => {
                                 error => {
                                     setLoading(false)
                                     setErrorMessage("Max file size is 500kb : )")
-                                    // const resMessage = getErrorMessage(error)
-                                    // console.log("image upload error", resMessage)
                                 }
                             )
                     }
@@ -117,7 +119,7 @@ const ProfileImageCRUD = () => {
         <>
             <HomeNav/>
             <div className="upload-profile-image-container">
-                <h2>PROFILE IMAGE</h2>
+                {isEdit ? <h2>Thay đổi hình đại diện</h2>:<h2>Thêm hình đại diện</h2>}
                 <section className="image-options">
                     {preview ?
                         <div className="image-container">

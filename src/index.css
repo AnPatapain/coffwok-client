@@ -202,10 +202,23 @@ nav .logo-container h3 {
     top: 0;
 }
 
+.vertical-nav .logo-container {
+    display: flex;
+    align-items: baseline;
+    margin-left: 20px;
+    margin-top: 5px;
+}
+
+.vertical-nav .logo-container .logo {
+    width: 32px;
+    height: 32px;
+}
+
 .vertical-nav .logo-container h3 {
     color: #5FB51C;
     font-weight: bold;
     font-size: 24px;
+    text-transform: uppercase;
 }
 
 .vertical-nav .nav-text {
@@ -251,22 +264,6 @@ nav .logo-container h3 {
 
 .vertical-nav li .profile-img {
     border-radius: 20px;
-}
-
-.vertical-nav .logo-container {
-    display: flex;
-    align-items: baseline;
-    margin-left: 20px;
-    margin-top: 5px;
-}
-
-.vertical-nav .logo-container .logo {
-    width: 32px;
-    height: 32px;
-}
-
-.vertical-nav .logo-container h3 {
-    text-transform: uppercase;
 }
 
 .vertical-nav ul .setting-modal {
@@ -359,13 +356,18 @@ nav .logo-container h3 {
 }
 
 /*------------------- Horizontal Nav ---------------*/
-.horizontal-nav {
+.horizontal-nav .title {
     display: flex;
-    width: 460px;
+    width: 560px;
     justify-content: space-between;
-    margin-left: 462px;
+    margin-left: 400px;
     border-bottom: 1px solid #dddddd;
 }
+
+.horizontal-nav .logo-container {
+    display: none;
+}
+
 
 .horizontal-nav span {
     display: flex;
@@ -378,13 +380,14 @@ nav .logo-container h3 {
 }
 
 @media (min-width: 768px) and (max-width: 1024px){
-    .horizontal-nav {
+    .horizontal-nav .title{
         margin-left: 250px;
+        width: 460px;
     }
 }
 
 @media (max-width: 768px) {
-    .horizontal-nav {
+    .horizontal-nav .title{
         width: 60%;
         margin-left: auto;
         margin-right: auto;
@@ -392,16 +395,37 @@ nav .logo-container h3 {
 }
 
 @media (max-width: 767px) {
-    .horizontal-nav {
+    .horizontal-nav .title{
         width: 100%;
         margin-left: 0;
         margin-right: 0;
+        /*display: none;*/
+    }
+
+    .horizontal-nav .logo-container {
+        display: none;
+        display: flex;
+        align-items: baseline;
+
+    }
+
+    .horizontal-nav .logo-container .logo {
+        width: 28px;
+        height: 28px;
+    }
+    .horizontal-nav .logo-container h3 {
+        color: #5FB51C;
+        font-weight: bold;
+        font-size: 22px;
+        text-transform: uppercase;
     }
 }
 
 @media (max-width: 375px){
-    .horizontal-nav {
-        margin-bottom: 20px;
+    .horizontal-nav .title{
+        margin-bottom: 10px;
+        padding: 0 5px;
+        width: 90%;
     }
     .horizontal-nav h2 {
         font-size: 18px;
@@ -1157,7 +1181,7 @@ nav .logo-container h3 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 440px;
+    width: 600px;
     max-height: 650px;
     margin: auto;
     border-radius: 10px;
@@ -1178,7 +1202,7 @@ nav .logo-container h3 {
 .plan-card .name-button-section {
     width: 90%;
     display: flex;
-    margin-left: -30px;
+    margin-left: -60px;
 }
 
 .plan-card .name-button-section article{
@@ -1202,10 +1226,16 @@ nav .logo-container h3 {
     cursor: pointer;
 }
 
+.plan-card .name-button-section article .message-button:last-child {
+    background-color: transparent;
+    border: 1px solid;
+}
+
 .plan-card .name-button-section .small-profile-image {
     border-radius: 25px;
     margin-right: 15px;
     max-height: 50px;
+    cursor: pointer;
 }
 
 .plan-card .name-button-section p {
@@ -1226,6 +1256,12 @@ nav .logo-container h3 {
     list-style: none;
     display: flex;
     margin-bottom: 20px;
+    align-items: center;
+}
+
+.plan-card .plan-info-section li article {
+    display: flex;
+    align-items: center;
 }
 
 .plan-card .plan-info-section li span{
@@ -1239,6 +1275,9 @@ nav .logo-container h3 {
 .plan-card .plan-info-section li .text {
     color: black;
     font-weight: normal;
+    display: inline-block;
+    max-width: 200px;
+    word-wrap: break-word;
 }
 
 .plan-card .plan-info-section li .icon {
@@ -1447,12 +1486,37 @@ nav .logo-container h3 {
     .dashboard-container .newfeed-container {
         margin-left: 100px;
     }
+    .dashboard-container .newfeed-container .plan-card {
+        width: 440px;
+    }
 }
 @media (max-width: 768px) {
     .dashboard-container .newfeed-container{
-        margin: auto;
+        margin: 0 auto auto;
     }
+
     .dashboard-container aside {
+        display: none;
+        height: 100px;
+        top: 70px;
+        left: 150px;
+    }
+
+    .dashboard-container aside ul {
+        /*display: none;*/
+        display: flex;
+        flex-direction: row;
+    }
+
+    .dashboard-container aside ul li {
+        flex-direction: column;
+    }
+
+    .dashboard-container aside ul li h2 {
+        font-weight: normal;
+    }
+
+    .dashboard-container aside ul .soulmates-title {
         display: none;
     }
 }
@@ -1472,7 +1536,9 @@ nav .logo-container h3 {
     .dashboard-container .newfeed-container .plans-container .plan-card .name-button-section article .message-button {
         margin-left: 0;
         font-size: 14px;
+        margin-top: 5px;
     }
+
 
     .dashboard-container .newfeed-container .plans-container .plan-card .name-button-section article .name {
         font-size: 18px;
@@ -1485,27 +1551,8 @@ nav .logo-container h3 {
 
 @media (max-width: 425px){
     .dashboard-container .newfeed-container .plans-container .plan-card{
-        width: 96%;
-        padding: 10px 5px;
-    }
-    .dashboard-container .newfeed-container .location-title {
-        font-size: 14px;
-        margin-left: 0;
-    }
-
-    .dashboard-container .newfeed-container h2 .location-icon {
-        width: 16px;
-        height: 16px;
-    }
-
-    .dashboard-container .newfeed-container .create-plan-title {
-        font-size: 16px;
-        margin-left: 0;
-    }
-
-    .dashboard-container .newfeed-container h2 .add-icon {
-        width: 25px;
-        height: 25px;
+        width: 92%;
+        padding: 10px 15px;
     }
 }
 
@@ -1648,7 +1695,7 @@ nav .logo-container h3 {
     margin: 0;
     list-style-type: none;
     overflow-y: scroll;
-    height: 80%;
+    height: 78%;
     border-top: 2px solid #fff;
 }
 
@@ -1782,7 +1829,7 @@ main footer form a {
 
 @media (max-width: 425px) {
     .chat-container {
-        height: 90vh;
+        height: 94vh;
         width: 100%;
         margin: 0;
     }

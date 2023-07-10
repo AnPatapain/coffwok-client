@@ -109,7 +109,7 @@ const Profile = () => {
                             <img src={profile.imgUrl}/>
                             {isMe ?
                                 <button className="primary-button" onClick={() => {
-                                    navigate(`/profile-image-creation`)
+                                    navigate(`/profile-image-creation?isEdit=true`)
                                 }}>Thay đổi</button> : null}
 
                         </section>
@@ -155,7 +155,7 @@ const Profile = () => {
                     </article>
                 </section>
                 <section className="profile-section profile-coffee-study-plan-section">
-                    {!planInfo.id ? <h2>Create Café-Study Plan</h2> : <h2>Kế hoạch cà phê - học bài</h2>}
+                    {!planInfo.id ? <h2>Tạo kế hoạch Cà phê - Học bài</h2> : <h2>Kế hoạch cà phê - học bài</h2>}
                     {!planInfo.id ? <img src={add_icon} className="add-plan-icon" onClick={() => {
                             navigate("/plan-creation")
                         }}/> :

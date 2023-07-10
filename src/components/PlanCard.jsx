@@ -11,7 +11,7 @@ import study_icon from "../assets/icons/study-icon.svg"
 // eslint-disable-next-line react/prop-types
 const PlanCard = ({planInfo, isOwner}) => {
     const navigate = useNavigate()
-    const handleClickName = (userId) => {
+    const navigateToProfile = (userId) => {
         UserService.getUserById(userId)
             .then(data => {
                 navigate("/profile/" + data.profileId)
@@ -30,11 +30,11 @@ const PlanCard = ({planInfo, isOwner}) => {
                 {/* eslint-disable-next-line react/prop-types */}
                 {planInfo.imgUrl !== null ?
                     <img className="small-profile-image"
-                         src={ImageService.modifyImageURI(planInfo.imgUrl, ["w_50", "h_50", "c_fill", "g_face", "q_100"])}/> : null}
+                         src={ImageService.modifyImageURI(planInfo.imgUrl, ["w_50", "h_50", "c_fill", "g_face", "q_100"])} onClick={() => navigateToProfile(planInfo.userId)}/> : null}
 
                 <article>
                     <p onClick={() => {
-                        handleClickName(planInfo.userId)
+                        navigateToProfile(planInfo.userId)
                     }} className="name">
                         {planInfo.name}
                     </p>
@@ -47,31 +47,37 @@ const PlanCard = ({planInfo, isOwner}) => {
                             Rủ đi học chung
                         </span> : ""
                     }
+                    <span className="message-button" onClick={() => navigateToProfile(planInfo.userId)}>Xem profile</span>
                 </article>
             </section>
             <ul className="plan-info-section">
                 <li className="plan-info-item">
-                    <img src={school_icon} className="icon" />
-                    <span>Trường</span>
+                    <article className="category">
+                        <img src={school_icon} className="icon" />
+                        <span>Trường</span>
+                    </article>
                     <span className="text">{planInfo.school}</span>
                 </li>
                 <li className="plan-info-item">
-                    <img src={pink_location_icon} className="icon" />
-                    <span>Quán Cafe</span>
+                    <article className="category">
+                        <img src={pink_location_icon} className="icon" />
+                        <span>Quán Cafe</span>
+                    </article>
                     <span className="text">{planInfo.coffeeShop}</span>
                 </li>
                 <li className="plan-info-item">
-                    <img src={clock_icon} className="icon" />
-                    <span>Thời gian</span>
+                    <article className="category">
+                        <img src={clock_icon} className="icon" />
+                        <span>Thời gian</span>
+                    </article>
                     <span className="text">{planInfo.schedule}</span>
                 </li>
 
                 <li className="plan-info-item">
-                    {/*<span>*/}
-                    {/*    <BsBook className="icon"/>Tìm bạn học chung*/}
-                    {/*</span>*/}
-                    <img src={study_icon} className="icon" />
-                    <span>Tìm bạn học chung</span>
+                    <article className="category">
+                        <img src={study_icon} className="icon" />
+                        <span>Tìm bạn học chung</span>
+                    </article>
                     <span className="text">{planInfo.planDetails}</span>
                 </li>
             </ul>
