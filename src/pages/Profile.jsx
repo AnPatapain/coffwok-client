@@ -10,6 +10,10 @@ import {PROFILE_ID} from "../api/constant/index.js";
 import ChatService from "../api/services/chat.service.js";
 
 import add_icon from "../assets/icons/add-icon.svg"
+import school_icon from "../assets/icons/school-icon.svg"
+import sos_icon from "../assets/icons/sos.png"
+import good_icon from "../assets/icons/good.png"
+
 
 
 const Profile = () => {
@@ -111,7 +115,6 @@ const Profile = () => {
                                 <button className="primary-button" onClick={() => {
                                     navigate(`/profile-image-creation?isEdit=true`)
                                 }}>Thay đổi</button> : null}
-
                         </section>
 
                         <section className="personal-info">
@@ -122,9 +125,6 @@ const Profile = () => {
                                         navigate(`/profile-info-creation?isEdit=true`)
                                     }}>Chỉnh sửa
                                     </button> :
-                                    // <AiOutlineMessage className="chat-icon" onClick={() => {
-                                    //     handleClickChatIcon(profile.userId)
-                                    // }}/>
                                     <span className="message-button" onClick={() => {
                                         handleClickChatIcon(profile.userId)
                                     }}>
@@ -139,18 +139,16 @@ const Profile = () => {
 
                 <section className="profile-section profile-study-info-section">
                     <article>
-                        {/*<span className="category"><TbSchool className="study-info-icon"/>Trường</span>*/}
-                        <span className="category">Trường</span>
+                        <span className="category"><img src={school_icon} className="study-info-icon"/> Trường</span>
                         <span>{profile.school}</span>
                     </article>
                     <article>
-                        {/*<span className="category"><AiOutlineLike className="study-info-icon"/> Thế Mạnh</span>*/}
-                        <span className="category">Thế Mạnh</span>
+                        <span className="category"><img src={good_icon} className="study-info-icon"/> Thế Mạnh</span>
                         <span>{profile.strength_subjects.join(", ")}</span>
                     </article>
                     <article>
                         {/*<span className="category"><AiOutlineDislike className="study-info-icon"/> Điểm yếu</span>*/}
-                        <span className="category">Điểm yếu</span>
+                        <span className="category"><img src={sos_icon} className="study-info-icon"/> Cần người kèm</span>
                         <span>{profile.weak_subjects.join(", ")}</span>
                     </article>
                 </section>

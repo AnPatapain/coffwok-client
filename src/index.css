@@ -1640,9 +1640,9 @@ nav .logo-container h3 {
 
 .chat-container {
     width: 93%;
-    height: 100vh;
+    height: 98vh;
     background: #f6f6f6;
-    /*margin-top: px;*/
+    margin-top: 2px;
     margin-left: 6%;
     overflow: hidden;
     border: 1px solid rgb(213, 213, 213);
@@ -1898,7 +1898,7 @@ main footer form a {
 
 @media (max-width: 425px) {
     .chat-container {
-        height: 90vh;
+        height: 80vh;
         width: 99%;
         margin-top: 1px;
         /*margin: 0;*/

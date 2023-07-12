@@ -22,6 +22,8 @@ const Chat = () => {
     const container = useRef(null)
     const [notificationList, setNotificationList] = useState([])
 
+    let mobileActive = false
+
 
     useEffect(() => {
         async function fetchData() {
@@ -227,6 +229,7 @@ const Chat = () => {
                                               value={text}
                                               onChange={handleChangeText}
                                               onKeyDown={handleKeyDown}
+                                              onClick={() => {setMobileActive(true)}}
                                     >
                                     </textarea>
                                     <a href="#" onClick={handleSubmit}>Gửi</a>
