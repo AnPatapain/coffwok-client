@@ -1,4 +1,4 @@
-const isProd = false
+const isProd = true
 
 
 export const ACCESS_TOKEN = 'accessToken'
