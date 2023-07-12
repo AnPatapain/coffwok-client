@@ -319,7 +319,7 @@ nav .logo-container h3 {
         display: flex;
         position: fixed;
         bottom: 0;
-        max-height: 40px;
+        max-height: 48px;
         width: 100%;
         justify-content: center;
         top: auto;
@@ -421,11 +421,18 @@ nav .logo-container h3 {
     }
 }
 
-@media (max-width: 375px){
+@media (max-width: 425px){
     .horizontal-nav .title{
-        margin-bottom: 10px;
+        margin-bottom: 0px;
         padding: 0 5px;
         width: 90%;
+    }
+    .horizontal-nav .logo-container .logo {
+        display: none;
+    }
+    .horizontal-nav .logo-container h3 {
+        font-size: 24px;
+        margin: 10px auto auto;
     }
     .horizontal-nav h2 {
         font-size: 18px;
@@ -563,7 +570,7 @@ nav .logo-container h3 {
     font-weight: normal;
 }
 
-@media (max-height: 565px) {
+@media (max-height: 600px) {
     .auth-modal {
         top: 0;
     }
@@ -796,10 +803,6 @@ nav .logo-container h3 {
         margin-right: auto;
     }
 
-    .profile-section article{
-        margin-left: 5%;
-    }
-
     .profile-personal-info-section div {
         width: 100%;
         margin-left: 20px;
@@ -827,6 +830,9 @@ nav .logo-container h3 {
         flex-direction: column;
         margin-bottom: 30px;
         align-items: start;
+    }
+    .profile-coffee-study-plan-section .plan-card .plan-info-section span {
+        font-size: 14px;
     }
 }
 
@@ -862,6 +868,10 @@ nav .logo-container h3 {
 
     .profile-personal-info-section div .personal-info .name-button button{
         margin-top: 8px;
+    }
+
+    .profile-personal-info-section div .personal-info .message-button {
+        margin-left: 0;
     }
 
     .profile-personal-info-section div .personal-info .profile-sub-info {
@@ -1096,7 +1106,7 @@ nav .logo-container h3 {
 }
 
 .upload-profile-image-container .image-options {
-    margin: 20px auto 100px;
+    margin: 20px auto 50px;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -1209,19 +1219,32 @@ nav .logo-container h3 {
     display: flex;
 }
 
-.plan-card .name-button-section article .name{
+.plan-card .name-button-section article .name {
     font-size: 18px;
     font-weight: bold;
     margin-top: 0;
+    margin-bottom: 5px;
+}
+
+.plan-card .name-button-section article .about {
+    margin: 0;
+    font-weight: normal;
+    font-size: 14px;
+    text-align: start;
+}
+
+.plan-card .name-button-section .name-button-about .about-mobile {
+    display: none;
 }
 
 .plan-card .name-button-section article .message-button {
-    background-color: #9AFB4D;
-    padding: 7px 15px;
+    background-color: #5fb51c;
+    color: white;
+    font-weight: bold;
+    padding: 5px 5px;
     border-radius: 10px;
     margin-left: 25px;
-    color: black;
-    font-size: 16px;
+    font-size: 14px;
     max-height: 15px;
     cursor: pointer;
 }
@@ -1229,6 +1252,8 @@ nav .logo-container h3 {
 .plan-card .name-button-section article .message-button:last-child {
     background-color: transparent;
     border: 1px solid;
+    color: black;
+    padding: 3px 3px;
 }
 
 .plan-card .name-button-section .small-profile-image {
@@ -1250,6 +1275,7 @@ nav .logo-container h3 {
     align-items: start;
     width: 100%;
     padding: 0;
+    margin-top: 30px;
 }
 
 .plan-card .plan-info-section li {
@@ -1257,6 +1283,7 @@ nav .logo-container h3 {
     display: flex;
     margin-bottom: 20px;
     align-items: center;
+    width: 100%;
 }
 
 .plan-card .plan-info-section li article {
@@ -1270,14 +1297,16 @@ nav .logo-container h3 {
     margin-right: 10px;
     /*color: #6C6C6C;*/
     font-weight: bold;
+    text-align: start;
 }
 
 .plan-card .plan-info-section li .text {
     color: black;
     font-weight: normal;
     display: inline-block;
-    max-width: 200px;
+    max-width: 500px;
     word-wrap: break-word;
+    text-align: start;
 }
 
 .plan-card .plan-info-section li .icon {
@@ -1286,11 +1315,68 @@ nav .logo-container h3 {
     margin-right: 5px;
 }
 
-.plan-card .plan-info-section li span article .edit-icon {
+.plan-card .plan-info-section li span .edit-icon {
     margin-left: 5px;
     cursor: pointer;
     color: #00bbf9;
     height: 14px;
+}
+
+.plan-card .plan-info-section li article label {
+    margin-right: 10px;
+    text-align: start;
+    font-weight: bold;
+}
+
+@media (max-width: 550px) {
+    .plan-card .name-button-section article {
+        flex-direction: column;
+        align-items: start;
+    }
+    .plan-card .name-button-section article p {
+        margin-bottom: 5px;
+    }
+
+    .plan-card .name-button-section article .message-button {
+        margin-left: 0;
+        font-size: 12px;
+        margin-top: 5px;
+        padding: 5px 5px;
+    }
+
+    .plan-card .plan-info-section li span {
+        font-size: 14px;
+    }
+
+
+    .plan-card .name-button-section article .name {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 425px) {
+    .plan-card{
+        width: 92%;
+        padding: 10px 15px;
+    }
+    .plan-card .plan-info-section li .icon {
+        width: 20px;
+        height: 20px;
+    }
+    .plan-card .plan-info-section li article {
+        width: 60%;
+    }
+    .plan-card .plan-info-section li .text {
+        max-width: 40%;
+    }
+
+    .plan-card .name-button-section .name-button-about .about-mobile {
+        display: block;
+    }
+
+    .plan-card .name-button-section .name-button-about .about-container {
+        display: none;
+    }
 }
 
 /*--------------- plan crud page ---------------------*/
@@ -1339,13 +1425,20 @@ nav .logo-container h3 {
     color: white;
 }
 
+@media (max-width: 1024px) {
+    .plan-crud-container .plan-card {
+        width: 55%;
+        margin-left: 25%;
+    }
+}
 
-@media (max-width: 375px) {
+@media (max-width: 425px) {
     .plan-crud-container h2 {
         font-size: 16px;
     }
     .plan-crud-container .plan-card {
         width: 100%;
+        margin-left: 0;
     }
     .plan-crud-container .plan-card .image-container {
         width: 100%;
@@ -1355,15 +1448,15 @@ nav .logo-container h3 {
     }
 }
 
-@media (min-width: 376px) and (max-width: 767px){
+@media (min-width: 320px) and (max-width: 425px){
     .plan-crud-container h2 {
         font-size: 20px;
         margin: 10px auto 5px;
     }
     .plan-crud-container .plan-card {
-        width: 80%;
-        height: 500px;
-        margin-top: 0;
+        width: 100%;
+        height: 350px;
+        margin: auto;
     }
     .plan-crud-container .plan-card .image-container {
         height: 40%;
@@ -1373,6 +1466,7 @@ nav .logo-container h3 {
         height: 100%;
     }
 }
+
 
 /*-------------------------------- Dash Board ------------------------*/
 .dashboard-container {
@@ -1525,36 +1619,11 @@ nav .logo-container h3 {
     .dashboard-container .newfeed-container .plans-container .plan-card{
         width: 92%;
     }
-    .dashboard-container .newfeed-container .plans-container .plan-card .name-button-section article {
-        flex-direction: column;
-        align-items: start;
-    }
-    .dashboard-container .newfeed-container .plans-container .plan-card .name-button-section article p {
-        margin-bottom: 5px;
-    }
-
-    .dashboard-container .newfeed-container .plans-container .plan-card .name-button-section article .message-button {
-        margin-left: 0;
-        font-size: 14px;
-        margin-top: 5px;
-    }
-
-
-    .dashboard-container .newfeed-container .plans-container .plan-card .name-button-section article .name {
-        font-size: 18px;
-    }
-
     .dashboard-container .newfeed-container {
         width: 100%;
     }
 }
 
-@media (max-width: 425px){
-    .dashboard-container .newfeed-container .plans-container .plan-card{
-        width: 92%;
-        padding: 10px 15px;
-    }
-}
 
 /*----------------------------- Chat -----------------------*/
 .chat-page .vertical-nav .nav-text {
@@ -1684,6 +1753,7 @@ nav .logo-container h3 {
     border: 1px solid #a5ff00;
     margin-right: 10px;
     max-height: 50px;
+    cursor: pointer;
 }
 
 .chat-container main .current-chat-room-container header p {
@@ -1796,7 +1866,6 @@ main footer form textarea {
     border-radius: 30px;
     padding: 10px;
     font-size: 13px;
-    margin-bottom: 13px;
     border: 2px solid rgb(213, 213, 213);
 }
 
@@ -1809,7 +1878,7 @@ main footer form a {
     text-decoration: none;
     text-transform: uppercase;
     font-weight: bold;
-    color: #6fbced;
+    color: #00bbf9;
     margin-left: 10px;
     margin-bottom: 15px;
 }
@@ -1829,9 +1898,10 @@ main footer form a {
 
 @media (max-width: 425px) {
     .chat-container {
-        height: 94vh;
-        width: 100%;
-        margin: 0;
+        height: 90vh;
+        width: 99%;
+        margin-top: 1px;
+        /*margin: 0;*/
     }
     .chat-container main {
         display: none;
@@ -1849,6 +1919,9 @@ main footer form a {
     }
     .chat-container aside {
         width: 100%;
+    }
+    .show-message-container li {
+        padding: 5px 0;
     }
 }
 

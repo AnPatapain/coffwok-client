@@ -160,7 +160,7 @@ const Profile = () => {
                             navigate("/plan-creation")
                         }}/> :
                         <>
-                            <PlanCard planInfo={planInfo} isOwner={isMe}/>
+                            <PlanCard planInfo={planInfo} isOwner={isMe} isShowButton={false}/>
                             {isMe ?
                                 <div className="buttons">
                                     <button className="primary-button edit-button" onClick={() => {

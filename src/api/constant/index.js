@@ -1,4 +1,5 @@
-const isProd = true
+const isProd = false
+
 
 export const ACCESS_TOKEN = 'accessToken'
 export const PROFILE_IMG = 'profileImg'

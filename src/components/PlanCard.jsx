@@ -9,7 +9,7 @@ import clock_icon from "../assets/icons/clock-icon.svg"
 import study_icon from "../assets/icons/study-icon.svg"
 
 // eslint-disable-next-line react/prop-types
-const PlanCard = ({planInfo, isOwner}) => {
+const PlanCard = ({planInfo, isOwner, isShowButton}) => {
     const navigate = useNavigate()
     const navigateToProfile = (userId) => {
         UserService.getUserById(userId)
@@ -30,44 +30,58 @@ const PlanCard = ({planInfo, isOwner}) => {
                 {/* eslint-disable-next-line react/prop-types */}
                 {planInfo.imgUrl !== null ?
                     <img className="small-profile-image"
-                         src={ImageService.modifyImageURI(planInfo.imgUrl, ["w_50", "h_50", "c_fill", "g_face", "q_100"])} onClick={() => navigateToProfile(planInfo.userId)}/> : null}
+                         src={ImageService.modifyImageURI(planInfo.imgUrl, ["w_50", "h_50", "c_fill", "g_face", "q_100"])}
+                         onClick={() => navigateToProfile(planInfo.userId)}/> : null}
 
-                <article>
-                    <p onClick={() => {
-                        navigateToProfile(planInfo.userId)
-                    }} className="name">
-                        {planInfo.name}
-                    </p>
+                <div className="name-button-about">
+                    <article>
+                        <p onClick={() => {
+                            navigateToProfile(planInfo.userId)
+                        }} className="name">
+                            {planInfo.name}
+                        </p>
 
-                    {
-                        !isOwner ?
-                        <span className="message-button" onClick={() => {
-                            handleClickChatIcon(planInfo.userId)
-                        }}>
+                        <p className="about about-mobile">
+                            {planInfo.about && planInfo.about.length > 66 ? planInfo.about.substring(0, 66) + "..." : planInfo.about}
+                        </p>
+
+                        {
+                            !isOwner && isShowButton ?
+                                <span className="message-button" onClick={() => {
+                                    handleClickChatIcon(planInfo.userId)
+                                }}>
                             Rủ đi học chung
                         </span> : ""
-                    }
-                    <span className="message-button" onClick={() => navigateToProfile(planInfo.userId)}>Xem profile</span>
-                </article>
+                        }
+                        {isShowButton ?
+                            <span className="message-button" onClick={() => navigateToProfile(planInfo.userId)}>Xem profile</span> : null}
+                    </article>
+                    <article className="about-container">
+                        <p className="about">
+                            {planInfo.about && planInfo.about.length > 66 ? planInfo.about.substring(0, 66) + "..." : planInfo.about}
+                        </p>
+                    </article>
+                </div>
+
             </section>
             <ul className="plan-info-section">
                 <li className="plan-info-item">
                     <article className="category">
-                        <img src={school_icon} className="icon" />
+                        <img src={school_icon} className="icon"/>
                         <span>Trường</span>
                     </article>
                     <span className="text">{planInfo.school}</span>
                 </li>
                 <li className="plan-info-item">
                     <article className="category">
-                        <img src={pink_location_icon} className="icon" />
+                        <img src={pink_location_icon} className="icon"/>
                         <span>Quán Cafe</span>
                     </article>
                     <span className="text">{planInfo.coffeeShop}</span>
                 </li>
                 <li className="plan-info-item">
                     <article className="category">
-                        <img src={clock_icon} className="icon" />
+                        <img src={clock_icon} className="icon"/>
                         <span>Thời gian</span>
                     </article>
                     <span className="text">{planInfo.schedule}</span>
@@ -75,7 +89,7 @@ const PlanCard = ({planInfo, isOwner}) => {
 
                 <li className="plan-info-item">
                     <article className="category">
-                        <img src={study_icon} className="icon" />
+                        <img src={study_icon} className="icon"/>
                         <span>Tìm bạn học chung</span>
                     </article>
                     <span className="text">{planInfo.planDetails}</span>

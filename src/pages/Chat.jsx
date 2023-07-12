@@ -182,7 +182,9 @@ const Chat = () => {
                         <div className="current-chat-room-container">
                             <header>
                                 <img
-                                    src={ImageService.modifyImageURI(currentChatRoom.oppositeProfile.imgUrl, ["w_50", "h_50", "q_100", "c_thumb"])}/>
+                                    src={ImageService.modifyImageURI(currentChatRoom.oppositeProfile.imgUrl, ["w_50", "h_50", "q_100", "c_thumb"])}
+                                    onClick={() => {navigate("/profile/" + currentChatRoom.oppositeProfile.id)} }
+                                />
                                 <p onClick={() => {
                                     navigate("/profile/" + currentChatRoom.oppositeProfile.id)
                                 }}>{currentChatRoom.oppositeProfile.name}</p>

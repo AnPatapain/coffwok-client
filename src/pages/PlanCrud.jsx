@@ -112,7 +112,7 @@ const PlanCrud = () => {
     return (
         <div className="plan-crud-container">
             <VerticalNav selectedItem={"plan"}/>
-            <h2>{oldPlan ? "Thay đổi" : "Tạo"} Kế hoạch cà phê học bài</h2>
+            <h2>{oldPlan ? "Thay đổi kế hoạch" : "Tạo kế hoạch cà phê học bài"}</h2>
             <PlanCreationEditCard planInfo={planInfo} planDTO={planDTO} setPlanDTO={setPlanDTO} oldPlan={oldPlan}/>
             {errorMessage ? <p className="error-msg">{errorMessage}</p> : ""}
 

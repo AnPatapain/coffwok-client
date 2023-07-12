@@ -132,6 +132,8 @@ const DashBoard = () => {
         ));
     };
 
+    console.log(plans)
+
     return (
         <div className="dashboard-page">
             <VerticalNav selectedItem={"dashboard"}/>
@@ -141,9 +143,9 @@ const DashBoard = () => {
                     <div className="plans-container">
                         {plans.map(plan => {
                             if (myPlan && plan.id === myPlan.id) {
-                                return <PlanCard key={plan.id} planInfo={plan} isOwner={true}/>
+                                return <PlanCard key={plan.id} planInfo={plan} isOwner={true} isShowButton={true}/>
                             } else {
-                                return <PlanCard key={plan.id} planInfo={plan}/>
+                                return <PlanCard key={plan.id} planInfo={plan} isShowButton={true}/>
                             }
                         })}
                     </div>

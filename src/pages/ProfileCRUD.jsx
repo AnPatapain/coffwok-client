@@ -10,12 +10,12 @@ const ProfileCRUD = () => {
     const url = new URL(window.location.href);
     let isEdit = url.searchParams.get("isEdit") === 'true'
     const [placeHolder, setPlaceHolder] = useState({
-        name: "Name",
+        name: "Tên",
         dob_day: "DD",
         dob_month: "MM",
         dob_year: "YYYY",
-        about: "I love study at coffee shop",
-        school: "School"
+        about: "",
+        school: "Trường của bạn"
     })
     const subjects = [
         "Vật lý",
@@ -35,7 +35,6 @@ const ProfileCRUD = () => {
 
     const [formData, setFormData] = useState({
         name: "",
-        dob: "",
         gender: "",
         about: "",
         school: "",
@@ -44,8 +43,6 @@ const ProfileCRUD = () => {
     })
 
     const [isClickName, setIsClickName] = useState(false)
-
-    const [isClickDob, setIsClickDob] = useState(false)
 
     const [isClickGender, setIsClickGender] = useState(false)
 
@@ -190,29 +187,6 @@ const ProfileCRUD = () => {
                                 }
                             </span>
 
-                            <label htmlFor="dob">Ngày sinh</label>
-                            <div className="multiple-input-container">
-                                <span>
-                                    {
-                                        oldProfile && !isClickDob ?
-                                            <article>
-                                            <span className="text">
-                                                {oldProfile.dob}
-                                                <img className="edit-icon" src={edit_icon} onClick={() => setIsClickDob(true)}/>
-                                            </span>
-                                            </article> :
-                                            <input
-                                                id="dob"
-                                                type="date"
-                                                name="dob"
-                                                required={true}
-                                                value={formData.dob}
-                                                onChange={handleChange}
-                                            />
-                                    }
-                                </span>
-                            </div>
-
                             <label>Giới tính</label>
                             <span>
                                 {
@@ -250,7 +224,7 @@ const ProfileCRUD = () => {
                                                 onChange={handleChange}
                                                 checked={formData.gender === "more"}
                                             />
-                                            <label htmlFor="more-gender-identity">Khác</label>
+                                            <label htmlFor="more-gender-identity">Hok mún nói</label>
                                         </div>
                                 }
                             </span>
