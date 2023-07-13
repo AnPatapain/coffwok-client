@@ -17,13 +17,56 @@ import HorizontalNav from "../components/HorizontalNav.jsx";
 
 const DashBoard = () => {
     const navigate = useNavigate()
+
     const [plans, setPlans] = useState([])
     const [myPlan, setMyPlan] = useState(null)
+    const [page, setPage] = useState(0)
+    const [pageSize, setPageSize] = useState(4)
+    const [isFetching, setIsFetching] = useState(false)
 
-    const [notifyStomp, setNotifyStomp] = useState(null)
     const [notificationList, setNotificationList] = useState([])
-
     const [chatRooms, setChatRooms] = useState([])
+
+    const handleScroll = () => {
+        const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
+        if (scrollTop + clientHeight >= scrollHeight && !isFetching) {
+            setPage(prevState => prevState + 1)
+            setIsFetching(true)
+        }
+    };
+
+    const fetchPlans = async () => {
+        await PlanService.getAllPlans(page, pageSize)
+            .then(data => {
+                console.log("data fetched", data)
+                if(data._embedded) {
+                    setPlans(prevPlans => {
+                        const newPlans = data._embedded.planList.filter(newPlan => {
+                            return !prevPlans.some(prevPlan => prevPlan.id === newPlan.id);
+                        });
+                        return [...prevPlans, ...newPlans];
+                    })
+                }
+            })
+            .catch(error => {
+                console.log(getErrorMessage(error))
+            })
+    }
+
+    const fetchMorePlans = async () => {
+        await fetchPlans()
+        setIsFetching(false)
+    }
+
+    useEffect(() => {
+        window.addEventListener("scroll", handleScroll);
+    }, [])
+
+    useEffect(() => {
+        if (isFetching) {
+            fetchMorePlans()
+        }
+    }, [isFetching])
 
     useEffect(() => {
         async function myFunc() {
@@ -40,24 +83,15 @@ const DashBoard = () => {
                                     localStorageService.add(PROFILE_ID, data.id)
                                     localStorageService.add(USER_ID, data.userId)
                                     localStorageService.add(PROFILE_IMG, data.imgUrl)
-                                    let notifyStomp_ = NotificationService.connect_notification_endpoint(data.userId, onReceiveNotification)
-                                    setNotifyStomp(notifyStomp_)
+                                    NotificationService.connect_notification_endpoint(data.userId, onReceiveNotification)
                                 }
                             })
                             .catch(error => {
-                                // const errMsg = getErrorMessage(error)
-                                // console.log(errMsg)
                                 navigate("/")
                             })
 
 
-                        await PlanService.getAllPlans()
-                            .then(data => {
-                                setPlans(data._embedded.planList)
-                            })
-                            .catch(error => {
-                                console.log(getErrorMessage(error))
-                            })
+                        await fetchPlans()
 
                         await PlanService.getMyPlan()
                             .then(data => {
@@ -81,7 +115,6 @@ const DashBoard = () => {
                         localStorage.clear()
                         navigate("/")
                     }
-
                 })
                 .catch(error => {
                     localStorage.clear()
@@ -148,6 +181,7 @@ const DashBoard = () => {
                                 return <PlanCard key={plan.id} planInfo={plan} isShowButton={true}/>
                             }
                         })}
+                        {isFetching ? <h4>Đang tải ...</h4>:null}
                     </div>
                 </div>
 

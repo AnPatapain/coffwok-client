@@ -60,9 +60,9 @@ const Home = () => {
             </Helmet>
             <HomeNav/>
             <div className="home">
-                <h1 className="primary-title">Tìm bạn học bài chung tại Glife</h1>
+                <h1 className="primary-title">Tìm bạn Café - học bài tại Quy Nhơn</h1>
                 <article>
-                    <p>Xem các kế hoạch đi Cà phê Học bài, kết nối và đi Glife học bài chung</p>
+                    <p>Xem các kế hoạch đi Cà phê Học bài, kết nối, rủ đi cà phê học bài chung tại Glife, E-coffee, ...</p>
                 </article>
                 <div className="home-buttons">
                     <button className="primary-button" onClick={handleSignupClick}>Tạo tài khoản</button>

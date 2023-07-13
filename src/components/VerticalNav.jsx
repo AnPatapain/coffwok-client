@@ -69,18 +69,18 @@ const VerticalNav = ({selectedItem}) => {
                     {/*<AiOutlineMessage className="ver-nav-icon"/>*/}
                     <img src={chat_icon} className="ver-nav-icon"/>
                     {localStorage.getItem(SHOW_NOTIFICATION) && localStorage.getItem(SHOW_NOTIFICATION) !== "0" ? <div className="red-dot">{localStorage.getItem(SHOW_NOTIFICATION)}</div>:null}
-                    <span className="nav-text">Tin Nhắn</span>
+                    <span className="nav-text">Tin nhắn</span>
                 </li>
 
                 <li onClick={() => {handleClickPlan()}} className={selectedItem === 'plan' ? 'clicked' : ''}>
                     {/*<BiMessageSquareAdd className="ver-nav-icon"/>*/}
                     <img src={add_icon} className="ver-nav-icon"/>
-                    <span className="nav-text">Tạo Kế Hoạch</span>
+                    <span className="nav-text">Tạo kế hoạch</span>
                 </li>
 
                 <li onClick={()=> {handleClickProfile()}} className={selectedItem === 'profile' ? 'clicked' : ''}>
                     {profileImg ? <img src={profileImg} className="profile-img"/> : <img src={profileImg} className="ver-nav-icon"/>}
-                    <span className="nav-text">Profile</span>
+                    <span className="nav-text">Trang cá nhân</span>
                 </li>
 
                 <li onClick={() => {handleLogOut()}}>

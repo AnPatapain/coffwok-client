@@ -13,7 +13,7 @@ import add_icon from "../assets/icons/add-icon.svg"
 import school_icon from "../assets/icons/school-icon.svg"
 import sos_icon from "../assets/icons/sos.png"
 import good_icon from "../assets/icons/good.png"
-
+import UserService from "../api/services/user.service.js";
 
 
 const Profile = () => {
@@ -57,23 +57,42 @@ const Profile = () => {
                         strength_subjects: data.strength_subjects,
                         weak_subjects: data.weak_subjects
                     }))
+                    UserService.getUserById(data.userId)
+                        .then(userData => {
+                            PlanService.getPlanById(userData.planId)
+                                .then(planData => {
+                                    setPlanInfo(prevState => ({
+                                        ...prevState,
+                                        id: planData.id,
+                                        coffeeShop: planData.coffeeShop,
+                                        schedule: planData.schedule,
+                                        planDetails: planData.planDetails
+                                    }))
+                                })
+                                .catch(error => {
+                                    navigate("/dashboard")
+                                })
+                        })
+                        .catch(error => {
+                            navigate("/dashboard")
+                        })
                 }).catch(error => {
                     localStorage.clear()
                     navigate("/")
                 })
 
-            await PlanService.getMyPlan()
-                .then(data => {
-                    setPlanInfo(prevState => ({
-                        ...prevState,
-                        id: data.id,
-                        coffeeShop: data.coffeeShop,
-                        schedule: data.schedule,
-                        planDetails: data.planDetails
-                    }))
-                }).catch(error => {
-                    console.log(error)
-                })
+            // await PlanService.getMyPlan()
+            //     .then(data => {
+            //         setPlanInfo(prevState => ({
+            //             ...prevState,
+            //             id: data.id,
+            //             coffeeShop: data.coffeeShop,
+            //             schedule: data.schedule,
+            //             planDetails: data.planDetails
+            //         }))
+            //     }).catch(error => {
+            //         console.log(error)
+            //     })
         }
 
         myFunc()
@@ -148,10 +167,12 @@ const Profile = () => {
                     </article>
                     <article>
                         {/*<span className="category"><AiOutlineDislike className="study-info-icon"/> Điểm yếu</span>*/}
-                        <span className="category"><img src={sos_icon} className="study-info-icon"/> Cần người kèm</span>
+                        <span className="category"><img src={sos_icon}
+                                                        className="study-info-icon"/> Cần người kèm</span>
                         <span>{profile.weak_subjects.join(", ")}</span>
                     </article>
                 </section>
+
                 <section className="profile-section profile-coffee-study-plan-section">
                     {!planInfo.id ? <h2>Tạo kế hoạch Cà phê - Học bài</h2> : <h2>Kế hoạch cà phê - học bài</h2>}
                     {!planInfo.id ? <img src={add_icon} className="add-plan-icon" onClick={() => {

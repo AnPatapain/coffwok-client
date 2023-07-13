@@ -115,12 +115,18 @@ html body {
 
 @media (max-width: 430px) {
 
+    .home {
+        margin-top: 10vh;
+    }
+
     .primary-button {
         font-size: 10px;
     }
 
     .home article p{
         font-size: 16px;
+        width: 80%;
+        margin: auto;
     }
 
     .home .home-buttons {
@@ -184,11 +190,11 @@ nav .logo-container h3 {
 
 @media (max-width: 375px) {
     nav .logo-container .logo {
-        width: 35px;
-        height: 35px;
+        width: 45px;
+        height: 45px;
     }
     nav .logo-container h3 {
-        font-size: 20px;
+        font-size: 24px;
     }
 }
 
@@ -210,8 +216,10 @@ nav .logo-container h3 {
 }
 
 .vertical-nav .logo-container .logo {
-    width: 32px;
-    height: 32px;
+    width: 40px;
+    height: 40px;
+    margin-right: 5px;
+    cursor: pointer;
 }
 
 .vertical-nav .logo-container h3 {
@@ -219,6 +227,7 @@ nav .logo-container h3 {
     font-weight: bold;
     font-size: 24px;
     text-transform: uppercase;
+    cursor: pointer;
 }
 
 .vertical-nav .nav-text {
@@ -358,10 +367,18 @@ nav .logo-container h3 {
 /*------------------- Horizontal Nav ---------------*/
 .horizontal-nav .title {
     display: flex;
+    align-items: center;
     width: 560px;
     justify-content: space-between;
     margin-left: 400px;
     border-bottom: 1px solid #dddddd;
+}
+
+.horizontal-nav .title h2 {
+    text-align: start;
+}
+.horizontal-nav .title span h4 {
+    text-align: start;
 }
 
 .horizontal-nav .logo-container {
@@ -427,15 +444,22 @@ nav .logo-container h3 {
         padding: 0 5px;
         width: 90%;
     }
+
+    .horizontal-nav .logo-container {
+        margin: 10px auto auto;
+    }
+
     .horizontal-nav .logo-container .logo {
-        display: none;
+        /*display: none;*/
+        width: 40px;
+        height: 40px;
+        margin-right: 5px;
     }
     .horizontal-nav .logo-container h3 {
         font-size: 24px;
-        margin: 10px auto auto;
     }
     .horizontal-nav h2 {
-        font-size: 18px;
+        font-size: 16px;
     }
     .horizontal-nav span .location-icon {
         width: 20px;
@@ -444,6 +468,32 @@ nav .logo-container h3 {
     }
     .horizontal-nav span h4 {
         font-size: 14px;
+    }
+}
+
+@media (max-width: 370px) {
+    .horizontal-nav h2 {
+        font-size: 18px;
+        /*width: 75%;*/
+        margin-bottom: 20px;
+        margin-top: 5px;
+    }
+    .horizontal-nav .logo-container h3 {
+        margin-bottom: 10px;
+    }
+    .horizontal-nav .title{
+        width: 96%;
+        flex-direction: column;
+        align-items: start;
+    }
+    .horizontal-nav span .location-icon {
+        width: 16px;
+        height: 16px;
+        margin-right: 0;
+    }
+    .horizontal-nav span h4 {
+        font-size: 16px;
+        font-weight: normal;
     }
 }
 
@@ -1101,10 +1151,6 @@ nav .logo-container h3 {
     border-top: solid 1px rgb(213, 213, 213);
 }
 
-.upload-profile-image-container h2 {
-    color: #5FB51C;
-}
-
 .upload-profile-image-container .image-options {
     margin: 20px auto 50px;
     display: flex;
@@ -1226,6 +1272,10 @@ nav .logo-container h3 {
     margin-bottom: 5px;
 }
 
+.plan-card .name-button-section .about-container {
+    margin-top: 15px;
+}
+
 .plan-card .name-button-section article .about {
     margin: 0;
     font-weight: normal;
@@ -1289,6 +1339,7 @@ nav .logo-container h3 {
 .plan-card .plan-info-section li article {
     display: flex;
     align-items: center;
+    width: 40%;
 }
 
 .plan-card .plan-info-section li span{
@@ -1304,7 +1355,7 @@ nav .logo-container h3 {
     color: black;
     font-weight: normal;
     display: inline-block;
-    max-width: 500px;
+    max-width: 45%;
     word-wrap: break-word;
     text-align: start;
 }
@@ -1364,10 +1415,10 @@ nav .logo-container h3 {
         height: 20px;
     }
     .plan-card .plan-info-section li article {
-        width: 60%;
+        width: 62%;
     }
     .plan-card .plan-info-section li .text {
-        max-width: 40%;
+        max-width: 35%;
     }
 
     .plan-card .name-button-section .name-button-about .about-mobile {
