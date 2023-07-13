@@ -21,7 +21,7 @@ const DashBoard = () => {
     const [plans, setPlans] = useState([])
     const [myPlan, setMyPlan] = useState(null)
     const [page, setPage] = useState(0)
-    const [pageSize, setPageSize] = useState(4)
+    const [pageSize, setPageSize] = useState(50)
     const [isFetching, setIsFetching] = useState(false)
 
     const [notificationList, setNotificationList] = useState([])
