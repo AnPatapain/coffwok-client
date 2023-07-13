@@ -41,7 +41,9 @@ const PlanCard = ({planInfo, isOwner, isShowButton}) => {
                             {planInfo.name}
                         </p>
 
-                        <p className="about about-mobile">
+                        <p onClick={() => {
+                            navigateToProfile(planInfo.userId)
+                        }} className="about about-mobile">
                             {planInfo.about && planInfo.about.length > 66 ? planInfo.about.substring(0, 66) + "..." : planInfo.about}
                         </p>
 
@@ -57,7 +59,9 @@ const PlanCard = ({planInfo, isOwner, isShowButton}) => {
                             <span className="message-button" onClick={() => navigateToProfile(planInfo.userId)}>Xem profile</span> : null}
                     </article>
                     <article className="about-container">
-                        <p className="about">
+                        <p className="about" onClick={() => {
+                            navigateToProfile(planInfo.userId)
+                        }}>
                             {planInfo.about && planInfo.about.length > 66 ? planInfo.about.substring(0, 66) + "..." : planInfo.about}
                         </p>
                     </article>

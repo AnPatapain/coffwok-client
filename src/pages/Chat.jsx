@@ -6,6 +6,8 @@ import {useNavigate, useParams} from "react-router-dom";
 import VerticalNav from "../components/VerticalNav.jsx";
 import NotificationService from "../api/services/notification.service.js";
 
+import tick_icon from "../assets/icons/tick.png"
+
 const Chat = () => {
     const {id} = useParams()
     const navigate = useNavigate()
@@ -218,6 +220,7 @@ const Chat = () => {
                                             <div className="message">
                                                 {message.text}
                                             </div>
+                                            <img src={tick_icon} className="sent-icon"/>
                                         </li>
                                     )
                                 }) : null}

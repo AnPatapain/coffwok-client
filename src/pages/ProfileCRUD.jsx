@@ -224,7 +224,7 @@ const ProfileCRUD = () => {
                                                 onChange={handleChange}
                                                 checked={formData.gender === "more"}
                                             />
-                                            <label htmlFor="more-gender-identity">Hok mún nói</label>
+                                            <label htmlFor="more-gender-identity">Khác</label>
                                         </div>
                                 }
                             </span>

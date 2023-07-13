@@ -70,11 +70,12 @@ const Profile = () => {
                                     }))
                                 })
                                 .catch(error => {
-                                    navigate("/dashboard")
+                                    console.log(error)
                                 })
                         })
                         .catch(error => {
-                            navigate("/dashboard")
+                            localStorage.clear()
+                            navigate("/")
                         })
                 }).catch(error => {
                     localStorage.clear()
