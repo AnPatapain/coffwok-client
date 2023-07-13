@@ -28,8 +28,13 @@ const DashBoard = () => {
     const [chatRooms, setChatRooms] = useState([])
 
     const handleScroll = () => {
-        const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
-        if (scrollTop + clientHeight >= scrollHeight && !isFetching) {
+        // const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
+        // if (scrollTop + clientHeight >= scrollHeight && !isFetching) {
+        //     setPage(prevState => prevState + 1)
+        //     setIsFetching(true)
+        // }
+        if(Math.ceil(window.innerHeight + document.documentElement.scrollTop) >=
+            document.documentElement.offsetHeight && !isFetching) {
             setPage(prevState => prevState + 1)
             setIsFetching(true)
         }
