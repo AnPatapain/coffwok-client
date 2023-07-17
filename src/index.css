@@ -1600,6 +1600,7 @@ nav .logo-container h3 {
     list-style-type: none;
     overflow-y: scroll;
     margin-top: 5px;
+    height: 100%;
 }
 
 .dashboard-container aside ul .soulmates-title {

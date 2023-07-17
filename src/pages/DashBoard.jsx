@@ -5,21 +5,20 @@ import {getErrorMessage} from "../api/error/errorMessage.js";
 import {useNavigate} from "react-router-dom";
 import localStorageService from "../api/services/localStorage.service.js";
 import {PROFILE_ID, PROFILE_IMG, SHOW_NOTIFICATION, USER_ID} from "../api/constant/index.js";
-import PlanService from "../api/services/plan.service.js";
-import PlanCard from "../components/PlanCard.jsx";
 import UserService from "../api/services/user.service.js";
 import NotificationService from "../api/services/notification.service.js";
 
 import ChatService from "../api/services/chat.service.js";
 import ImageService from "../api/services/image.service.js";
 import HorizontalNav from "../components/HorizontalNav.jsx";
+import ProfileCard from "../components/ProfileCard.jsx";
 
 
 const DashBoard = () => {
     const navigate = useNavigate()
 
-    const [plans, setPlans] = useState([])
-    const [myPlan, setMyPlan] = useState(null)
+    const [profiles, setProfiles] = useState([])
+    const [myProfile, setMyProfile] = useState(null)
     const [page, setPage] = useState(0)
     const [pageSize, setPageSize] = useState(50)
     const [isFetching, setIsFetching] = useState(false)
@@ -28,11 +27,6 @@ const DashBoard = () => {
     const [chatRooms, setChatRooms] = useState([])
 
     const handleScroll = () => {
-        // const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
-        // if (scrollTop + clientHeight >= scrollHeight && !isFetching) {
-        //     setPage(prevState => prevState + 1)
-        //     setIsFetching(true)
-        // }
         if(Math.ceil(window.innerHeight + document.documentElement.scrollTop) >=
             document.documentElement.offsetHeight && !isFetching) {
             setPage(prevState => prevState + 1)
@@ -40,16 +34,15 @@ const DashBoard = () => {
         }
     };
 
-    const fetchPlans = async () => {
-        await PlanService.getAllPlans(page, pageSize)
+    const fetchProfiles = async () => {
+        await ProfileService.getAllProfiles(page, pageSize)
             .then(data => {
-                console.log("data fetched", data)
                 if(data._embedded) {
-                    setPlans(prevPlans => {
-                        const newPlans = data._embedded.planList.filter(newPlan => {
-                            return !prevPlans.some(prevPlan => prevPlan.id === newPlan.id);
+                    setProfiles(prevProfiles => {
+                        const newProfiles = data._embedded.profileList.filter(newProfile => {
+                            return !prevProfiles.some(prevProfile => prevProfile.id === newProfile.id);
                         });
-                        return [...prevPlans, ...newPlans];
+                        return [...prevProfiles, ...newProfiles];
                     })
                 }
             })
@@ -58,8 +51,8 @@ const DashBoard = () => {
             })
     }
 
-    const fetchMorePlans = async () => {
-        await fetchPlans()
+    const fetchMoreProfiles = async () => {
+        await fetchProfiles()
         setIsFetching(false)
     }
 
@@ -69,7 +62,7 @@ const DashBoard = () => {
 
     useEffect(() => {
         if (isFetching) {
-            fetchMorePlans()
+            fetchMoreProfiles()
         }
     }, [isFetching])
 
@@ -96,11 +89,11 @@ const DashBoard = () => {
                             })
 
 
-                        await fetchPlans()
+                        await fetchProfiles()
 
-                        await PlanService.getMyPlan()
+                        await ProfileService.getMyProfile()
                             .then(data => {
-                                setMyPlan(data)
+                                setMyProfile(data)
                             })
                             .catch(error => {
                                 console.log(getErrorMessage(error))
@@ -170,8 +163,6 @@ const DashBoard = () => {
         ));
     };
 
-    console.log(plans)
-
     return (
         <div className="dashboard-page">
             <VerticalNav selectedItem={"dashboard"}/>
@@ -179,11 +170,11 @@ const DashBoard = () => {
             <div className="dashboard-container">
                 <div className="newfeed-container">
                     <div className="plans-container">
-                        {plans.map(plan => {
-                            if (myPlan && plan.id === myPlan.id) {
-                                return <PlanCard key={plan.id} planInfo={plan} isOwner={true} isShowButton={true}/>
+                        {profiles.map(profile => {
+                            if (myProfile && profile.id === myProfile.id) {
+                                return <ProfileCard key={profile.id} profile={profile} isOwner={true} isShowButton={true}/>
                             } else {
-                                return <PlanCard key={plan.id} planInfo={plan} isShowButton={true}/>
+                                return <ProfileCard key={profile.id} profile={profile} isOwner={false} isShowButton={true}/>
                             }
                         })}
                         {isFetching ? <h4>Đang tải ...</h4>:null}

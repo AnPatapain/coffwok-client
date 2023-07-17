@@ -10,6 +10,7 @@ import PlanCrud from "./pages/PlanCrud.jsx";
 import Chat from "./pages/Chat.jsx";
 import ChatList from "./pages/ChatList.jsx";
 import {HelmetProvider} from "react-helmet-async";
+import Profiles from "./pages/Profiles.jsx";
 
 const App = () => {
     return (

@@ -1,8 +1,4 @@
 import LogoContainer from "./LogoContainer.jsx";
-// import {BiHomeAlt2, BiMessageSquareAdd} from "react-icons/bi";
-// import {AiOutlineMessage} from "react-icons/ai";
-// import {CgProfile} from "react-icons/cg";
-// import {FiLogOut} from "react-icons/fi";
 
 
 import {useLocation, useNavigate} from "react-router-dom";
@@ -13,15 +9,14 @@ import ImageService from "../api/services/image.service.js";
 import home_icon from "../assets/icons/home-icon.svg"
 import chat_icon from "../assets/icons/message-icon.svg"
 import add_icon from "../assets/icons/add-icon.svg"
-import profile_icon from "../assets/icons/profile-icon.svg"
 import logout_icon from "../assets/icons/logout-icon.svg"
+import plan_icon from "../assets/icons/plan-icon.svg"
 
 
 const VerticalNav = ({selectedItem}) => {
     const navigate = useNavigate()
     const location = useLocation()
     const [profileImg, setProfileImg] = useState("")
-    const [showSettingModal, setShowSettingModal] = useState(false)
 
     useEffect(() => {
         let imgUrl = localStorage.getItem(PROFILE_IMG)
@@ -51,6 +46,10 @@ const VerticalNav = ({selectedItem}) => {
         navigate("/profile/" + localStorage.getItem(PROFILE_ID))
     }
 
+    const handleClickProfiles = () => {
+        navigate("/profiles")
+    }
+
     const handleLogOut = () => {
         localStorage.clear()
         navigate("/")
@@ -60,9 +59,8 @@ const VerticalNav = ({selectedItem}) => {
             <LogoContainer/>
             <ul>
                 <li onClick={()=> {handleClickHome()} } className={selectedItem === 'dashboard' ? 'clicked' : ''}>
-                    {/*<BiHomeAlt2 className="ver-nav-icon"/>*/}
                     <img src={home_icon} className="ver-nav-icon"/>
-                    <span className="nav-text">Trang Chủ</span>
+                    <span className="nav-text">Trang chủ</span>
                 </li>
 
                 <li onClick={() => {handleClickMessage()}} className={selectedItem === 'message' ? 'clicked' : ''}>

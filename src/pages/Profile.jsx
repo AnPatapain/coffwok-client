@@ -82,18 +82,6 @@ const Profile = () => {
                     navigate("/")
                 })
 
-            // await PlanService.getMyPlan()
-            //     .then(data => {
-            //         setPlanInfo(prevState => ({
-            //             ...prevState,
-            //             id: data.id,
-            //             coffeeShop: data.coffeeShop,
-            //             schedule: data.schedule,
-            //             planDetails: data.planDetails
-            //         }))
-            //     }).catch(error => {
-            //         console.log(error)
-            //     })
         }
 
         myFunc()
