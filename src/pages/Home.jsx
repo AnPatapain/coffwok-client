@@ -1,10 +1,10 @@
 import HomeNav from "../components/HomeNav.jsx";
 import AuthModal from "../components/AuthModal.jsx";
 import {useEffect, useState} from "react";
-import {ACCESS_TOKEN} from "../api/constant/index.js";
 import {useNavigate} from "react-router-dom";
 import UserService from "../api/services/user.service.js";
 import ProfileService from "../api/services/profile.service.js";
+import {Helmet} from "react-helmet-async";
 
 const Home = () => {
     const navigate = useNavigate()
@@ -14,25 +14,30 @@ const Home = () => {
     useEffect(() => {
         UserService.getCurrentUser()
             .then(user => {
-                console.log(user)
-                if(user.profileId === null) {
-                    navigate("/profile-info-creation?isEdit=false")
+                if(user) {
+                    if(user.profileId === null) {
+                        navigate("/profile-info-creation?isEdit=false")
+                    }else {
+                        ProfileService.getMyProfile()
+                            .then(data => {
+                                if(data.imgUrl === null) {
+                                    navigate("/profile-image-creation")
+                                }else {
+                                    navigate("/dashboard")
+                                }
+                            })
+                            .catch(error => {
+                                localStorage.clear()
+                                navigate("/")
+                            })
+                    }
                 }else {
-                    ProfileService.getMyProfile()
-                        .then(data => {
-                            if(data.imgUrl === null) {
-                                navigate("/profile-image-creation")
-                            }else {
-                                navigate("/dashboard")
-                            }
-                        })
+                    localStorage.clear()
+                    navigate("/")
                 }
             })
             .catch(error => {
-                console.log(error)
-                if(localStorage.getItem(ACCESS_TOKEN)) {
-                    localStorage.removeItem(ACCESS_TOKEN)
-                }
+                localStorage.clear()
                 navigate("/")
             })
     }, [])
@@ -49,16 +54,19 @@ const Home = () => {
 
     return (
         <div className="overlay">
+            <Helmet>
+                <title>Coffwok | Tìm bạn đi cafe-học bài tại Quy Nhơn</title>
+                <meta name="description" content="Bạn sống ở Quy Nhơn và yêu thích học bài tại quán Cà phê? Đừng đi một mình : ) Tìm bạn đi cà phê học bài chung ngay hôm nay. Tạo mối quan hệ, cùng nhau học các môn bạn yêu thích tại các quán Cà phê như: Glife, E-coffee, ..." />
+            </Helmet>
             <HomeNav/>
             <div className="home">
-                <h1 className="primary-title">Swipe Right to Study together at Café</h1>
+                <h1 className="primary-title">Tìm bạn Café - học bài tại Quy Nhơn</h1>
                 <article>
-                    <p>share next study plan at your favorite café, find study partner, connect and study together.</p>
-                    <p>The best place for sapiosexuals</p>
+                    <p>Xem các kế hoạch đi Cà phê Học bài, kết nối, rủ đi cà phê học bài chung tại Glife, E-coffee, ...</p>
                 </article>
                 <div className="home-buttons">
-                    <button className="primary-button" onClick={handleSignupClick}>create account</button>
-                    <button className="primary-button transparent-button" onClick={handleLoginClick}>log in</button>
+                    <button className="primary-button" onClick={handleSignupClick}>Tạo tài khoản</button>
+                    <button className="primary-button transparent-button" onClick={handleLoginClick}>Đăng nhập</button>
                 </div>
 
                 {showModal && (

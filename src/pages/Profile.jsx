@@ -1,18 +1,19 @@
 import VerticalNav from "../components/VerticalNav.jsx";
 
-import {TbSchool} from "react-icons/tb"
-import {AiOutlineLike, AiOutlineMessage} from "react-icons/ai"
-import {AiOutlineDislike} from "react-icons/ai"
 import {useNavigate, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import ProfileService from "../api/services/profile.service.js";
-import {getErrorMessage} from "../api/error/errorMessage.js";
 import ImageService from "../api/services/image.service.js";
 import PlanCard from "../components/PlanCard.jsx";
 import PlanService from "../api/services/plan.service.js";
-import {IoIosAddCircleOutline} from "react-icons/io"
 import {PROFILE_ID} from "../api/constant/index.js";
 import ChatService from "../api/services/chat.service.js";
+
+import add_icon from "../assets/icons/add-icon.svg"
+import school_icon from "../assets/icons/school-icon.svg"
+import sos_icon from "../assets/icons/sos.png"
+import good_icon from "../assets/icons/good.png"
+import UserService from "../api/services/user.service.js";
 
 
 const Profile = () => {
@@ -37,6 +38,7 @@ const Profile = () => {
         name: "",
         coffeeShop: "",
         schedule: "",
+        planDetails: "",
         school: "",
         strength_subjects: [],
         weak_subjects: []
@@ -46,33 +48,40 @@ const Profile = () => {
         async function myFunc() {
             await ProfileService.getProfileById(id)
                 .then(data => {
-                    console.log(data)
                     setProfile(data)
                     setPlanInfo(prevState => ({
                         ...prevState,
-                        imgUrl: ImageService.modifyImageURI(data.imgUrl, ["w_350", "h_250", "c_fill", "g_face", "q_100"]),
+                        imgUrl: ImageService.modifyImageURI(data.imgUrl, ["w_50", "h_50", "c_fill", "g_face", "q_100"]),
                         name: data.name,
                         school: data.school,
                         strength_subjects: data.strength_subjects,
                         weak_subjects: data.weak_subjects
                     }))
+                    UserService.getUserById(data.userId)
+                        .then(userData => {
+                            PlanService.getPlanById(userData.planId)
+                                .then(planData => {
+                                    setPlanInfo(prevState => ({
+                                        ...prevState,
+                                        id: planData.id,
+                                        coffeeShop: planData.coffeeShop,
+                                        schedule: planData.schedule,
+                                        planDetails: planData.planDetails
+                                    }))
+                                })
+                                .catch(error => {
+                                    console.log(error)
+                                })
+                        })
+                        .catch(error => {
+                            localStorage.clear()
+                            navigate("/")
+                        })
                 }).catch(error => {
-                    const errMsg = getErrorMessage(error)
-                    console.log(errMsg)
+                    localStorage.clear()
                     navigate("/")
                 })
 
-            await PlanService.getMyPlan()
-                .then(data => {
-                    setPlanInfo(prevState => ({
-                        ...prevState,
-                        id: data.id,
-                        coffeeShop: data.coffeeShop,
-                        schedule: data.schedule
-                    }))
-                }).catch(error => {
-                    console.log(error)
-                })
         }
 
         myFunc()
@@ -94,7 +103,6 @@ const Profile = () => {
                 navigate("/dashboard")
             })
             .catch(error => {
-                console.log(getErrorMessage(error))
                 navigate("/dashboard")
             })
     }
@@ -105,7 +113,7 @@ const Profile = () => {
 
     return (
         <div className="profile-container">
-            <VerticalNav/>
+            <VerticalNav selectedItem={"profile"}/>
             <div className="profile-section-container">
                 <section className="profile-section profile-personal-info-section">
                     <div>
@@ -113,9 +121,8 @@ const Profile = () => {
                             <img src={profile.imgUrl}/>
                             {isMe ?
                                 <button className="primary-button" onClick={() => {
-                                    navigate(`/profile-image-creation`)
-                                }}>Change image</button> : null}
-
+                                    navigate(`/profile-image-creation?isEdit=true`)
+                                }}>Thay đổi</button> : null}
                         </section>
 
                         <section className="personal-info">
@@ -124,54 +131,53 @@ const Profile = () => {
                                 {isMe ?
                                     <button className="primary-button" onClick={() => {
                                         navigate(`/profile-info-creation?isEdit=true`)
-                                    }}>Edit Info
+                                    }}>Chỉnh sửa
                                     </button> :
-                                    <AiOutlineMessage className="chat-icon" onClick={() => {
+                                    <span className="message-button" onClick={() => {
                                         handleClickChatIcon(profile.userId)
-                                    }}/>
+                                    }}>
+                                        Nhắn tin
+                                    </span>
                                 }
                             </section>
                             <p className="about">{profile.about}</p>
-                            <section className="profile-sub-info">
-                                <article>
-                                    <span>130 visitors</span>
-                                    <span>10 love</span>
-                                </article>
-                            </section>
                         </section>
                     </div>
                 </section>
 
                 <section className="profile-section profile-study-info-section">
                     <article>
-                        <span className="category"><TbSchool className="study-info-icon"/> School</span>
+                        <span className="category"><img src={school_icon} className="study-info-icon"/> Trường</span>
                         <span>{profile.school}</span>
                     </article>
                     <article>
-                        <span className="category"><AiOutlineLike className="study-info-icon"/> Good</span>
+                        <span className="category"><img src={good_icon} className="study-info-icon"/> Thế Mạnh</span>
                         <span>{profile.strength_subjects.join(", ")}</span>
                     </article>
                     <article>
-                        <span className="category"><AiOutlineDislike className="study-info-icon"/> Bad</span>
+                        {/*<span className="category"><AiOutlineDislike className="study-info-icon"/> Điểm yếu</span>*/}
+                        <span className="category"><img src={sos_icon}
+                                                        className="study-info-icon"/> Cần người kèm</span>
                         <span>{profile.weak_subjects.join(", ")}</span>
                     </article>
                 </section>
+
                 <section className="profile-section profile-coffee-study-plan-section">
-                    {!planInfo.id ? <h2>Create Café-Study Plan</h2> : <h2>Café-Study Plan</h2>}
-                    {!planInfo.id ? <IoIosAddCircleOutline className="add-plan-icon" onClick={() => {
+                    {!planInfo.id ? <h2>Tạo kế hoạch Cà phê - Học bài</h2> : <h2>Kế hoạch cà phê - học bài</h2>}
+                    {!planInfo.id ? <img src={add_icon} className="add-plan-icon" onClick={() => {
                             navigate("/plan-creation")
                         }}/> :
                         <>
-                            <PlanCard planInfo={planInfo} isOwner={!isMe}/>
+                            <PlanCard planInfo={planInfo} isOwner={isMe} isShowButton={false}/>
                             {isMe ?
                                 <div className="buttons">
                                     <button className="primary-button edit-button" onClick={() => {
                                         navigate("/plan-creation")
-                                    }}>Edit
+                                    }}>Chỉnh sửa
                                     </button>
-                                    <button className="primary-button delete-button" onClick={handleDelete}>Delete
+                                    <button className="primary-button delete-button" onClick={handleDelete}>Xóa
                                     </button>
-                                </div>:null
+                                </div> : null
                             }
 
                         </>}

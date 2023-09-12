@@ -4,12 +4,10 @@ import {useNavigate} from "react-router-dom";
 import ChatService from "../api/services/chat.service.js";
 
 import school_icon from "../assets/icons/school-icon.svg"
-import pink_location_icon from "../assets/icons/pink-location-icon.svg"
-import clock_icon from "../assets/icons/clock-icon.svg"
-import study_icon from "../assets/icons/study-icon.svg"
+import sos_icon from "../assets/icons/sos.png"
 
 // eslint-disable-next-line react/prop-types
-const PlanCard = ({planInfo, isOwner, isShowButton}) => {
+const ProfileCard = ({profile, isOwner, isShowButton}) => {
     const navigate = useNavigate()
     const navigateToProfile = (userId) => {
         UserService.getUserById(userId)
@@ -24,45 +22,47 @@ const PlanCard = ({planInfo, isOwner, isShowButton}) => {
     const handleClickChatIcon = (userId) => {
         ChatService.handleNavigate(userId, navigate)
     }
+    console.log("isOwner", isOwner)
+
     return (
         <div className="plan-card">
             <section className="name-button-section">
                 {/* eslint-disable-next-line react/prop-types */}
-                {planInfo.imgUrl !== null ?
+                {profile.imgUrl !== null ?
                     <img className="small-profile-image"
-                         src={ImageService.modifyImageURI(planInfo.imgUrl, ["w_50", "h_50", "c_fill", "g_face", "q_100"])}
-                         onClick={() => navigateToProfile(planInfo.userId)}/> : null}
+                         src={ImageService.modifyImageURI(profile.imgUrl, ["w_50", "h_50", "c_fill", "g_face", "q_100"])}
+                         onClick={() => navigateToProfile(profile.userId)}/> : null}
 
                 <div className="name-button-about">
                     <article>
                         <p onClick={() => {
-                            navigateToProfile(planInfo.userId)
+                            navigateToProfile(profile.userId)
                         }} className="name">
-                            {planInfo.name}
+                            {profile.name}
                         </p>
 
                         <p onClick={() => {
-                            navigateToProfile(planInfo.userId)
+                            navigateToProfile(profile.userId)
                         }} className="about about-mobile">
-                            {planInfo.about && planInfo.about.length > 66 ? planInfo.about.substring(0, 66) + "..." : planInfo.about}
+                            {profile.about && profile.about.length > 66 ? profile.about.substring(0, 66) + "..." : profile.about}
                         </p>
 
                         {
                             !isOwner && isShowButton ?
                                 <span className="message-button" onClick={() => {
-                                    handleClickChatIcon(planInfo.userId)
+                                    handleClickChatIcon(profile.userId)
                                 }}>
                             Rủ đi học chung
                         </span> : ""
                         }
                         {isShowButton ?
-                            <span className="message-button" onClick={() => navigateToProfile(planInfo.userId)}>Xem profile</span> : null}
+                            <span className="message-button" onClick={() => navigateToProfile(profile.userId)}>Xem profile</span> : null}
                     </article>
                     <article className="about-container">
                         <p className="about" onClick={() => {
-                            navigateToProfile(planInfo.userId)
+                            navigateToProfile(profile.userId)
                         }}>
-                            {planInfo.about && planInfo.about.length > 66 ? planInfo.about.substring(0, 66) + "..." : planInfo.about}
+                            {profile.about && profile.about.length > 66 ? profile.about.substring(0, 66) + "..." : profile.about}
                         </p>
                     </article>
                 </div>
@@ -74,32 +74,18 @@ const PlanCard = ({planInfo, isOwner, isShowButton}) => {
                         <img src={school_icon} className="icon"/>
                         <span>Trường</span>
                     </article>
-                    <span className="text">{planInfo.school}</span>
+                    <span className="text">{profile.school}</span>
                 </li>
                 <li className="plan-info-item">
                     <article className="category">
-                        <img src={study_icon} className="icon"/>
-                        <span>Tìm bạn học chung</span>
+                        <img src={sos_icon} className="icon"/>
+                        <span>Cần bạn kèm</span>
                     </article>
-                    <span className="text">{planInfo.planDetails}</span>
-                </li>
-                <li className="plan-info-item">
-                    <article className="category">
-                        <img src={pink_location_icon} className="icon"/>
-                        <span>Quán Cafe</span>
-                    </article>
-                    <span className="text">{planInfo.coffeeShop}</span>
-                </li>
-                <li className="plan-info-item">
-                    <article className="category">
-                        <img src={clock_icon} className="icon"/>
-                        <span>Thời gian</span>
-                    </article>
-                    <span className="text">{planInfo.schedule}</span>
+                    <span className="text">{profile.weak_subjects.join(", ")}</span>
                 </li>
             </ul>
         </div>
     )
 }
 
-export default PlanCard
+export default ProfileCard

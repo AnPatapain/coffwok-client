@@ -5,7 +5,7 @@ import PlanService from "../api/services/plan.service.js";
 import {useNavigate} from "react-router-dom";
 import {getErrorMessage} from "../api/error/errorMessage.js";
 import ImageService from "../api/services/image.service.js";
-import {ACCESS_TOKEN, PROFILE_IMG} from "../api/constant/index.js";
+import {PROFILE_IMG} from "../api/constant/index.js";
 import UserService from "../api/services/user.service.js";
 import ProfileService from "../api/services/profile.service.js";
 
@@ -14,17 +14,16 @@ const PlanCrud = () => {
 
     const [planDTO, setPlanDTO] = useState({
         coffeeShop: "",
-        schedule: ""
+        schedule: "",
+        planDetails: ""
     })
 
     const [errorMessage, setErrorMessage] = useState("")
 
     const [planInfo, setPlanInfo] = useState({
-        imgUrl: localStorage.getItem(PROFILE_IMG) ? ImageService.modifyImageURI(localStorage.getItem(PROFILE_IMG), ["w_350", "h_250", "c_fill", "g_face", "q_100"]) : "",
+        imgUrl: localStorage.getItem(PROFILE_IMG) ? ImageService.modifyImageURI(localStorage.getItem(PROFILE_IMG), ["w_50", "h_50", "c_fill", "g_face", "q_100"]) : "",
         name: "",
-        school: "",
-        strength_subjects: [],
-        weak_subjects: []
+        school: ""
     })
 
     const [oldPlan, setOldPlan] = useState(null)
@@ -37,13 +36,14 @@ const PlanCrud = () => {
                         .then(data => {
                             setPlanInfo(prevState => ({
                                 ...prevState,
-                                imgUrl: ImageService.modifyImageURI(data.imgUrl, ["w_350", "h_250", "c_fill", "g_face", "q_100"]),
+                                imgUrl: ImageService.modifyImageURI(data.imgUrl, ["w_50", "h_50", "c_fill", "g_face", "q_100"]),
                                 name: data.name,
-                                school: data.school,
-                                strength_subjects: data.strength_subjects,
-                                weak_subjects: data.weak_subjects
+                                school: data.school
                             }))
                         })
+                }else {
+                    localStorage.clear()
+                    navigate("/")
                 }
                 if (user.planId) {
                     PlanService.getPlanById(user.planId)
@@ -52,7 +52,8 @@ const PlanCrud = () => {
                             setPlanDTO(prevState => ({
                                 ...prevState,
                                 coffeeShop: data.coffeeShop,
-                                schedule: data.schedule
+                                schedule: data.schedule,
+                                planDetails: data.planDetails
                             }))
                         })
                         .catch(error => {
@@ -62,17 +63,14 @@ const PlanCrud = () => {
                 }
             })
             .catch(error => {
-                console.log(error)
-                if (localStorage.getItem(ACCESS_TOKEN)) {
-                    localStorage.removeItem(ACCESS_TOKEN)
-                }
+                localStorage.clear()
                 navigate("/")
             })
     }, [])
 
     const submitPlan = () => {
         if (planDTO.coffeeShop === "" || planDTO.schedule === "") {
-            setErrorMessage("Please fill the form : )")
+            setErrorMessage("Xin bạn điền thông tin ^^")
         } else {
             setErrorMessage("")
             PlanService.uploadPlan(planDTO)
@@ -101,7 +99,6 @@ const PlanCrud = () => {
     }
 
     const deletePlan = () => {
-        //TODO: delete request
         return PlanService.deletePlan(oldPlan.id)
             .then(response => {
                 console.log("response data after delete", response.data)
@@ -114,18 +111,18 @@ const PlanCrud = () => {
     }
     return (
         <div className="plan-crud-container">
-            <VerticalNav/>
-            <h2>{oldPlan ? "You already had" : "Create"} Café-Study plan</h2>
+            <VerticalNav selectedItem={"plan"}/>
+            <h2>{oldPlan ? "Thay đổi kế hoạch" : "Tạo kế hoạch cà phê học bài"}</h2>
             <PlanCreationEditCard planInfo={planInfo} planDTO={planDTO} setPlanDTO={setPlanDTO} oldPlan={oldPlan}/>
             {errorMessage ? <p className="error-msg">{errorMessage}</p> : ""}
 
             {
                 oldPlan ?
                     <div className="button-group">
-                        <button className="primary-button" onClick={editPlan}>Save</button>
-                        <button className="primary-button" onClick={deletePlan}>Delete</button>
+                        <button className="primary-button" onClick={editPlan}>Lưu</button>
+                        <button className="primary-button" onClick={deletePlan}>Xóa</button>
                     </div>:
-                    <button className="primary-button" onClick={submitPlan}>Publish Plan</button>
+                    <button className="primary-button" onClick={submitPlan}>Đăng Kế Hoạch</button>
             }
         </div>
     )

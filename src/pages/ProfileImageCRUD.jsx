@@ -1,15 +1,18 @@
 import {useEffect, useState} from "react";
-import {BiImageAdd} from "react-icons/bi"
 import HomeNav from "../components/HomeNav.jsx";
 import ProfileService from "../api/services/profile.service.js";
 import {useNavigate} from "react-router-dom";
-import {getErrorMessage} from "../api/error/errorMessage.js";
 import UserService from "../api/services/user.service.js";
-import {ACCESS_TOKEN, PROFILE_IMG} from "../api/constant/index.js";
+import {PROFILE_IMG} from "../api/constant/index.js";
 import {RotatingSquare} from 'react-loader-spinner';
 import localStorageService from "../api/services/localStorage.service.js";
 
+import add_icon from "../assets/icons/add-icon.svg"
+
 const ProfileImageCRUD = () => {
+    const url = new URL(window.location.href);
+    let isEdit = url.searchParams.get("isEdit") === 'true'
+
     const navigate = useNavigate()
     const [loading, setLoading] = useState(false)
     const [selectedFile, setSelectedFile] = useState(null)
@@ -90,27 +93,22 @@ const ProfileImageCRUD = () => {
                         navigate("/profile-info-creation?isEdit=false")
                     } else {
                         setLoading(true)
+                        
                         ProfileService.uploadProfileImage(user.profileId, selectedFile)
                             .then(
                                 response => {
-                                    console.log(response)
                                     localStorageService.add(PROFILE_IMG, response.data.imgUrl)
-                                    navigate("/profile/" + user.profileId)
+                                    navigate("/dashboard")
                                 },
                                 error => {
                                     setLoading(false)
                                     setErrorMessage("Max file size is 500kb : )")
-                                    const resMessage = getErrorMessage(error)
-                                    console.log("image upload error", resMessage)
                                 }
                             )
                     }
                 })
                 .catch(error => {
-                    console.log(error)
-                    if (localStorage.getItem(ACCESS_TOKEN)) {
-                        localStorage.removeItem(ACCESS_TOKEN)
-                    }
+                    localStorage.clear()
                     navigate("/")
                 })
         }
@@ -121,7 +119,7 @@ const ProfileImageCRUD = () => {
         <>
             <HomeNav/>
             <div className="upload-profile-image-container">
-                <h2>PROFILE IMAGE</h2>
+                {isEdit ? <h2>Thay đổi hình đại diện</h2>:<h2>Thêm hình đại diện</h2>}
                 <section className="image-options">
                     {preview ?
                         <div className="image-container">
@@ -135,7 +133,7 @@ const ProfileImageCRUD = () => {
                     <div className={`${preview ? "image-choose selected" : "image-choose"}`}>
                         <>
                             <label htmlFor="file">
-                                <BiImageAdd className="user-option"/>
+                                <img className="user-option" src={add_icon}/>
                             </label>
                             <input id="file" type='file' className="inputfile" onChange={onSelectFile}/>
                         </>

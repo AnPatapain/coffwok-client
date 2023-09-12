@@ -38,9 +38,9 @@ const getMyPlan = () => {
     })
 }
 
-const getAllPlans = () => {
+const getAllPlans = (page, pageSize) => {
     return new Promise((resolve, reject) => {
-        RequestService.getRequest(API_BASE_URL + "/api/plans")
+        RequestService.getRequest(API_BASE_URL + `/api/plans?page=${page}&size=${pageSize}`)
             .then(response => {
                 resolve(response.data)
             })

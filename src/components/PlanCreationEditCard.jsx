@@ -1,13 +1,16 @@
-import {AiOutlineDislike, AiOutlineLike} from "react-icons/ai";
-import {TbSchool} from "react-icons/tb";
-import {GoLocation} from "react-icons/go";
-import {MdSchedule} from "react-icons/md";
-import {SlPencil} from "react-icons/sl"
 import {useState} from "react";
+import pink_location_icon from "../assets/icons/pink-location-icon.svg"
+import clock_icon from "../assets/icons/clock-icon.svg"
+import study_icon from "../assets/icons/study-icon.svg"
+import edit_icon from "../assets/icons/edit-icon.svg"
 
 // eslint-disable-next-line react/prop-types
 const PlanCreationEditCard = ({planInfo, planDTO, setPlanDTO, oldPlan}) => {
-    const [isClick, setIsClick] = useState(false)
+    const [isClickCafe, setIsClickCafe] = useState(false)
+
+    const [isClickSchedule, setIsClickSchedule] = useState(false)
+
+    const [isClickPlanDetails, setIsClickPlanDetails] = useState(false)
     const handleChange = (e) => {
         let value = e.target.value
         let name = e.target.name
@@ -21,77 +24,96 @@ const PlanCreationEditCard = ({planInfo, planDTO, setPlanDTO, oldPlan}) => {
 
     return (
         <div className="plan-card">
-            <section className="image-container">
-                <img
-                    src={planInfo.imgUrl}/>
-            </section>
             <section className="name-button-section">
+                {/* eslint-disable-next-line react/prop-types */}
+                <img className="small-profile-image"
+                     src={planInfo.imgUrl}/>
                 <p>{planInfo.name}</p>
             </section>
             <ul className="plan-info-section">
                 <li className="plan-info-item">
-                    <span><TbSchool className="icon"/>School</span>
-                    <span className="text">{planInfo.school}</span>
-                </li>
-                <li className="plan-info-item">
-                    <span>
-                        <GoLocation className="icon"/>
-                        <label htmlFor="cafe">Café</label>
-                    </span>
-                    <span>
-                        {
-                            oldPlan && !isClick ?
-                                <article>
-                                    <span className="text">
-                                        {oldPlan.coffeeShop}
-                                        <SlPencil className="edit-icon" onClick={() => {setIsClick(true)}}/>
-                                    </span>
-                                </article> :
-                                <input id="cafe"
-                                       type="text"
-                                       name="coffeeShop"
-                                       required={true}
-                                       value={planDTO.coffeeShop}
-                                       placeholder="Glife"
-                                       onChange={handleChange}/>
-                        }
-                    </span>
-                </li>
-                <li className="plan-info-item">
-                    <span>
-                        <MdSchedule className="icon"/>
-                        <label htmlFor="schedule">Schedule</label>
-                    </span>
-                    <span>
-                        {
-                            oldPlan && !isClick ?
-                                <article>
-                                    <span className="text">
-                                        {oldPlan.schedule}
-                                        <SlPencil className="edit-icon" onClick={() => {setIsClick(true)}}/>
-                                    </span>
-                                </article> :
-                                <input id="schedule"
-                                       type="text"
-                                       name="schedule"
-                                       required={true}
-                                       value={planDTO.schedule}
-                                       placeholder="7h-9h tomorrow"
-                                       onChange={handleChange}/>
-                        }
+                    <article className="category">
+                        <img src={pink_location_icon} className="icon"/>
+                        <label htmlFor="cafe">Cà phê</label>
+                    </article>
 
-                    </span>
+                    {
+                        oldPlan && !isClickCafe ?
+
+                            <span className="text">
+                                        {oldPlan.coffeeShop}
+                                <img src={edit_icon} className="edit-icon" onClick={() => {
+                                    setIsClickCafe(true)
+                                }}/>
+                            </span>
+                            :
+                            <input id="cafe"
+                                   type="text"
+                                   name="coffeeShop"
+                                   required={true}
+                                   value={planDTO.coffeeShop}
+                                   placeholder="Glife 111 Phan Đình Phùng"
+                                   onChange={handleChange}/>
+                    }
+
                 </li>
                 <li className="plan-info-item">
-                    <span><AiOutlineLike className="icon"/>Strengths</span>
-                    <span className="text">{planInfo.strength_subjects.slice(0, 2).join(", ")} ...</span>
+                    <article className="category">
+                        <img src={clock_icon} className="icon"/>
+                        <label htmlFor="schedule">Thời gian</label>
+                    </article>
+
+                    {
+                        oldPlan && !isClickSchedule ?
+
+                            <span className="text">
+                                        {oldPlan.schedule}
+                                <img src={edit_icon} className="edit-icon" onClick={() => {
+                                    setIsClickSchedule(true)
+                                }}/>
+                                {/*<SlPencil className="edit-icon" onClick={() => {setIsClickSchedule(true)}}/>*/}
+                            </span>
+                            :
+                            <input id="schedule"
+                                   type="text"
+                                   name="schedule"
+                                   required={true}
+                                   value={planDTO.schedule}
+                                   placeholder="7h-9h Ngày mai / Hôm nay "
+                                   onChange={handleChange}/>
+                    }
+
+
                 </li>
                 <li className="plan-info-item">
-                    <span><AiOutlineDislike className="icon"/>Weakness</span>
-                    <span className="text">{planInfo.weak_subjects.slice(0, 2).join(", ")} ...</span>
+                    <article className="category">
+                        <img src={study_icon} className="icon"/>
+                        <label htmlFor="planDetails">Tìm bạn học chung</label>
+                    </article>
+
+                    {
+                        oldPlan && !isClickPlanDetails ?
+
+                            <span className="text">
+                                        {oldPlan.planDetails}
+                                <img src={edit_icon} className="edit-icon" onClick={() => {
+                                    setIsClickPlanDetails(true)
+                                }}/>
+                                {/*<SlPencil className="edit-icon" onClick={() => {setIsClickPlanDetails(true)}}/>*/}
+                            </span>
+                            :
+                            <input id="planDetails"
+                                   type="text"
+                                   name="planDetails"
+                                   required={true}
+                                   value={planDTO.planDetails}
+                                   placeholder="Anh, Toán, Lý, Văn ..."
+                                   onChange={handleChange}/>
+                    }
+
+
                 </li>
             </ul>
-            {/*<button className="primary-button" onClick={submitPlan}>Publish Plan</button>*/}
         </div>
     )
 }

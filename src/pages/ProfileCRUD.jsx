@@ -4,39 +4,37 @@ import HomeNav from "../components/HomeNav.jsx";
 import ProfileService from "../api/services/profile.service.js";
 import {getErrorMessage} from "../api/error/errorMessage.js"
 import UserService from "../api/services/user.service.js";
-import {ACCESS_TOKEN} from "../api/constant/index.js";
-import VerticalNav from "../components/VerticalNav.jsx";
+import edit_icon from "../assets/icons/edit-icon.svg"
 
 const ProfileCRUD = () => {
     const url = new URL(window.location.href);
     let isEdit = url.searchParams.get("isEdit") === 'true'
     const [placeHolder, setPlaceHolder] = useState({
-        name: "Name",
+        name: "Tên",
         dob_day: "DD",
         dob_month: "MM",
         dob_year: "YYYY",
-        about: "I love study at coffee shop",
-        school: "School"
+        about: "",
+        school: "Trường của bạn"
     })
     const subjects = [
-        "physic",
-        "english",
-        "ielts",
-        "coding",
-        "literature",
-        "math",
-        "chemistry",
-        "biology",
-        "history",
-        "geography",
-        "french",
-        "marketing",
-        "finance"
+        "Vật lý",
+        "Tiếng anh",
+        "Ielts",
+        "Tin học",
+        "Văn",
+        "Toán",
+        "Hóa",
+        "Sinh",
+        "Sử",
+        "Địa",
+        "Tiếng Pháp",
+        "Marketing",
+        "Tài chính"
     ]
 
     const [formData, setFormData] = useState({
         name: "",
-        dob: "",
         gender: "",
         about: "",
         school: "",
@@ -44,16 +42,28 @@ const ProfileCRUD = () => {
         weak_subjects: []
     })
 
+    const [isClickName, setIsClickName] = useState(false)
+
+    const [isClickGender, setIsClickGender] = useState(false)
+
+    const [isClickAbout, setIsClickAbout] = useState(false)
+
+    const [isClickSchool, setIsClickSchool] = useState(false)
+
+    const [oldProfile, setOldprofile] = useState(null)
+
     let navigate = useNavigate()
 
     useEffect(() => {
-        if(isEdit) {
+        if (isEdit) {
             ProfileService.getMyProfile()
                 .then(data => {
                     setPlaceHolder(data)
+                    setOldprofile(data)
                 })
                 .catch(error => {
                     console.log(getErrorMessage(error))
+                    navigate("/profile-info-creation?isEdit=false")
                 })
         }
     }, [])
@@ -61,63 +71,53 @@ const ProfileCRUD = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        try {
-            if(isEdit) {
-                UserService.getCurrentUser()
-                    .then(user => {
-                        if(user.profileId === null) {
-                            navigate("/profile-info-creation?isEdit=false")
-                        }else {
-                            ProfileService.editProfileInfo(user.profileId, formData)
-                                .then(response => {
-                                    navigate("/profile/" + user.profileId)
-                                })
-                                .catch(error => {
-                                    const errorMsg = getErrorMessage(error)
-                                    console.log(errorMsg)
-                                    navigate("/profile/" + user.profileId)
-                                })
-                        }
-                    })
-                    .catch(error => {
-                        console.log(error)
-                        if(localStorage.getItem(ACCESS_TOKEN)) {
-                            localStorage.removeItem(ACCESS_TOKEN)
-                        }
-                        navigate("/")
-                    })
-            }else {
-                UserService.getCurrentUser()
-                    .then(user => {
-                        if(user.profileId) {
-                            console.log("user has already profile")
-                            navigate("/profile/" + user.profileId)
-                        }else {
-                            ProfileService.uploadProfileInfo(formData)
-                                .then(
-                                    response => {
-                                        console.log(response.data)
-                                        navigate("/profile-image-creation")
-                                    },
-                                    error => {
-                                        const resMessage = getErrorMessage(error)
-                                        console.log(resMessage)
-                                    }
-                                )
-                        }
-                    })
-                    .catch(error => {
-                        console.log(error)
-                        if(localStorage.getItem(ACCESS_TOKEN)) {
-                            localStorage.removeItem(ACCESS_TOKEN)
-                        }
-                        navigate("/")
-                    })
 
-            }
-        } catch (err) {
-            console.log(err)
+        if (isEdit) {
+            UserService.getCurrentUser()
+                .then(user => {
+                    if (user.profileId === null) {
+                        navigate("/profile-info-creation?isEdit=false")
+                    } else {
+                        ProfileService.editProfileInfo(user.profileId, formData)
+                            .then(response => {
+                                navigate("/profile/" + user.profileId)
+                            })
+                            .catch(error => {
+                                const errorMsg = getErrorMessage(error)
+                                navigate("/profile/" + user.profileId)
+                            })
+                    }
+                })
+                .catch(error => {
+                    console.log(error)
+                    localStorage.clear()
+                    navigate("/")
+                })
+        } else {
+            UserService.getCurrentUser()
+                .then(user => {
+                    if (user.profileId) {
+                        navigate("/profile/" + user.profileId)
+                    } else {
+                        ProfileService.uploadProfileInfo(formData)
+                            .then(
+                                response => {
+                                    navigate("/profile-image-creation")
+                                },
+                                error => {
+                                    const resMessage = getErrorMessage(error)
+                                    navigate("/profile-info-creation?isEdit=false")
+                                }
+                            )
+                    }
+                })
+                .catch(error => {
+                    localStorage.clear()
+                    navigate("/")
+                })
+
         }
+
     }
 
     const handleChange = (e) => {
@@ -125,23 +125,25 @@ const ProfileCRUD = () => {
         let name = e.target.name
 
         setFormData((prevState) => {
-            if(name === 'strengths') {
+            if (name === 'strengths') {
                 return {
                     ...prevState,
                     [name]: [...prevState[name], value]
                 }
-            }else {
+            } else {
                 return {
                     ...prevState,
                     [name]: value
                 }
+
+
             }
         })
     }
 
     const addStrengthOrWeakness = (field, value) => {
         setFormData((prevState) => {
-            if(prevState[field].includes(value)) {
+            if (prevState[field].includes(value)) {
                 return {
                     ...prevState,
                     [field]: prevState[field].filter((str) => str !== value)
@@ -158,107 +160,141 @@ const ProfileCRUD = () => {
         <div className="onboarding-container">
             <HomeNav/>
             <div className="onboarding">
-                {isEdit ? (<h2>EDIT PROFILE</h2>) : <h2>CREATE PROFILE</h2>}
+                {isEdit ? (<h2>CHỈNH SỬA PROFILE</h2>) : <h2>TẠO PROFILE</h2>}
 
                 <form onSubmit={handleSubmit}>
                     <div>
                         <section>
-                            <label htmlFor="name">Name</label>
-                            <input
-                                id="name"
-                                type='text'
-                                name="name"
-                                placeholder={placeHolder.name}
-                                required={true}
-                                value={formData.name}
-                                onChange={handleChange}
-                            />
+                            <label htmlFor="name">Tên</label>
+                            <span>
+                                {
+                                    oldProfile && !isClickName ?
+                                        <article>
+                                            <span className="text">
+                                                {oldProfile.name}
+                                                <img className="edit-icon" src={edit_icon} onClick={() => setIsClickName(true)}/>
+                                            </span>
+                                        </article> :
 
-                            {/* TODO: change backend dto */}
+                                        <input
+                                            id="name"
+                                            type='text'
+                                            name="name"
+                                            placeholder={placeHolder.name}
+                                            required={true}
+                                            value={formData.name}
+                                            onChange={handleChange}/>
+                                }
+                            </span>
 
-                            <label htmlFor="dob">Birthday</label>
-                            <div className="multiple-input-container">
-                                <input
-                                    id="dob"
-                                    type="date"
-                                    name="dob"
-                                    required={true}
-                                    value={formData.dob}
-                                    onChange={handleChange}
-                                />
-                            </div>
-
-                            <label>Gender</label>
-                            <div className="multiple-input-container">
-                                <input
-                                    id="man-gender-identity"
-                                    type="radio"
-                                    name="gender"
-                                    value="man"
-                                    onChange={handleChange}
-                                    checked={formData.gender === "man"}
-                                />
-                                <label htmlFor="man-gender-identity">Man</label>
-                                <input
-                                    id="woman-gender-identity"
-                                    type="radio"
-                                    name="gender"
-                                    value="woman"
-                                    onChange={handleChange}
-                                    checked={formData.gender === "woman"}
-                                />
-                                <label htmlFor="woman-gender-identity">Woman</label>
-                                <input
-                                    id="more-gender-identity"
-                                    type="radio"
-                                    name="gender"
-                                    value="more"
-                                    onChange={handleChange}
-                                    checked={formData.gender === "more"}
-                                />
-                                <label htmlFor="more-gender-identity">Other</label>
-                            </div>
-
-                            <label htmlFor="about">About me</label>
-                            <input
-                                id="about"
-                                type="text"
-                                name="about"
-                                required={true}
-                                placeholder={placeHolder.about}
-                                value={formData.about}
-                                onChange={handleChange}
-                            />
-                            {/*<input type="submit"/>*/}
+                            <label>Giới tính</label>
+                            <span>
+                                {
+                                    oldProfile && !isClickGender ?
+                                        <article>
+                                            <span className="text">
+                                                {oldProfile.gender}
+                                                <img className="edit-icon" src={edit_icon} onClick={() => setIsClickGender(true)}/>
+                                            </span>
+                                        </article> :
+                                        <div className="multiple-input-container">
+                                            <input
+                                                id="man-gender-identity"
+                                                type="radio"
+                                                name="gender"
+                                                value="man"
+                                                onChange={handleChange}
+                                                checked={formData.gender === "man"}
+                                            />
+                                            <label htmlFor="man-gender-identity">Nam</label>
+                                            <input
+                                                id="woman-gender-identity"
+                                                type="radio"
+                                                name="gender"
+                                                value="woman"
+                                                onChange={handleChange}
+                                                checked={formData.gender === "woman"}
+                                            />
+                                            <label htmlFor="woman-gender-identity">Nữ</label>
+                                            <input
+                                                id="more-gender-identity"
+                                                type="radio"
+                                                name="gender"
+                                                value="more"
+                                                onChange={handleChange}
+                                                checked={formData.gender === "more"}
+                                            />
+                                            <label htmlFor="more-gender-identity">Khác</label>
+                                        </div>
+                                }
+                            </span>
+                            <label htmlFor="about">Giới Thiệu</label>
+                            <span>
+                                {
+                                    oldProfile && !isClickAbout ?
+                                        <article>
+                                            <span className="text">
+                                                {oldProfile.about}
+                                                <img className="edit-icon" src={edit_icon} onClick={() => setIsClickAbout(true)}/>
+                                            </span>
+                                        </article> :
+                                        <input
+                                            id="about"
+                                            type="text"
+                                            name="about"
+                                            required={true}
+                                            placeholder={placeHolder.about}
+                                            value={formData.about}
+                                            onChange={handleChange}
+                                        />
+                                }
+                            </span>
                         </section>
 
                         <section>
-                            <label htmlFor="school">School</label>
-                            <input
-                                id="school"
-                                type="text"
-                                name="school"
-                                required={true}
-                                placeholder={placeHolder.school}
-                                value={formData.school}
-                                onChange={handleChange}
-                            />
+                            <label htmlFor="school">Học tại</label>
+                            <span>
+                                {
+                                    oldProfile && !isClickSchool ?
+                                        <article>
+                                            <span className="text">
+                                                {oldProfile.school}
+                                                <img className="edit-icon" src={edit_icon} onClick={() => setIsClickSchool(true)}/>
+                                            </span>
+                                        </article> :
+                                        <input
+                                            id="school"
+                                            type="text"
+                                            name="school"
+                                            required={true}
+                                            placeholder={placeHolder.school}
+                                            value={formData.school}
+                                            onChange={handleChange}
+                                        />
+                                }
+                            </span>
 
-                            <label>Strengths</label>
+                            <label>Thế mạnh</label>
                             <ul>
                                 {subjects.map((value, index) => {
-                                    return <li key={index} className={`${formData.strength_subjects.includes(value) ? "selected":""}`}
-                                               onClick={() => {addStrengthOrWeakness("strength_subjects", value)}}>
+                                    return <li key={index}
+                                               className={`${formData.strength_subjects.includes(value) ? "selected" : ""}`}
+                                               onClick={() => {
+                                                   addStrengthOrWeakness("strength_subjects", value)
+                                               }}>
                                         {value}
                                     </li>
                                 })}
                             </ul>
 
-                            <label>Weakness</label>
+                            <label>Cần người kèm</label>
                             <ul>
                                 {subjects.map((value, index) => {
-                                    return <li key={index} className={`${formData.weak_subjects.includes(value) ? "selected":""}`}
-                                               onClick={() => {addStrengthOrWeakness("weak_subjects", value)}}>
+                                    return <li key={index}
+                                               className={`${formData.weak_subjects.includes(value) ? "selected" : ""}`}
+                                               onClick={() => {
+                                                   addStrengthOrWeakness("weak_subjects", value)
+                                               }}>
                                         {value}
                                     </li>
                                 })}
@@ -266,7 +302,7 @@ const ProfileCRUD = () => {
 
                         </section>
                     </div>
-                    <input type="submit"/>
+                    <button className="primary-button" onClick={handleSubmit}>Lưu</button>
                 </form>
             </div>
         </div>

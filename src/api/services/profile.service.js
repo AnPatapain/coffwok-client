@@ -2,6 +2,18 @@ import {API_BASE_URL} from "../constant/index.js";
 import RequestService from "./request.service.js";
 import {getErrorMessage} from "../error/errorMessage.js";
 
+const getAllProfiles =  (page, pageSize) => {
+    return new Promise((resolve, reject) => {
+        RequestService.getRequest(API_BASE_URL + `/api/profiles?page=${page}&size=${pageSize}`)
+            .then(response => {
+                resolve(response.data)
+            })
+            .catch(error => {
+                reject(getErrorMessage(error))
+            })
+    })
+}
+
 const uploadProfileInfo = (profileData) => {
     return RequestService.postRequestJson(API_BASE_URL + "/api/profiles", profileData)
 }
@@ -44,7 +56,8 @@ const ProfileService = {
     uploadProfileImage,
     editProfileInfo,
     getMyProfile,
-    getProfileById
+    getProfileById,
+    getAllProfiles
 }
 
 export default ProfileService
