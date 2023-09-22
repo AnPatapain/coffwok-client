@@ -69,7 +69,6 @@ const connect_socket = (chatRoomId, onReceiveMessage) => {
     stompClient.connect(
         {Authorization: token},
         function (frame) {
-            console.log("connected: " + frame)
             // stompClient.unsubscribe("/chatroom/" + chatRoomId);
             stompClient.subscribe("/chatroom/" + chatRoomId, onReceiveMessage)
         })
@@ -77,7 +76,6 @@ const connect_socket = (chatRoomId, onReceiveMessage) => {
 }
 
 const sendMessageRealTime = (stompClient, chatRoomId, message) => {
-    console.log("sending message")
     stompClient.send("/api/chat/" + chatRoomId, {}, message)
 }
 

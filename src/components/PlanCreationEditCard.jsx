@@ -34,7 +34,7 @@ const PlanCreationEditCard = ({planInfo, planDTO, setPlanDTO, oldPlan}) => {
                 <li className="plan-info-item">
                     <article className="category">
                         <img src={pink_location_icon} className="icon"/>
-                        <label htmlFor="cafe">Cà phê</label>
+                        <label htmlFor="cafe">Café</label>
                     </article>
 
                     {
@@ -52,7 +52,7 @@ const PlanCreationEditCard = ({planInfo, planDTO, setPlanDTO, oldPlan}) => {
                                    name="coffeeShop"
                                    required={true}
                                    value={planDTO.coffeeShop}
-                                   placeholder="Glife 111 Phan Đình Phùng"
+                                   placeholder="Your favorite café"
                                    onChange={handleChange}/>
                     }
 
@@ -60,7 +60,7 @@ const PlanCreationEditCard = ({planInfo, planDTO, setPlanDTO, oldPlan}) => {
                 <li className="plan-info-item">
                     <article className="category">
                         <img src={clock_icon} className="icon"/>
-                        <label htmlFor="schedule">Thời gian</label>
+                        <label htmlFor="schedule">Schedule</label>
                     </article>
 
                     {
@@ -79,7 +79,7 @@ const PlanCreationEditCard = ({planInfo, planDTO, setPlanDTO, oldPlan}) => {
                                    name="schedule"
                                    required={true}
                                    value={planDTO.schedule}
-                                   placeholder="7h-9h Ngày mai / Hôm nay "
+                                   placeholder="9:am Tomorrow"
                                    onChange={handleChange}/>
                     }
 
@@ -88,7 +88,7 @@ const PlanCreationEditCard = ({planInfo, planDTO, setPlanDTO, oldPlan}) => {
                 <li className="plan-info-item">
                     <article className="category">
                         <img src={study_icon} className="icon"/>
-                        <label htmlFor="planDetails">Tìm bạn học chung</label>
+                        <label htmlFor="planDetails">Find study partner in</label>
                     </article>
 
                     {
@@ -107,7 +107,7 @@ const PlanCreationEditCard = ({planInfo, planDTO, setPlanDTO, oldPlan}) => {
                                    name="planDetails"
                                    required={true}
                                    value={planDTO.planDetails}
-                                   placeholder="Anh, Toán, Lý, Văn ..."
+                                   placeholder="Physics, English, Coding, ..."
                                    onChange={handleChange}/>
                     }
 

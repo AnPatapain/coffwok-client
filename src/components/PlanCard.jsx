@@ -72,28 +72,28 @@ const PlanCard = ({planInfo, isOwner, isShowButton}) => {
                 <li className="plan-info-item">
                     <article className="category">
                         <img src={school_icon} className="icon"/>
-                        <span>Trường</span>
+                        <span>School</span>
                     </article>
                     <span className="text">{planInfo.school}</span>
                 </li>
                 <li className="plan-info-item">
                     <article className="category">
                         <img src={study_icon} className="icon"/>
-                        <span>Tìm bạn học chung</span>
+                        <span>Find study partner in</span>
                     </article>
                     <span className="text">{planInfo.planDetails}</span>
                 </li>
                 <li className="plan-info-item">
                     <article className="category">
                         <img src={pink_location_icon} className="icon"/>
-                        <span>Quán Cafe</span>
+                        <span>Café</span>
                     </article>
                     <span className="text">{planInfo.coffeeShop}</span>
                 </li>
                 <li className="plan-info-item">
                     <article className="category">
                         <img src={clock_icon} className="icon"/>
-                        <span>Thời gian</span>
+                        <span>Schedule</span>
                     </article>
                     <span className="text">{planInfo.schedule}</span>
                 </li>

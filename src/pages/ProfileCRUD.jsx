@@ -10,12 +10,12 @@ const ProfileCRUD = () => {
     const url = new URL(window.location.href);
     let isEdit = url.searchParams.get("isEdit") === 'true'
     const [placeHolder, setPlaceHolder] = useState({
-        name: "Tên",
+        name: "",
         dob_day: "DD",
         dob_month: "MM",
         dob_year: "YYYY",
         about: "",
-        school: "Trường của bạn"
+        school: ""
     })
     const subjects = [
         "Vật lý",
@@ -160,12 +160,12 @@ const ProfileCRUD = () => {
         <div className="onboarding-container">
             <HomeNav/>
             <div className="onboarding">
-                {isEdit ? (<h2>CHỈNH SỬA PROFILE</h2>) : <h2>TẠO PROFILE</h2>}
+                {isEdit ? (<h2>EDIT PROFILE</h2>) : <h2>CREATE PROFILE</h2>}
 
                 <form onSubmit={handleSubmit}>
                     <div>
                         <section>
-                            <label htmlFor="name">Tên</label>
+                            <label htmlFor="name">Name</label>
                             <span>
                                 {
                                     oldProfile && !isClickName ?
@@ -187,7 +187,7 @@ const ProfileCRUD = () => {
                                 }
                             </span>
 
-                            <label>Giới tính</label>
+                            <label>Gender</label>
                             <span>
                                 {
                                     oldProfile && !isClickGender ?
@@ -206,7 +206,7 @@ const ProfileCRUD = () => {
                                                 onChange={handleChange}
                                                 checked={formData.gender === "man"}
                                             />
-                                            <label htmlFor="man-gender-identity">Nam</label>
+                                            <label htmlFor="man-gender-identity">Men</label>
                                             <input
                                                 id="woman-gender-identity"
                                                 type="radio"
@@ -215,7 +215,7 @@ const ProfileCRUD = () => {
                                                 onChange={handleChange}
                                                 checked={formData.gender === "woman"}
                                             />
-                                            <label htmlFor="woman-gender-identity">Nữ</label>
+                                            <label htmlFor="woman-gender-identity">Women</label>
                                             <input
                                                 id="more-gender-identity"
                                                 type="radio"
@@ -224,11 +224,11 @@ const ProfileCRUD = () => {
                                                 onChange={handleChange}
                                                 checked={formData.gender === "more"}
                                             />
-                                            <label htmlFor="more-gender-identity">Khác</label>
+                                            <label htmlFor="more-gender-identity">Other</label>
                                         </div>
                                 }
                             </span>
-                            <label htmlFor="about">Giới Thiệu</label>
+                            <label htmlFor="about">About</label>
                             <span>
                                 {
                                     oldProfile && !isClickAbout ?
@@ -252,7 +252,7 @@ const ProfileCRUD = () => {
                         </section>
 
                         <section>
-                            <label htmlFor="school">Học tại</label>
+                            <label htmlFor="school">School</label>
                             <span>
                                 {
                                     oldProfile && !isClickSchool ?
@@ -274,7 +274,7 @@ const ProfileCRUD = () => {
                                 }
                             </span>
 
-                            <label>Thế mạnh</label>
+                            <label>Strength</label>
                             <ul>
                                 {subjects.map((value, index) => {
                                     return <li key={index}
@@ -287,7 +287,7 @@ const ProfileCRUD = () => {
                                 })}
                             </ul>
 
-                            <label>Cần người kèm</label>
+                            <label>Find study partner in</label>
                             <ul>
                                 {subjects.map((value, index) => {
                                     return <li key={index}
@@ -302,7 +302,7 @@ const ProfileCRUD = () => {
 
                         </section>
                     </div>
-                    <button className="primary-button" onClick={handleSubmit}>Lưu</button>
+                    <button className="primary-button" onClick={handleSubmit}>Continue</button>
                 </form>
             </div>
         </div>

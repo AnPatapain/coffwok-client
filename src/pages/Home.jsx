@@ -60,13 +60,13 @@ const Home = () => {
             </Helmet>
             <HomeNav/>
             <div className="home">
-                <h1 className="primary-title">Tìm bạn Café - học bài tại Quy Nhơn</h1>
+                <h1 className="primary-title">Networking app to find friends to study at a coffee shop together.</h1>
                 <article>
-                    <p>Xem các kế hoạch đi Cà phê Học bài, kết nối, rủ đi cà phê học bài chung tại Glife, E-coffee, ...</p>
+                    <p>See other people's coffee-study plan, invite them to study together at your favorite coffee shop</p>
                 </article>
                 <div className="home-buttons">
-                    <button className="primary-button" onClick={handleSignupClick}>Tạo tài khoản</button>
-                    <button className="primary-button transparent-button" onClick={handleLoginClick}>Đăng nhập</button>
+                    <button className="primary-button" onClick={handleSignupClick}>Create Account</button>
+                    <button className="primary-button transparent-button" onClick={handleLoginClick}>Log in</button>
                 </div>
 
                 {showModal && (

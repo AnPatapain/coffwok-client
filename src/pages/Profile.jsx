@@ -122,7 +122,7 @@ const Profile = () => {
                             {isMe ?
                                 <button className="primary-button" onClick={() => {
                                     navigate(`/profile-image-creation?isEdit=true`)
-                                }}>Thay đổi</button> : null}
+                                }}>Change image</button> : null}
                         </section>
 
                         <section className="personal-info">
@@ -131,12 +131,12 @@ const Profile = () => {
                                 {isMe ?
                                     <button className="primary-button" onClick={() => {
                                         navigate(`/profile-info-creation?isEdit=true`)
-                                    }}>Chỉnh sửa
+                                    }}>Edit Profile
                                     </button> :
                                     <span className="message-button" onClick={() => {
                                         handleClickChatIcon(profile.userId)
                                     }}>
-                                        Nhắn tin
+                                        Invite to Café
                                     </span>
                                 }
                             </section>
@@ -147,23 +147,23 @@ const Profile = () => {
 
                 <section className="profile-section profile-study-info-section">
                     <article>
-                        <span className="category"><img src={school_icon} className="study-info-icon"/> Trường</span>
+                        <span className="category"><img src={school_icon} className="study-info-icon"/> School</span>
                         <span>{profile.school}</span>
                     </article>
                     <article>
-                        <span className="category"><img src={good_icon} className="study-info-icon"/> Thế Mạnh</span>
+                        <span className="category"><img src={good_icon} className="study-info-icon"/> Strength</span>
                         <span>{profile.strength_subjects.join(", ")}</span>
                     </article>
                     <article>
                         {/*<span className="category"><AiOutlineDislike className="study-info-icon"/> Điểm yếu</span>*/}
                         <span className="category"><img src={sos_icon}
-                                                        className="study-info-icon"/> Cần người kèm</span>
+                                                        className="study-info-icon"/> Need study partner in</span>
                         <span>{profile.weak_subjects.join(", ")}</span>
                     </article>
                 </section>
 
                 <section className="profile-section profile-coffee-study-plan-section">
-                    {!planInfo.id ? <h2>Tạo kế hoạch Cà phê - Học bài</h2> : <h2>Kế hoạch cà phê - học bài</h2>}
+                    {!planInfo.id ? <h2>Tạo kế hoạch Cà phê - Học bài</h2> : <h2>Coffee-Study Plan</h2>}
                     {!planInfo.id ? <img src={add_icon} className="add-plan-icon" onClick={() => {
                             navigate("/plan-creation")
                         }}/> :
@@ -173,9 +173,9 @@ const Profile = () => {
                                 <div className="buttons">
                                     <button className="primary-button edit-button" onClick={() => {
                                         navigate("/plan-creation")
-                                    }}>Chỉnh sửa
+                                    }}>Edit
                                     </button>
-                                    <button className="primary-button delete-button" onClick={handleDelete}>Xóa
+                                    <button className="primary-button delete-button" onClick={handleDelete}>Delete
                                     </button>
                                 </div> : null
                             }

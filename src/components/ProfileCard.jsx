@@ -5,6 +5,7 @@ import ChatService from "../api/services/chat.service.js";
 
 import school_icon from "../assets/icons/school-icon.svg"
 import sos_icon from "../assets/icons/sos.png"
+import study_icon from "../assets/icons/study-icon.svg";
 
 // eslint-disable-next-line react/prop-types
 const ProfileCard = ({profile, isOwner, isShowButton}) => {
@@ -31,7 +32,7 @@ const ProfileCard = ({profile, isOwner, isShowButton}) => {
                 {profile.imgUrl !== null ?
                     <img className="small-profile-image"
                          src={ImageService.modifyImageURI(profile.imgUrl, ["w_50", "h_50", "c_fill", "g_face", "q_100"])}
-                         onClick={() => navigateToProfile(profile.userId)}/> : null}
+                         onClick={() => navigateToProfile(profile.userId)} alt="profileImage"/> : null}
 
                 <div className="name-button-about">
                     <article>
@@ -52,11 +53,11 @@ const ProfileCard = ({profile, isOwner, isShowButton}) => {
                                 <span className="message-button" onClick={() => {
                                     handleClickChatIcon(profile.userId)
                                 }}>
-                            Rủ đi học chung
+                            Invite to café
                         </span> : ""
                         }
                         {isShowButton ?
-                            <span className="message-button" onClick={() => navigateToProfile(profile.userId)}>Xem profile</span> : null}
+                            <span className="message-button" onClick={() => navigateToProfile(profile.userId)}>View Profile</span> : null}
                     </article>
                     <article className="about-container">
                         <p className="about" onClick={() => {
@@ -72,14 +73,14 @@ const ProfileCard = ({profile, isOwner, isShowButton}) => {
                 <li className="plan-info-item">
                     <article className="category">
                         <img src={school_icon} className="icon"/>
-                        <span>Trường</span>
+                        <span>School</span>
                     </article>
                     <span className="text">{profile.school}</span>
                 </li>
                 <li className="plan-info-item">
                     <article className="category">
-                        <img src={sos_icon} className="icon"/>
-                        <span>Cần bạn kèm</span>
+                        <img src={study_icon} className="icon"/>
+                        <span>Find study partner in</span>
                     </article>
                     <span className="text">{profile.weak_subjects.join(", ")}</span>
                 </li>

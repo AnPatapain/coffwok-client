@@ -60,31 +60,31 @@ const VerticalNav = ({selectedItem}) => {
             <ul>
                 <li onClick={()=> {handleClickHome()} } className={selectedItem === 'dashboard' ? 'clicked' : ''}>
                     <img src={home_icon} className="ver-nav-icon"/>
-                    <span className="nav-text">Trang chủ</span>
+                    <span className="nav-text">Home</span>
                 </li>
 
                 <li onClick={() => {handleClickMessage()}} className={selectedItem === 'message' ? 'clicked' : ''}>
                     {/*<AiOutlineMessage className="ver-nav-icon"/>*/}
                     <img src={chat_icon} className="ver-nav-icon"/>
                     {localStorage.getItem(SHOW_NOTIFICATION) && localStorage.getItem(SHOW_NOTIFICATION) !== "0" ? <div className="red-dot">{localStorage.getItem(SHOW_NOTIFICATION)}</div>:null}
-                    <span className="nav-text">Tin nhắn</span>
+                    <span className="nav-text">Messages</span>
                 </li>
 
                 <li onClick={() => {handleClickPlan()}} className={selectedItem === 'plan' ? 'clicked' : ''}>
                     {/*<BiMessageSquareAdd className="ver-nav-icon"/>*/}
                     <img src={add_icon} className="ver-nav-icon"/>
-                    <span className="nav-text">Tạo kế hoạch</span>
+                    <span className="nav-text">New coffee-study plan</span>
                 </li>
 
                 <li onClick={()=> {handleClickProfile()}} className={selectedItem === 'profile' ? 'clicked' : ''}>
                     {profileImg ? <img src={profileImg} className="profile-img"/> : <img src={profileImg} className="ver-nav-icon"/>}
-                    <span className="nav-text">Trang cá nhân</span>
+                    <span className="nav-text">Profile</span>
                 </li>
 
                 <li onClick={() => {handleLogOut()}}>
                     {/*<FiLogOut className="ver-nav-icon"/>*/}
                     <img src={logout_icon} className="ver-nav-icon"/>
-                    <span className="nav-text">Đăng xuất</span>
+                    <span className="nav-text">Logout</span>
                 </li>
             </ul>
         </div>

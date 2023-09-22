@@ -183,7 +183,7 @@ const DashBoard = () => {
 
                 <aside>
                     <ul>
-                        <h2 className="soulmates-title">café - học bài soulmates</h2>
+                        <h2 className="soulmates-title">Your Contacts</h2>
                         {renderProfileItems()}
                     </ul>
                 </aside>

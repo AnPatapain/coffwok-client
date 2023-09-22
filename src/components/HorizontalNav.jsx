@@ -6,10 +6,10 @@ const HorizontalNav = () => {
         <div className="horizontal-nav">
             <LogoContainer/>
             <div className="title">
-                <h2>Tìm Bạn Cà phê - Học Bài</h2>
+                <h2>All Profiles</h2>
                 <span>
                 <img src={pink_location_icon} className="location-icon"/>
-                <h4>Quy Nhơn</h4>
+                <h4>Quy Nhơn, VietNam</h4>
             </span>
             </div>
         </div>

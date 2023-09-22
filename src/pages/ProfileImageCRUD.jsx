@@ -119,7 +119,7 @@ const ProfileImageCRUD = () => {
         <>
             <HomeNav/>
             <div className="upload-profile-image-container">
-                {isEdit ? <h2>Thay đổi hình đại diện</h2>:<h2>Thêm hình đại diện</h2>}
+                {isEdit ? <h2>Change profile image</h2>:<h2>Add profile image</h2>}
                 <section className="image-options">
                     {preview ?
                         <div className="image-container">

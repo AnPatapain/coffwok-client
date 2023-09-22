@@ -167,7 +167,7 @@ const Chat = () => {
             <div className="chat-container">
                 <aside className={currentChatRoom.id !== "" && currentChatRoom.oppositeProfile !== null ? "hide-aside":""}>
                     <ul>
-                        <h2>Tin nhắn</h2>
+                        <h2>Contacts</h2>
                         {currentChatRoom.id !== "" && currentChatRoom.oppositeProfile !== null ?
                             <li className="selected">
                                 <img

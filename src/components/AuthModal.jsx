@@ -63,18 +63,18 @@ const AuthModal = ({setShowModal, isSignup, setIsSignup}) => {
             <div className="logo-container">
                 <img className="logo" src={coffwokLogo}/>
             </div>
-            <h2>{isSignup ? 'TẠO TÀI KHOẢN' : 'ĐĂNG NHẬP'}</h2>
+            <h2>{isSignup ? 'Create Account' : 'Log In'}</h2>
             <div className="google-button">
                 <a href={GOOGLE_AUTH_URL}>
                     <button className="google-button-style">
-                        {isSignup ? 'Tạo tài khoản bằng Google' : 'Đăng nhập bằng Google'}
+                        {isSignup ? 'Continue with Google' : 'Continue with Google'}
                         <img src={googleLogo} alt="Google Logo" className="google-logo" />
                     </button>
                 </a>
             </div>
             <div className="divider">
                 <div className="line-1"></div>
-                <p>Hoặc</p>
+                <p>OR</p>
                 <div className="line-2"></div>
             </div>
             <form onSubmit={handleSubmit}>
@@ -82,7 +82,7 @@ const AuthModal = ({setShowModal, isSignup, setIsSignup}) => {
                     type="email"
                     id="email"
                     name="email"
-                    placeholder="email"
+                    placeholder="Email"
                     required={true}
                     onChange={(e) => setEmail(e.target.value)}
                 />
@@ -90,7 +90,7 @@ const AuthModal = ({setShowModal, isSignup, setIsSignup}) => {
                     type="password"
                     id="password"
                     name="password"
-                    placeholder="Mật khẩu"
+                    placeholder="Password"
                     required={true}
                     onChange={(e) => setPassword(e.target.value)}
                 />
@@ -98,12 +98,12 @@ const AuthModal = ({setShowModal, isSignup, setIsSignup}) => {
                     type="password"
                     id="password-check"
                     name="password-check"
-                    placeholder="Nhập lại mật khẩu"
+                    placeholder="Confirm password"
                     required={true}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                 />)}
 
-                <button className="primary-button">{isSignup ? 'TIẾP TỤC' : 'ĐĂNG NHẬP'}</button>
+                <button className="primary-button">{isSignup ? 'Continue' : 'Login'}</button>
                 {isSignup && (<p className="auth-match-password-error">{error}</p>)}
                 {!isSignup && (<p className="auth-message-success">{message}</p>)}
             </form>

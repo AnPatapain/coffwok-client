@@ -75,12 +75,10 @@ const PlanCrud = () => {
             setErrorMessage("")
             PlanService.uploadPlan(planDTO)
                 .then(response => {
-                    console.log("response data after submit", response.data)
                     navigate("/dashboard")
                 })
                 .catch(error => {
                     const errMessage = getErrorMessage(error)
-                    console.log(errMessage)
                     navigate("/dashboard")
                 })
         }
@@ -112,17 +110,17 @@ const PlanCrud = () => {
     return (
         <div className="plan-crud-container">
             <VerticalNav selectedItem={"plan"}/>
-            <h2>{oldPlan ? "Thay đổi kế hoạch" : "Tạo kế hoạch cà phê học bài"}</h2>
+            <h2>{oldPlan ? "Create café study plan" : "Edit café study plan"}</h2>
             <PlanCreationEditCard planInfo={planInfo} planDTO={planDTO} setPlanDTO={setPlanDTO} oldPlan={oldPlan}/>
             {errorMessage ? <p className="error-msg">{errorMessage}</p> : ""}
 
             {
                 oldPlan ?
                     <div className="button-group">
-                        <button className="primary-button" onClick={editPlan}>Lưu</button>
-                        <button className="primary-button" onClick={deletePlan}>Xóa</button>
+                        <button className="primary-button" onClick={editPlan}>Save</button>
+                        <button className="primary-button" onClick={deletePlan}>Delete</button>
                     </div>:
-                    <button className="primary-button" onClick={submitPlan}>Đăng Kế Hoạch</button>
+                    <button className="primary-button" onClick={submitPlan}>Publish plan</button>
             }
         </div>
     )

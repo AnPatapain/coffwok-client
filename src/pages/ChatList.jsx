@@ -81,7 +81,7 @@ const ChatList = () => {
             <div className="chat-list-container">
                 <aside>
                     <ul>
-                        <h2>Café-Học bài soulmates</h2>
+                        <h2>Your contacts</h2>
                         {renderProfileItems()}
                     </ul>
                 </aside>
