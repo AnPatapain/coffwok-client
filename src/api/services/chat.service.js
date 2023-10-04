@@ -69,7 +69,6 @@ const connect_socket = (chatRoomId, onReceiveMessage) => {
     stompClient.connect(
         {Authorization: token},
         function (frame) {
-            // stompClient.unsubscribe("/chatroom/" + chatRoomId);
             stompClient.subscribe("/chatroom/" + chatRoomId, onReceiveMessage)
         })
     return stompClient

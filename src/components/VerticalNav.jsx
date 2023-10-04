@@ -11,12 +11,15 @@ import chat_icon from "../assets/icons/message-icon.svg"
 import add_icon from "../assets/icons/add-icon.svg"
 import logout_icon from "../assets/icons/logout-icon.svg"
 import plan_icon from "../assets/icons/plan-icon.svg"
+import AuthModal from "./AuthModal.jsx";
 
 
-const VerticalNav = ({selectedItem}) => {
+const VerticalNav = ({selectedItem, mode}) => {
     const navigate = useNavigate()
     const location = useLocation()
     const [profileImg, setProfileImg] = useState("")
+
+    const [isSignup, setIsSignup] = useState(true)
 
     useEffect(() => {
         let imgUrl = localStorage.getItem(PROFILE_IMG)
@@ -58,34 +61,48 @@ const VerticalNav = ({selectedItem}) => {
         <div className="vertical-nav">
             <LogoContainer/>
             <ul>
-                <li onClick={()=> {handleClickHome()} } className={selectedItem === 'dashboard' ? 'clicked' : ''}>
+                {mode !== "guest" && <li onClick={() => {
+                    handleClickHome()
+                }} className={selectedItem === 'dashboard' ? 'clicked' : ''}>
                     <img src={home_icon} className="ver-nav-icon"/>
                     <span className="nav-text">Home</span>
-                </li>
+                </li>}
 
-                <li onClick={() => {handleClickMessage()}} className={selectedItem === 'message' ? 'clicked' : ''}>
+                {mode === "guest" && <AuthModal isSignup={isSignup} setIsSignup={setIsSignup} mode={"guest"}/>}
+
+                {mode !== "guest" && <li onClick={() => {
+                    handleClickMessage()
+                }} className={selectedItem === 'message' ? 'clicked' : ''}>
                     {/*<AiOutlineMessage className="ver-nav-icon"/>*/}
                     <img src={chat_icon} className="ver-nav-icon"/>
-                    {localStorage.getItem(SHOW_NOTIFICATION) && localStorage.getItem(SHOW_NOTIFICATION) !== "0" ? <div className="red-dot">{localStorage.getItem(SHOW_NOTIFICATION)}</div>:null}
+                    {localStorage.getItem(SHOW_NOTIFICATION) && localStorage.getItem(SHOW_NOTIFICATION) !== "0" ?
+                        <div className="red-dot">{localStorage.getItem(SHOW_NOTIFICATION)}</div> : null}
                     <span className="nav-text">Messages</span>
-                </li>
+                </li>}
 
-                <li onClick={() => {handleClickPlan()}} className={selectedItem === 'plan' ? 'clicked' : ''}>
+                {mode !== "guest" && <li onClick={() => {
+                    handleClickPlan()
+                }} className={selectedItem === 'plan' ? 'clicked' : ''}>
                     {/*<BiMessageSquareAdd className="ver-nav-icon"/>*/}
                     <img src={add_icon} className="ver-nav-icon"/>
                     <span className="nav-text">New coffee-study plan</span>
-                </li>
+                </li>}
 
-                <li onClick={()=> {handleClickProfile()}} className={selectedItem === 'profile' ? 'clicked' : ''}>
-                    {profileImg ? <img src={profileImg} className="profile-img"/> : <img src={profileImg} className="ver-nav-icon"/>}
+                {mode !== "guest" && <li onClick={() => {
+                    handleClickProfile()
+                }} className={selectedItem === 'profile' ? 'clicked' : ''}>
+                    {profileImg ? <img src={profileImg} className="profile-img"/> :
+                        <img src={profileImg} className="ver-nav-icon"/>}
                     <span className="nav-text">Profile</span>
-                </li>
+                </li>}
 
-                <li onClick={() => {handleLogOut()}}>
+                {mode !== "guest" && <li onClick={() => {
+                    handleLogOut()
+                }}>
                     {/*<FiLogOut className="ver-nav-icon"/>*/}
                     <img src={logout_icon} className="ver-nav-icon"/>
                     <span className="nav-text">Logout</span>
-                </li>
+                </li>}
             </ul>
         </div>
     )

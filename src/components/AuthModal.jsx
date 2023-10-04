@@ -7,7 +7,7 @@ import {useNavigate} from "react-router-dom";
 import {getErrorMessage} from "../api/error/errorMessage.js";
 
 // eslint-disable-next-line react/prop-types
-const AuthModal = ({setShowModal, isSignup, setIsSignup}) => {
+const AuthModal = ({setShowModal, isSignup, setIsSignup, mode}) => {
     const navigate = useNavigate()
 
     const [email, setEmail] = useState(null)
@@ -57,12 +57,12 @@ const AuthModal = ({setShowModal, isSignup, setIsSignup}) => {
 
     return (
         <div className="auth-modal">
-            <div className="close-icon" onClick={handleClick}>
+            {mode!=="guest" && <div className="close-icon" onClick={handleClick}>
                 &#10006;
-            </div>
-            <div className="logo-container">
+            </div>}
+            {mode!=="guest" && <div className="logo-container">
                 <img className="logo" src={coffwokLogo}/>
-            </div>
+            </div>}
             <h2>{isSignup ? 'Create Account' : 'Log In'}</h2>
             <div className="google-button">
                 <a href={GOOGLE_AUTH_URL}>

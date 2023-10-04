@@ -2,7 +2,7 @@ import VerticalNav from "../components/VerticalNav.jsx";
 import {useEffect, useState} from "react";
 import ProfileService from "../api/services/profile.service.js";
 import {getErrorMessage} from "../api/error/errorMessage.js";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useSearchParams} from "react-router-dom";
 import localStorageService from "../api/services/localStorage.service.js";
 import {PROFILE_ID, PROFILE_IMG, SHOW_NOTIFICATION, USER_ID} from "../api/constant/index.js";
 import UserService from "../api/services/user.service.js";
@@ -12,10 +12,12 @@ import ChatService from "../api/services/chat.service.js";
 import ImageService from "../api/services/image.service.js";
 import HorizontalNav from "../components/HorizontalNav.jsx";
 import ProfileCard from "../components/ProfileCard.jsx";
+import AuthModal from "../components/AuthModal.jsx";
 
 
 const DashBoard = () => {
     const navigate = useNavigate()
+    const [searchParams] = useSearchParams();
 
     const [profiles, setProfiles] = useState([])
     const [myProfile, setMyProfile] = useState(null)
@@ -56,6 +58,12 @@ const DashBoard = () => {
         setIsFetching(false)
     }
 
+    // useEffect(() => {
+    //     if(searchParams.get("mode") === "guest") {
+    //         alert("This is guest mode. You can't chat with other, see their profile. To do this please create account : >")
+    //     }
+    // }, [])
+
     useEffect(() => {
         window.addEventListener("scroll", handleScroll);
     }, [])
@@ -66,8 +74,8 @@ const DashBoard = () => {
         }
     }, [isFetching])
 
-    useEffect(() => {
-        async function myFunc() {
+    useEffect( () => {
+        async function prepareStatesForUser() {
             UserService.getCurrentUser()
                 .then(async (data) => {
                     if (data) {
@@ -78,6 +86,7 @@ const DashBoard = () => {
                                 if (data.imgUrl === null) {
                                     navigate("/profile-image-creation")
                                 } else {
+                                    setMyProfile(data)
                                     localStorageService.add(PROFILE_ID, data.id)
                                     localStorageService.add(USER_ID, data.userId)
                                     localStorageService.add(PROFILE_IMG, data.imgUrl)
@@ -88,16 +97,7 @@ const DashBoard = () => {
                                 navigate("/")
                             })
 
-
                         await fetchProfiles()
-
-                        await ProfileService.getMyProfile()
-                            .then(data => {
-                                setMyProfile(data)
-                            })
-                            .catch(error => {
-                                console.log(getErrorMessage(error))
-                            })
 
                         await ChatService.getAllMyChatRooms()
                             .then(data => {
@@ -121,7 +121,12 @@ const DashBoard = () => {
 
         }
 
-        myFunc()
+        if(searchParams.get("mode") === "guest") {
+            fetchProfiles()
+            alert("This is guest mode. You can't chat with other, see their profile. To do this please create account : >")
+        }else {
+            prepareStatesForUser()
+        }
     }, [])
 
     const onReceiveNotification = (messageJson) => {
@@ -165,7 +170,7 @@ const DashBoard = () => {
 
     return (
         <div className="dashboard-page">
-            <VerticalNav selectedItem={"dashboard"}/>
+            <VerticalNav selectedItem={"dashboard"} mode={searchParams.get("mode")}/>
             <HorizontalNav/>
             <div className="dashboard-container">
                 <div className="newfeed-container">
@@ -181,12 +186,23 @@ const DashBoard = () => {
                     </div>
                 </div>
 
-                <aside>
-                    <ul>
-                        <h2 className="soulmates-title">Your Contacts</h2>
-                        {renderProfileItems()}
-                    </ul>
-                </aside>
+
+                {searchParams.get("mode") !== "guest" ?
+                    <aside>
+                        <ul>
+                            <h2 className="soulmates-title">Your Contacts</h2>
+                            {renderProfileItems()}
+                        </ul>
+                    </aside> :
+                    <aside>
+                        <ul>
+                            <h1>Coffwok features</h1>
+                            <li>> Coffwok is a platform that help you find your coffee-study soulmate</li>
+                            <li>> See all students who love study at coffee shop</li>
+                            <li>> Chat to them and make appointment at coffee shop</li>
+                        </ul>
+                    </aside>
+                }
             </div>
         </div>
     )

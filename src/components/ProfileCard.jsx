@@ -17,14 +17,13 @@ const ProfileCard = ({profile, isOwner, isShowButton}) => {
             })
             .catch(error => {
                 console.log(error)
+                alert("Create account to see other's profile")
             })
     }
 
     const handleClickChatIcon = (userId) => {
         ChatService.handleNavigate(userId, navigate)
     }
-    console.log("isOwner", isOwner)
-
     return (
         <div className="plan-card">
             <section className="name-button-section">

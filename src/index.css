@@ -1613,6 +1613,7 @@ nav .logo-container h3 {
     padding: 10px 0;
     display: flex;
     margin-bottom: 20px;
+    text-align: left;
 }
 
 .dashboard-container aside li div span{

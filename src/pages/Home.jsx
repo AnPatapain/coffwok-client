@@ -52,6 +52,10 @@ const Home = () => {
         setIsSignup(false)
     }
 
+    const handleGuestMode = () => {
+        navigate("/dashboard?mode=guest")
+    }
+
     return (
         <div className="overlay">
             <Helmet>
@@ -65,6 +69,7 @@ const Home = () => {
                     <p>See other people's coffee-study plan, invite them to study together at your favorite coffee shop</p>
                 </article>
                 <div className="home-buttons">
+                    <button className="primary-button" onClick={handleGuestMode}>Guest Mode</button>
                     <button className="primary-button" onClick={handleSignupClick}>Create Account</button>
                     <button className="primary-button transparent-button" onClick={handleLoginClick}>Log in</button>
                 </div>
