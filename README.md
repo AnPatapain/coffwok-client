@@ -1,6 +1,9 @@
 ## Coffwok client app  
 Client app for www.coffwok.com. Communicates with coffwok-backend (https://github.com/AnPatapain/coffwok-backend) through API  
-Stacks: ReactJS, HTML, CSS
+
+Realtime Chat feature using WebSocket  
+
+Stacks: ReactJS, HTML, CSS  
 
 ## Product preview
 Home page    
